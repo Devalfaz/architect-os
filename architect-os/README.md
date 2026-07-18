@@ -1,0 +1,104 @@
+# Architect OS
+
+*A personal operating system for AI-assisted software engineering. Spec-driven, memory-backed, human-gated. You architect and decide; agents execute and propose.*
+
+## The one-paragraph version
+
+Every piece of work flows **idea → BRD → PRD/FSD → design → architecture/ADRs → file-level tickets → narrow-context agent runs → human review first, AI review second → tested squash merge → memory update**. Specs are the source of truth, GitHub Issues are the execution system, and a layered repo memory (AGENTS.md → docs tree → knowledge graph → session dumps) makes every cycle smarter than the last. Your effort concentrates at the gates — spec approval, plan review, diff review — and almost nowhere else.
+
+## Seven principles
+
+1. **The spec is the source of truth.** Code that diverges from spec produces a spec delta, never silent drift. Prompt quality is a symptom; spec quality is the cause.
+2. **Narrow context beats big context.** Each agent run gets one ticket's worth of context. More context makes agents worse *and* more expensive — it's a quality rule that happens to save money.
+3. **Human review comes first.** You review every diff with the [rubric](pr-review-rubric.md) *before* reading AI reviews, to stay unanchored. AI reviewers are your second and third pass, not your first.
+4. **Plans are reviewed harder than diffs.** Ten minutes on a file-level plan saves an hour on a wrong diff. If implementation goes sideways twice, the plan was wrong — restart, don't correct a third time.
+5. **Memory has a freshness date.** Every doc, graph node, and note carries `last_verified`. Unverified memory is a hypothesis, not a fact ([protocol](memory-freshness-protocol.md)).
+6. **Small everything.** Tickets ≤1 day. PRs ≤400 lines. Fix loops ≤2 rounds. WIP ≤2 agent runs. The limits are the system.
+7. **Agents propose, you decide.** Agents never merge, never close issues, never mark their own work ready. Every irreversible action passes through you.
+
+## Reading order
+
+| # | Doc | What it gives you |
+|---|---|---|
+| 1 | [lifecycle.md](lifecycle.md) | The end-to-end workflow, stage by stage, with gates |
+| 2 | [daily-loop.md](daily-loop.md) | The one-page loop you actually run each day |
+| 3 | [constitution.md](constitution.md) | The rules every agent must follow (C1–C35) |
+| 4 | [harness-matrix.md](harness-matrix.md) | Which tool for which layer, and why — cited |
+| 5 | [skills-catalog.md](skills-catalog.md) | The repeatable agent workflows and when to fire each |
+| 6 | [github-setup.md](github-setup.md) | Labels, issue forms, rulesets, Projects — the execution system |
+| 7 | [repo-memory.md](repo-memory.md) | The four-layer memory architecture |
+| 8 | [tech-stack.md](tech-stack.md) | Default stack + when to deviate |
+| 9 | [pr-review-rubric.md](pr-review-rubric.md) / [review-workflow.md](review-workflow.md) | The two-stage review system |
+| 10 | [models-cost-quality.md](models-cost-quality.md) / [cost-control.md](cost-control.md) | Model routing and budgets |
+| 11 | [rituals-and-metrics.md](rituals-and-metrics.md) | Daily/weekly/monthly cadence, the numbers that matter |
+| 12 | [failure-modes.md](failure-modes.md) / [failure-recovery-playbook.md](failure-recovery-playbook.md) | What goes wrong and what to do about it |
+| 13 | [adoption-plan.md](adoption-plan.md) | Default/light/heavy profiles, 30/60/90, worked walkthroughs |
+
+## Repository layout (this document set)
+
+```
+architect-os/
+├── README.md                      ← you are here
+├── lifecycle.md                   ← the workflow spine
+├── daily-loop.md                  ← 1-page operating loop
+├── constitution.md                ← agent rules C1–C35
+├── harness-matrix.md              ← tool comparison & assignments
+├── skills-catalog.md              ← agent workflow library
+├── github-setup.md                ← execution-system narrative
+├── repo-memory.md                 ← memory architecture
+├── memory-freshness-protocol.md   ← anti-staleness rules
+├── tech-stack.md                  ← default stack + variants
+├── pr-review-rubric.md            ← human review, first pass
+├── review-workflow.md             ← full two-stage review pipeline
+├── models-cost-quality.md         ← model landscape & routing
+├── cost-control.md                ← budgets, arbitrage, kill switches
+├── rituals-and-metrics.md         ← cadences & measurement
+├── failure-modes.md               ← the 12 ways this goes wrong
+├── failure-recovery-playbook.md   ← symptom → action
+├── adoption-plan.md               ← profiles, 30/60/90, walkthroughs
+├── templates/                     ← BRD, PRD, FSD, ADR, AGENTS.md, dumps…
+├── github/                        ← issue forms, labels, ruleset, CI (copy into .github/)
+└── memory/                        ← repo-graph schema + example
+```
+
+## What a product repo looks like once installed
+
+```
+your-app/
+├── AGENTS.md                      ← agent entrypoint, ≤150 lines (CLAUDE.md symlinks here)
+├── .claude/skills/                ← repo-specific skills
+├── .github/                       ← copied from architect-os/github/
+├── docs/
+│   ├── product/                   ← ideas, BRDs, PRDs, design briefs
+│   ├── specs/                     ← FSDs (implementation contracts)
+│   ├── adr/                       ← numbered decision records
+│   ├── architecture/              ← architecture.md + diagrams
+│   ├── research/                  ← spikes, with expiry dates
+│   └── agents/                    ← agent-facing guides (verified APIs, gotchas)
+├── memory/
+│   ├── repo-graph.json            ← the knowledge graph
+│   └── dumps/                     ← session memory dumps
+└── src/ …
+```
+
+## Setup checklist (new machine / first time)
+
+- [ ] Install Claude Code; sign in on a Max plan ([cost rationale](cost-control.md))
+- [ ] Install Codex CLI (second opinion + cross-review) and `gh` CLI, authenticated
+- [ ] Install skills: Matt Pocock's set + OS-native skills into `~/.claude/skills` ([catalog](skills-catalog.md))
+- [ ] Put `~/.claude/skills` under git — versioning is mandatory ([rituals](rituals-and-metrics.md))
+- [ ] Install the CodeRabbit GitHub App on your account
+- [ ] Enable Copilot coding agent (if using async tickets)
+
+## Setup checklist (each new repo)
+
+- [ ] `git init` + create GitHub repo, squash-merge only
+- [ ] Copy `architect-os/github/` → `.github/`; run label sync
+- [ ] Import [branch ruleset](github/rulesets/main-ruleset.json) on `main`
+- [ ] Create the **Delivery** project with Stage/Size/Priority/Agent fields ([guide](github/projects-setup.md))
+- [ ] Write `AGENTS.md` from the [template](templates/AGENTS.md); `ln -s AGENTS.md CLAUDE.md`
+- [ ] Create `docs/` + `memory/` trees; commit an empty `repo-graph.json` with the [schema](memory/repo-graph.schema.json)
+- [ ] Write ADR-0001 (stack) and ADR-0002 (architecture style) — even if they just say "defaults per tech-stack.md"
+- [ ] CI green on a hello-world PR before any feature work
+
+Full command sequence: [github-setup.md](github-setup.md).
