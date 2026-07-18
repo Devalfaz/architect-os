@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "repo-graph.schema.json",
+  "title": "Repository Knowledge Graph",
+  "description": "A structured, queryable representation of the codebase. Nodes represent modules, files, concepts, decisions, APIs, tests, and workflows. Edges represent dependencies, ownership, calls, constraints, and historical decisions.",
+  "type": "object",
+  "required": ["version", "generated", "nodes", "edges"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.0"
+    },
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this graph was last regenerated from dumps."
+    },
+    "nodes": {
+      "type": "array",
+      "description": "All nodes in the graph.",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier: {type}:{path-or-name}. Examples: 'file:src/server/auth/service.ts', 'concept:Session', 'decision:ADR-0001'."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["module", "file", "concept", "decision", "api", "test", "workflow"],
+            "description": "The kind of node."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable name."
+          },
+          "properties": {
+            "type": "object",
+            "description": "Type-specific metadata.",
+            "properties": {
+              "description": { "type": "string" },
+              "exports": { "type": "array", "items": { "type": "string" } },
+              "dependencies": { "type": "array", "items": { "type": "string" } },
+              "test_coverage": { "type": "string", "enum": ["none", "low", "medium", "high"] },
+              "last_modified": { "type": "string", "format": "date" },
+              "last_verified": { "type": "string", "format": "date" },
+              "status": { "type": "string" },
+              "priority": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "All edges in the graph. Each edge has a source, target, type, and optional properties.",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "type"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Optional unique identifier for the edge."
+          },
+          "source": {
+            "type": "string",
+            "description": "Node ID of the source."
+          },
+          "target": {
+            "type": "string",
+            "description": "Node ID of the target."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["depends_on", "implements", "tests", "owns", "calls", "constrained_by", "related_to", "supersedes", "caused_by"],
+            "description": "The relationship type."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "last_verified": { "type": "string", "format": "date" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+name: Task
+description: A planned unit of work from the S5 decomposition
+labels: [needs-triage]
+body:
+  - type: textarea
+    attributes:
+      label: Linked spec
+      description: Which FSD section(s) does this implement? Link to the file and FR-ids.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Implementation plan (file/function level)
+      description: |
+        List every file that will be changed or created, with the function/class/component name.
+        Example:
+        - src/server/export/service.ts: ExportService.exportToCsv()
+        - src/app/api/export/route.ts: GET handler
+        - src/server/export/service.test.ts: describe('ExportService')
+      placeholder: |
+        - path/to/file.ts: FunctionOrClassName
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Out of scope
+      description: What are we explicitly NOT doing in this ticket?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Acceptance criteria (Given/When/Then)
+      description: Each criterion must be mechanically testable.
+      placeholder: |
+        GIVEN a logged-in user with 50 records
+        WHEN they click "Export CSV"
+        THEN a CSV file downloads within 5 seconds containing all 50 records
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Test plan
+      description: Which test files will be created/updated, and what they test.
+      placeholder: |
+        - Unit: ExportService.exportToCsv() with 0, 50, and 100k records
+        - Integration: GET /api/export with auth, no auth, empty data
+        - E2E: Happy path export from settings page
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Size
+      options: [XS, S, M, split-me]
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Agent readiness
+      options:
+        - label: File-level plan is complete and reviewed
+        - label: All dependencies are merged or this ticket is independent
+        - label: No unmade decision blocks this work

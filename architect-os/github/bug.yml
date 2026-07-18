@@ -1,0 +1,43 @@
+name: Bug Report
+description: Something's broken
+labels: [bug, needs-triage]
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: The bug, in one sentence.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      description: Step-by-step instructions to reproduce. Include specific inputs.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual behavior
+      description: What actually happened? Include error messages, stack traces.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Severity
+      options:
+        - P0:now (blocking, data loss, security)
+        - P1:next (broken feature, no workaround)
+        - P2:soon (broken, workaround exists)
+        - P3:later (cosmetic)
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Regression?
+      options:
+        - label: This previously worked and is now broken (regression test required)
