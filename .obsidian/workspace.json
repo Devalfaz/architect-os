@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "9969813f6bd66065",
+    "type": "split",
+    "children": [
+      {
+        "id": "b452da5e41a1ce48",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3593f90809bd95f6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "architect-os/wiki/01-getting-started.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01-getting-started"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d6a60f506b184fd8",
+    "type": "split",
+    "children": [
+      {
+        "id": "21a7b2c765388eb6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a492c83105dbf921",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "46b0fa3a9a864070",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "e95904c99501bd39",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "60afbf4fe2f8389c",
+    "type": "split",
+    "children": [
+      {
+        "id": "2604d72024110e8a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "338c330376d12b83",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "architect-os/wiki/01-getting-started.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 01-getting-started"
+            }
+          },
+          {
+            "id": "7869aeb24b3ebca3",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "architect-os/wiki/01-getting-started.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 01-getting-started"
+            }
+          },
+          {
+            "id": "de178bfc1a90c8fd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "061d0c7bf6a4709a",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "a91e8c43b3776a51",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "architect-os/wiki/01-getting-started.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 01-getting-started"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3593f90809bd95f6",
+  "lastOpenFiles": [
+    "architect-os/cost-control.md",
+    "architect-os/wiki/04-reference.md",
+    "architect-os/wiki/03-project-profiles.md",
+    "architect-os/wiki/02-running-the-loop.md",
+    "architect-os/wiki/01-getting-started.md",
+    "architect-os/wiki/Home.md",
+    "architect-os/wiki",
+    "architect-os/profiles/web-nextjs.md",
+    "architect-os/profiles/flutter.md",
+    "architect-os/profiles/README.md",
+    "architect-os/profiles",
+    "architect-os/multi-agent.md",
+    "architect-os/skills/converge/SKILL.md",
+    "architect-os/skills/converge",
+    "architect-os/skills",
+    "architect-os/repo-memory.md.tmp.6492.1508fe480b37",
+    "architect-os/repo-memory.md.tmp.6492.e803409b29e4",
+    "architect-os/models-cost-quality.md",
+    "architect-os/research-2026-07-tools.md",
+    "architect-os/harness-matrix.md",
+    "architect-os/research-2026-07-memory.md",
+    "architect-os/skills-catalog.md",
+    "architect-os/constitution.md",
+    "architect-os/adoption-plan.md",
+    "architect-os/lifecycle.md",
+    "architect-os/README.md",
+    "architect-os/insights-and-issues-2026-07.md",
+    "architect-os/research-2026-07-multi-agent.md",
+    "architect-os/research-2026-07-review.md",
+    "architect-os/research-2026-07-specs.md",
+    "architect-os/research-2026-07-update.md",
+    "architect-os/docs/research",
+    "architect-os/docs"
+  ]
+}
