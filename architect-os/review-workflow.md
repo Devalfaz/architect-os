@@ -82,7 +82,8 @@ Reviews every PR automatically. Best at: mechanical bugs, security patterns, cod
 
 | PR authored by | Standing second opinion | Alternatives | Never |
 |---|---|---|---|
-| Claude Code (default) | **Codex review** — `codex review --pr <NUM> --repo <owner/repo>` | Copilot code review (if seat exists) | claude-code-action on a Claude model |
+| Claude Code (default stack) | **Codex review** — `codex review --pr <NUM> --repo <owner/repo>` | Copilot code review (if seat exists) | claude-code-action on a Claude model |
+| DeepSeek via OpenCode (open-frontier stack) | **GLM 5.2 via OpenRouter** | Llama 4 Maverick (third family), Codex review | DeepSeek-powered reviewer (incl. claude-code-action pointed at DeepSeek) |
 | Codex | claude-code-action (Anthropic model) | CodeRabbit alone + 20-min rubric | Codex review |
 | Cursor agent | Codex review or claude-code-action | — | Cursor Bugbot |
 | Human (no agent) | any — C36 doesn't apply | — | — |

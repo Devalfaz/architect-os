@@ -85,8 +85,8 @@ staying 10–40× cheaper. The routing problem is no longer "which vendor" — i
 
 | Model           | Input $/1M    | Output $/1M | When to use                                                                                     | Confidence |
 | --------------- | ------------- | ----------- | ----------------------------------------------------------------------------------------------- | ---------- |
-| Claude Opus 4.8 | $5.00         | $25.00      | Only when DeepSeek V4 Pro fails a planning task — highest reasoning ceiling, 11× more expensive | ✅ |
-| Claude Sonnet 5 | $2.00 (intro) | $10.00      | Only when DeepSeek V4 Flash produces low-quality code on a hard ticket — 35× more expensive. **⏰ Intro price ends 2026-08-31** ($3/$15 after) | ✅ |
+| Claude Opus 4.8 | $5.00         | $25.00      | Only when DeepSeek V4 Pro fails a planning task — highest reasoning ceiling, ~16× more expensive per call | ✅ |
+| Claude Sonnet 5 | $2.00 (intro) | $10.00      | Only when DeepSeek V4 Flash produces low-quality code on a hard ticket — ~20× more expensive per call. **⏰ Intro price ends 2026-08-31** ($3/$15 after) | ✅ |
 | GPT-5.6-sol     | $5.00         | $30.00      | Escape hatch for OpenAI-ecosystem tasks                                                         | 📣 tier naming per CodeRabbit benchmark |
 
 #### The routing principle
@@ -135,7 +135,9 @@ coding agent pull live model and pricing data.
 
 ### OpenCode — the open-frontier stack's primary harness
 
-**Confidence:** ✅ opencode.ai docs via `research-2026-07-tools.md`.
+**Confidence:** ❔ — the tools research *ran on* OpenCode but never fetched its
+docs as a primary source; capability list is self-referenced. Verify at
+opencode.ai before relying on a specific feature.
 
 Terminal-based, model-agnostic coding agent. Reads files, writes code, runs
 commands, tests its own work, self-corrects in a loop. Accepts any
@@ -161,7 +163,8 @@ usage. The core economic advantage over Claude Code ($200/mo Max) and Codex
 | S4 Architect         | Primary — plan mode, ADR drafting         | DeepSeek V4 Pro            |
 | S5 Plan (tickets)    | Primary — to-tickets + wayfinder          | DeepSeek V4 Pro            |
 | S6 Implement         | Primary — one fresh session per ticket    | DeepSeek V4 Flash          |
-| S7 Review            | Secondary — self-review pass              | GLM 5.2 (different family) |
+| S6 Self-review (C22) | Author's own pass — same model as author  | DeepSeek V4 Flash          |
+| S7 Second opinion    | **C36 cross-family reviewer**             | GLM 5.2 (different family) |
 | S9 Learn             | Primary — mechanical                      | Gemini 2.5 Flash           |
 
 #### Configuration sketch
@@ -233,7 +236,9 @@ edits.
 
 ### DeepSeek — the open-frontier stack's primary model provider
 
-**Confidence:** ✅ api-docs.deepseek.com/quick_start/pricing fetched 2026-07-19.
+**Confidence:** ✅ api-docs.deepseek.com/quick_start/pricing fetched 2026-07-19 —
+but note this is a *single-fetch* ✅ carrying the most load-bearing numbers in
+the doc; double-source it at the 2026-10-19 re-verification.
 
 | Model                 | Input (cache miss) | Input (cache hit) | Output   | Context | Concurrency |
 | --------------------- | ------------------ | ----------------- | -------- | ------- | ----------- |
@@ -252,19 +257,28 @@ edits.
 
 #### Pricing comparison vs vendor frontier
 
-| Task                                          | DeepSeek V4 Pro              | Claude Opus 4.8         | Multiple        |
-| --------------------------------------------- | ---------------------------- | ----------------------- | --------------- |
-| Spec generation (S2, ~50k input, ~10k output) | $0.022 + $8.70 = **$8.72**   | $0.25 + $250 = **$250** | **28× cheaper** |
-| Architecture (S4, ~100k input, ~20k output)   | $0.044 + $17.40 = **$17.44** | $0.50 + $500 = **$500** | **28× cheaper** |
+Per single API call at the stated token volumes (in + out):
 
-| Task                                        | DeepSeek V4 Flash          | Claude Sonnet 5       | Multiple        |
-| ------------------------------------------- | -------------------------- | --------------------- | --------------- |
-| Implementation (S6, ~30k input, ~5k output) | $0.004 + $1.40 = **$1.40** | $0.06 + $50 = **$50** | **35× cheaper** |
-| Self-review (S7, ~20k input, ~3k output)    | $0.003 + $0.84 = **$0.84** | $0.04 + $30 = **$30** | **35× cheaper** |
+| Task                                          | DeepSeek V4 Pro                | Claude Opus 4.8            | Multiple        |
+| --------------------------------------------- | ------------------------------ | -------------------------- | --------------- |
+| Spec generation (S2, ~50k input, ~10k output) | $0.022 + $0.009 = **$0.031**   | $0.25 + $0.25 = **$0.50**  | **~16× cheaper** |
+| Architecture (S4, ~100k input, ~20k output)   | $0.044 + $0.017 = **$0.061**   | $0.50 + $0.50 = **$1.00**  | **~16× cheaper** |
 
-**Monthly estimate (15–20 tickets):** DeepSeek API ~$15–40/mo + OpenRouter
-review ~$5–10/mo = **~$20–50/mo vs ~$232–249/mo** vendor-locked. 80–90% cost
-reduction at near-equivalent quality for most tasks.
+| Task                                        | DeepSeek V4 Flash              | Claude Sonnet 5             | Multiple        |
+| ------------------------------------------- | ------------------------------ | --------------------------- | --------------- |
+| Implementation (S6, ~30k input, ~5k output) | $0.004 + $0.001 = **$0.006**   | $0.06 + $0.05 = **$0.11**   | **~20× cheaper** |
+| Self-review (S7, ~20k input, ~3k output)    | $0.003 + $0.001 = **$0.004**   | $0.04 + $0.03 = **$0.07**   | **~20× cheaper** |
+
+**The agentic multiplier:** a real ticket session is not one call — tool loops,
+retries, and re-reads run **10–50×** a single call's tokens (caching absorbs
+most of the input side). That's how ~$0.006 calls become the **~$15–40/mo**
+DeepSeek estimate at 15–20 tickets, and $0.11 calls become a $200/mo Max plan
+being fair value on the default stack.
+
+**Honesty note on totals:** the per-token gap is 16–20×, but the *bill* gap is
+smaller — most of the residual open-frontier spend is subscriptions both stacks
+share (CodeRabbit, ChatGPT-for-Codex). Compare totals in Part VI, not model
+prices alone.
 
 ---
 
@@ -277,7 +291,7 @@ The AI reviewer must not share model family with the author (C36). Route review
 to a _different family_:
 
 - **GLM 5.2 (Zhipu) — primary review model.** Different training corpus from
-  DeepSeek. ~$0.50/$2.00 per 1M; a typical review ~$0.16. Via OpenRouter
+  DeepSeek. ~$0.50/$2.00 per 1M; a typical review ~$0.02. Via OpenRouter
   (`zhipuai/glm-5.2`). S7 second opinion, S4 council debates.
 - **Llama 4 Maverick (Meta) — long-context review.** 1M context, third family.
   ~$0.20/$0.60. S7 third opinion, large-PR review.
@@ -555,7 +569,7 @@ never instructions) — see [constitution.md](constitution.md).
 | GitHub Copilot | Consumer + public MCP Registry (github.com/mcp)   | ✅ |
 | Cursor       | Consumer + Team Marketplace MCPs                    | ✅ |
 | Cline        | Consumer (first-class)                              | ✅ |
-| OpenCode     | Consumer                                            | ✅ |
+| OpenCode     | Consumer                                            | ❔ self-referenced |
 | CodeRabbit   | Consumer (knowledge-base MCP connections)           | ✅ |
 | Lovable      | Producer (MCP server)                               | ✅ |
 | Codex CLI    | Consumer                                            | ❔ |
@@ -603,7 +617,11 @@ absorbed (sizing); don't migrate wholesale.
 
 ### The One-Glance Matrix
 
-| Layer                             | Default                                                  | Alternative                                           | Skip when                                      |
+Columns show the **open-frontier stack's** picks — "default" is deliberately
+avoided here because [adoption-plan.md](adoption-plan.md) names Claude Code +
+Anthropic the *default stack*; its stage mapping lives there and in Part III.
+
+| Layer                             | Open-frontier pick                                       | Alternatives                                          | Skip when                                      |
 | --------------------------------- | -------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------- |
 | S0 Capture                        | None / OpenCode chat                                     | —                                                     | —                                              |
 | S1 Frame (BRD)                    | OpenCode + DeepSeek V4 Pro                               | —                                                     | Lightweight: skip BRD                          |
@@ -627,20 +645,22 @@ absorbed (sizing); don't migrate wholesale.
 
 ### Model routing defaults
 
-| Task                       | Model                                  | Cost / typical op | Why                                                                                |
+Costs are **per session** (single-call cost × the 10–50× agentic multiplier, cache-adjusted):
+
+| Task                       | Model                                  | Cost / session    | Why                                                                                |
 | -------------------------- | -------------------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
-| Spec generation (S2)       | **DeepSeek V4 Pro**                    | ~$8.72            | Intelligent planning, 28× cheaper than Opus 4.8                                    |
-| Architecture (S4)          | **DeepSeek V4 Pro**                    | ~$17.44           | Deep trade-off analysis; 1M context fits whole repo                                |
-| Ticket decomposition (S5)  | **DeepSeek V4 Pro**                    | ~$5–10            | Reads real files, structured plans                                                 |
-| Implementation (S6)        | **DeepSeek V4 Flash**                  | ~$1.40/ticket     | 35× cheaper than Sonnet 5; fast, tool calls, FIM                                   |
-| Hard ticket fallback (S6)  | GLM 4.5 Air, Qwen 3 Coder              | ~$2–4/ticket      | Different family when Flash struggles                                              |
-| Self-review (S6)           | GLM 5.2 (via OpenRouter)               | ~$0.16            | **Different family from author** — uncorrelated                                    |
+| Spec generation (S2)       | **DeepSeek V4 Pro**                    | ~$0.30–1.00       | Intelligent planning, ~16× cheaper per token than Opus 4.8                         |
+| Architecture (S4)          | **DeepSeek V4 Pro**                    | ~$0.50–1.50       | Deep trade-off analysis; 1M context fits whole repo                                |
+| Ticket decomposition (S5)  | **DeepSeek V4 Pro**                    | ~$0.20–0.60       | Reads real files, structured plans                                                 |
+| Implementation (S6)        | **DeepSeek V4 Flash**                  | ~$0.10–0.50/ticket | ~20× cheaper per token than Sonnet 5; fast, tool calls, FIM                       |
+| Hard ticket fallback (S6)  | GLM 4.5 Air, Qwen 3 Coder              | ~$0.20–0.80/ticket | Different family when Flash struggles                                             |
+| Self-review (C22, S6)      | DeepSeek V4 Flash (author's own model) | ~$0.01            | Self-review is the author's pass by definition                                     |
 | AI review always-on (S7)   | CodeRabbit (subscription)              | ~$12–15/mo ❔     | Multi-model, always-on, path instructions + learnings                              |
-| AI review 2nd opinion (S7) | Codex review (C36)                     | ChatGPT sub       | OpenAI family — uncorrelated from Claude/DeepSeek authors                          |
+| AI review 2nd opinion (S7) | **C36 cross-family**: Codex review (default stack) / GLM 5.2 via OpenRouter (open-frontier) | ChatGPT sub / ~$0.02/review | Different family from author — uncorrelated |
 | AI review 3rd opinion (S7) | Copilot code review (Business)         | $19/user/mo       | Third family                                                                       |
-| Spec conformance (S7)      | `converge` skill on DeepSeek V4 Pro    | ~$2/run           | Frozen ACs + plan vs diff, tests as evidence                                       |
+| Spec conformance (S7)      | `converge` skill on DeepSeek V4 Pro    | ~$0.10–0.30/run   | Frozen ACs + plan vs diff, tests as evidence                                       |
 | Runtime validation (S7)    | Greptile TREX                          | subscription      | Sandboxed execution; optional upgrade                                              |
-| Learning/dumps (S9)        | Gemini 2.5 Flash                       | ~$0.014/dump      | Cheapest viable, 1M context                                                        |
+| Learning/dumps (S9)        | Gemini 2.5 Flash                       | ~$0.002/dump      | Cheapest viable, 1M context                                                        |
 
 #### The three-family rule
 
