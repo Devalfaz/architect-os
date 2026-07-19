@@ -305,3 +305,5 @@
 ---
 
 *These failure modes are not hypothetical — they're the battle scars of teams that have adopted AI coding tools at scale. The Architect OS doesn't eliminate them; it mitigates them with specific, enforceable mechanisms. The mitigations work when the rituals are followed. They fail when the rituals are skipped.*
+
+*Fanning out adds a second taxonomy on top of these 18: the 12 multi-agent failure modes (F1–F12 — coordinator bottlenecks, telephone games, shared-state races, cost explosion) live in [multi-agent.md](multi-agent.md).*

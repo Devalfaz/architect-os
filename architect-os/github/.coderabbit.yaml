@@ -33,7 +33,7 @@ reviews:
   path_instructions:
     - path: "**/*"
       instructions: |
-        This repo follows a numbered constitution (constitution.md, rules C1–C36),
+        This repo follows a numbered constitution (constitution.md, rules C1–C37),
         each rule tagged with a severity: 🔴 Critical, 🟠 Major, 🟡 Minor, 🔵 Trivial.
         - Cite every violation as `[Cn]` with the rule's tagged severity.
         - 🔴 and 🟠 findings: individual comments, request changes.

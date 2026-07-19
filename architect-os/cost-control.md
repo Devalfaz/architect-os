@@ -20,6 +20,20 @@ C24 (fix loops ≤2 rounds) is both a quality control AND a cost control.
 
 ---
 
+## Per-orchestrator budget (multi-agent runs)
+
+Multi-agent systems burn **~15× the tokens of chat** — a fanned-out run turns a $3 task into a $50 run when misapplied ([multi-agent.md](multi-agent.md)). Orchestrator runs get their own ceilings, separate from per-ticket:
+
+| Run type                                  | Budget ceiling | Kill trigger                        |
+| ----------------------------------------- | -------------- | ----------------------------------- |
+| Orchestrator + 3–5 subagents (research)   | $10.00         | Token spend, not fix-loop count     |
+| Batch migration (`claude -p` loop, N files) | $0.50 × N files | First 2–3 files wrong → stop, re-prompt |
+| Agent team (multi-day coordinated)        | $25.00/day     | Daily spend review                  |
+
+If an orchestrator run hits the ceiling, the decomposition was wrong or the task didn't warrant fan-out. Single-agent is the default; fan-out is a budgeted exception.
+
+---
+
 ## Model arbitrage (updated July 2026)
 
 ### Downgrade when

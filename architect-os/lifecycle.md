@@ -124,7 +124,7 @@ The FSD is the document agents will actually read during implementation. Write i
 | **Entry** | approved FSD + architecture |
 | **Activities** | run `to-tickets`: decompose into GitHub Issues using [task.yml](github/ISSUE_TEMPLATE/task.yml). Every ticket gets: linked spec section, **file/function-level implementation plan**, out-of-scope list, Given/When/Then acceptance criteria, test plan, size XS/S/M. Order with sub-issues/dependencies. You review every plan — this review is 10x cheaper than reviewing the diff that a bad plan produces. |
 | **Artifacts** | GitHub Issues labeled `ai:ready`, sequenced in the Delivery project; for M-size work, the plan **persisted to `docs/specs/<slug>/plan.md`** |
-| **Harness** | Claude Code against the repo (it must read actual code to name actual files); Traycer is the managed alternative for this exact step — see [harness-matrix.md](harness-matrix.md) |
+| **Harness** | Claude Code against the repo (it must read actual code to name actual files); Spec Kit `/speckit.tasks` is the managed alternative for this exact step — see [harness-matrix.md](harness-matrix.md) |
 | **Skills** | `to-tickets`, `wayfinder` (locate the right code first) |
 | **Exit gate** | every ticket ≤1 day (size M max; `size:split-me` means split it). File lists name real files. No ticket depends on an unmade decision — those get `needs-decision` and stop here. **The plan is persisted before S6 begins** — M-size: `docs/specs/<slug>/plan.md`; XS/S: the issue body is the persistence. You'd stake a code review on each plan being right. |
 
@@ -137,11 +137,15 @@ The FSD is the document agents will actually read during implementation. Write i
 | | |
 |---|---|
 | **Entry** | ticket labeled `ai:ready`, its dependencies merged |
-| **Activities** | one issue = one branch (`feat/123-slug`) = one PR. Launch a **fresh** Claude Code session per ticket: context = AGENTS.md + the ticket + linked FSD section + files in the plan. Nothing else. TDD per the `tdd` skill: failing test first, then implementation, per [constitution](constitution.md) testing rules. Agent self-reviews its own diff and posts the self-review comment before requesting review. Fully-specified XS tickets can go async to Copilot coding agent instead. WIP limit: 2 concurrent runs. |
+| **Activities** | one issue = one branch (`feat/123-slug`) = one PR. Launch a **fresh** Claude Code session per ticket: context = AGENTS.md + the ticket + linked FSD section + files in the plan. Nothing else. TDD per the `tdd` skill: failing test first, then implementation, per [constitution](constitution.md) testing rules. Agent self-reviews its own diff and posts the self-review comment before requesting review. WIP limit: **2 concurrent interactive runs**. Two non-interactive lanes exist for the right work (below): async XS and batch mechanical. |
 | **Artifacts** | a PR ≤400 lines, linked `closes #123`, CI green, self-review comment posted |
-| **Harness** | Claude Code (primary); Copilot coding agent (async XS); Codex CLI (second implementation when you want to compare approaches) |
+| **Harness** | Claude Code (primary); Claude Code on the web / Routines, Copilot coding agent, or Codex Web (async XS — governed by **C37**); Codex CLI (second implementation when you want to compare approaches) |
 | **Skills** | `implement`, `tdd`, `diagnosing-bugs` (when tests fail unexpectedly) |
 | **Exit gate** | CI green, PR template complete, diff touches only planned files (deviations flagged per constitution). |
+
+**Async lane (XS only):** fully-specified XS tickets with *no unknowns* can run unattended — Claude Code on the web / Routines, Copilot coding agent, or Codex Web. You come back to a PR and run the normal S7 pipeline. Anything needing judgment runs interactively; C37 limits what unattended sessions may do.
+
+**Batch lane (mechanical migrations):** the same transformation across N files runs as a monitored `claude -p` / `opencode -p` loop — one commit per file, first 2–3 files reviewed by hand before scale-out. Both lanes, plus worktree parallelism and orchestrator-worker spikes, are specified in [multi-agent.md](multi-agent.md) — the 20% case where one agent isn't the right shape.
 
 Narrow context is not a cost optimization — it's a *quality* mechanism. An agent that can see the whole repo will helpfully "improve" things you didn't ask about; an agent that sees one ticket's worth of context physically can't.
 

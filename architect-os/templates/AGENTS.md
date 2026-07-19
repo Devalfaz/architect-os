@@ -49,7 +49,7 @@
 - [e.g., Errors are Result values at service boundaries — no throws across layers (ADR-0007)]
 - Full map: `docs/architecture/architecture.md` · Decisions: `docs/adr/`
 
-## Constitution (see constitution.md — C1–C36)
+## Constitution (see constitution.md — C1–C37)
 
 The 5 most commonly violated rules here:
 - **C4:** Tests before implementation (TDD)

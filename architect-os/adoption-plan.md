@@ -39,7 +39,7 @@ Full comparison with citations: [harness-matrix.md](harness-matrix.md). The one-
 
 | Layer | Default | Alternative | Skip when |
 |---|---|---|---|
-| Spec & planning | Claude Code + skills | Traycer (managed plans), Spec Kit (ceremony) | — |
+| Spec & planning | Claude Code + skills | Spec Kit (ceremony, agent-agnostic) | — |
 | Implementation | Claude Code | Codex CLI (2nd opinion), Cursor (IDE feel) | — |
 | Async small tickets | Copilot coding agent | Codex cloud | no GitHub org / rarely have XS tickets |
 | AI PR review | CodeRabbit | Codex review, claude-code-action | lightweight profile: CodeRabbit only |

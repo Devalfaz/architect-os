@@ -212,9 +212,9 @@ flowchart LR
 
     subgraph S5S6["S5–S6: Execution"]
         direction TB
-        S52["S5: Claude Code + to-tickets<br/>alt: Traycer / Spec Kit"]
+        S52["S5: Claude Code + to-tickets<br/>alt: Spec Kit"]
         S62["S6: Claude Code (Sonnet)<br/>alt: Codex (2nd opinion)"]
-        S6X["S6 XS: Copilot Workspace<br/>(Enterprise) / Codex Cloud"]
+        S6X["S6 XS async: Claude Code Web<br/>/ Copilot coding agent / Codex Web"]
     end
 
     subgraph S7S9["S7–S9: Quality & Learn"]
@@ -242,16 +242,16 @@ flowchart TD
     Q1 -->|"S0-S4<br/>Spec & Plan"| Q2{"Need to read<br/>live repo files?"}
     Q2 -->|"yes"| CC["Claude Code<br/>Opus for S2/S4<br/>Sonnet for S1"]
     Q2 -->|"no"| Q3{"Want product UX?"}
-    Q3 -->|"yes"| TK["Spec Kit / Traycer"]
+    Q3 -->|"yes"| TK["Spec Kit"]
     Q3 -->|"no"| CC
 
     Q1 -->|"S5<br/>Tickets"| Q5{"Team or solo?"}
     Q5 -->|"solo"| CC
-    Q5 -->|"team"| TR["Traycer or Spec Kit"]
+    Q5 -->|"team"| TR["Spec Kit"]
 
     Q1 -->|"S6<br/>Implement"| Q6{"Ticket size?"}
-    Q6 -->|"XS"| Q7{"GitHub Enterprise?"}
-    Q7 -->|"yes"| CW["Copilot Workspace"]
+    Q6 -->|"XS"| Q7{"Well-specified,<br/>no unknowns?"}
+    Q7 -->|"yes"| CW["Async lane: Claude Code Web<br/>/ Copilot coding agent (C37)"]
     Q7 -->|"no"| CC2["Claude Code (manual)"]
     Q6 -->|"S/M"| CC3["Claude Code (Sonnet)"]
     Q6 -->|"complex / uncertain"| Q8{"Want 2nd opinion?"}
