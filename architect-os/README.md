@@ -16,6 +16,8 @@ Every piece of work flows **idea → BRD → PRD/FSD → design → architecture
 6. **Small everything.** Tickets ≤1 day. PRs ≤400 lines. Fix loops ≤2 rounds. WIP ≤2 agent runs. The limits are the system.
 7. **Agents propose, you decide.** Agents never merge, never close issues, never mark their own work ready. Every irreversible action passes through you.
 
+**New here? Start with the [wiki](wiki/Home.md)** — the hands-on user manual (getting started, running the loop, per-project profiles, reference card). The documents below are the canonical law the wiki points into.
+
 ## Reading order
 
 | # | Doc | What it gives you |
@@ -72,6 +74,8 @@ architect-os/
 ├── failure-modes.md               ← the 18 ways this goes wrong
 ├── failure-recovery-playbook.md   ← symptom → action
 ├── adoption-plan.md               ← profiles, 30/60/90, walkthroughs
+├── wiki/                          ← user manual (start here)
+├── profiles/                      ← per-project-type overlays (flutter, web-nextjs, …)
 ├── templates/                     ← BRD, PRD, FSD, ADR, AGENTS.md, dumps…
 ├── skills/                        ← OS-native skill specs (converge, …)
 ├── github/                        ← issue forms, labels, ruleset, CI, .coderabbit.yaml (copy into repo)
