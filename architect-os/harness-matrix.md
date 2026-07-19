@@ -1,10 +1,10 @@
 # Harness Matrix — Which Tool, Which Layer, and Why
 
-_Every tool comparison in one place, cited to primary sources. Rewritten July
-2026 around the **open-frontier + OpenRouter** thesis: intelligent models for
-planning, cheap flash models for coding, different model families for review.
-The question isn't "which tool is best" — it's "which model for which job at
-which stage, at what cost."_
+_Every tool comparison in one place, cited to primary sources. Covers **both
+stacks** of the OS: the **default stack** (Claude Code + Anthropic models) and
+the **open-frontier stack** (OpenCode + DeepSeek via OpenRouter) — canonical
+definitions in [adoption-plan.md](adoption-plan.md). The question isn't "which
+tool is best" — it's "which model for which job at which stage, at what cost."_
 
 **Confidence tiers.** Every load-bearing fact in this doc carries one:
 
@@ -41,11 +41,15 @@ decision). ✅ `research-2026-07-tools.md`
 Plus **spec/workflow frameworks** (GitHub Spec Kit, BMAD, Architect OS itself)
 — methodology + prompts, not model-backed products.
 
-**The Architect OS thesis (unchanged):** BYO-key CLI agents as the primary
-harness (model-agnostic, real files, full audit trail, no vendor lock-in),
-intelligent open models for planning, cheap flash models for implementation,
-different model families for review. Vendor-locked agents and control centers
-are optional escape hatches and async lanes, not the default.
+**How to read this matrix:** the OS runs **two named stacks** (canonical
+definitions: [adoption-plan.md](adoption-plan.md)). **Part II** documents the
+open-frontier stack's components (OpenCode, DeepSeek, OpenRouter, GLM/Llama
+reviewers). **Part III** documents the wider market — including the default
+stack's harness and reviewers (Claude Code, Codex, Copilot). One routing
+principle governs both stacks: intelligent models for planning, cheap models
+for implementation, different model families for review. Pick one stack per
+repo; vendor-locked control centers are optional escape hatches and async
+lanes on either stack.
 
 **MCP is load-bearing in 2026.** The Model Context Protocol became the de
 facto integration standard; tools without MCP support look architecturally
@@ -129,14 +133,14 @@ coding agent pull live model and pricing data.
 
 ---
 
-### OpenCode — primary harness
+### OpenCode — the open-frontier stack's primary harness
 
 **Confidence:** ✅ opencode.ai docs via `research-2026-07-tools.md`.
 
 Terminal-based, model-agnostic coding agent. Reads files, writes code, runs
 commands, tests its own work, self-corrects in a loop. Accepts any
 OpenAI-compatible API, OpenRouter, or direct provider endpoints. The harness
-the Architect OS is built on.
+the open-frontier stack is built on.
 
 - **Model-agnostic:** `opencode.json` with any provider; switch models per-stage.
 - **Subagents:** `task` tool dispatches parallel subagents in isolated context.
@@ -227,7 +231,7 @@ edits.
 
 ---
 
-### DeepSeek — the primary model provider
+### DeepSeek — the open-frontier stack's primary model provider
 
 **Confidence:** ✅ api-docs.deepseek.com/quick_start/pricing fetched 2026-07-19.
 
@@ -362,10 +366,11 @@ Channels, web sessions, and agent teams are the async primitives.
 $200/mo Max). Use when you need a Claude-Code-specific feature (a skill, an
 MCP integration) OpenCode doesn't yet support.
 
-**Where it fits:** optional harness and async-lane candidate. Even if it isn't
-your daily driver, its native patterns (worktrees, `claude -p` batch, agent
-teams, `/code-review` skill) are the reference implementation for
-[multi-agent.md](multi-agent.md).
+**Where it fits:** the **default stack's** harness (planning on Opus 4.8,
+implementation on Sonnet 5); on the open-frontier stack, an optional escape
+hatch and async-lane candidate. Either way, its native patterns (worktrees,
+`claude -p` batch, agent teams, `/code-review` skill) are the reference
+implementation for [multi-agent.md](multi-agent.md).
 
 ---
 
@@ -695,7 +700,7 @@ cheaper at near-equivalent quality for most tasks.**
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | Three-category market (IDE/CLI/cloud)           | **Seven-category market** (control centers, CLI, vendor CLI, IDE, cloud async, review, vibe)  |
 | "Claude Code has no async fire-and-forget"      | Routines, Channels, Claude Code on the web, agent teams — async is native everywhere          |
-| Claude Code as primary harness ($200/mo Max)    | OpenCode as primary harness ($0, BYO-key); Claude Code optional + async lanes                 |
+| Claude Code as the only primary harness ($200/mo Max)    | **Two named stacks**: default (Claude Code + Anthropic) or open-frontier (OpenCode + DeepSeek, $0 harness) — pick per repo |
 | Claude Sonnet/Opus for all stages               | DeepSeek V4 Pro planning, V4 Flash implementation                                             |
 | Codex CLI as second-opinion implementer         | Codex review as standing C36 cross-family reviewer; GLM/Llama via OpenRouter as alternates    |
 | Copilot Enterprise for Code Review ($39 + GHEC) | Copilot Business ($19, no GHEC) — and now a 12-product platform family                        |

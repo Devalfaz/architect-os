@@ -2,6 +2,8 @@
 
 *AI agents can burn money if unchecked. This is the control system. Pricing verified against official provider docs July 2026.*
 
+**Scope:** budgets below price the [default stack](adoption-plan.md) (Claude Code + Anthropic models). The open-frontier stack runs the same budget structure at ~28–35× lower per-op cost — routing and per-op figures live in [harness-matrix.md](harness-matrix.md).
+
 ---
 
 ## Per-ticket budget
@@ -111,6 +113,8 @@ Don't restart the same session. Kill → diagnose → re-plan:
 | Codex CLI | API usage (gpt-5.3-codex) | ~$10–20 |
 | GitHub | Free/Pro | $0–4 |
 | **Total** | | **~$232–249** |
+
+**Open-frontier stack:** OpenCode $0 + DeepSeek API $15–40 + OpenRouter reviews $5–10 + CodeRabbit $12–15 = **~$32–65/mo** (routing detail: [harness-matrix.md](harness-matrix.md)).
 
 **Lightweight profile:** Claude Pro $17–20 + CodeRabbit $0–15 = ~$20–35/mo.
 

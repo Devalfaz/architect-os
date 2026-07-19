@@ -2,6 +2,8 @@
 
 *Which models for which tasks. Pricing verified against official provider documentation as of July 2026. Route by task importance, not cost minimization.*
 
+**Scope:** the [default stack's](adoption-plan.md) models (Anthropic + OpenAI). Open-frontier models (DeepSeek, GLM, Qwen, Llama, Gemini) route per [harness-matrix.md](harness-matrix.md).
+
 **Sources:** [Anthropic Pricing](https://www.anthropic.com/pricing) (verified July 2026), [OpenAI API Pricing](https://developers.openai.com/api/docs/pricing) (verified July 2026), [PE Collective cross-check](https://pecollective.com/tools/anthropic-api-pricing/), [PE Collective OpenAI cross-check](https://pecollective.com/tools/openai-api-pricing/).
 
 ---

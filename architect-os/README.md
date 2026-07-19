@@ -100,12 +100,12 @@ your-app/
 
 ## Setup checklist (new machine / first time)
 
-- [ ] Install Claude Code; sign in on a Max plan ([cost rationale](cost-control.md))
-- [ ] Install Codex CLI (second opinion + cross-review) and `gh` CLI, authenticated
+- [ ] **Pick your stack** ([the two stacks](adoption-plan.md)): **default** — install Claude Code, sign in on a Max plan ([cost rationale](cost-control.md)); **open-frontier** — install OpenCode plus DeepSeek/OpenRouter API keys ([setup](harness-matrix.md))
+- [ ] Install the C36 cross-family reviewer — Codex CLI (default stack) or GLM 5.2 via OpenRouter (open-frontier stack) — plus `gh` CLI, authenticated
 - [ ] Install skills: Matt Pocock's set + OS-native skills into `~/.claude/skills` ([catalog](skills-catalog.md))
 - [ ] Put `~/.claude/skills` under git — versioning is mandatory ([rituals](rituals-and-metrics.md))
 - [ ] Install the CodeRabbit GitHub App on your account
-- [ ] Enable Copilot coding agent (if using async tickets)
+- [ ] Enable an async XS lane if using one (Claude Code on the web, Copilot coding agent, or Codex Web — C37 applies)
 
 ## Setup checklist (each new repo)
 

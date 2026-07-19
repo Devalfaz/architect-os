@@ -30,6 +30,8 @@ Three loops matter:
 
 **Stage-skipping is sized, not improvised.** A one-line bugfix doesn't need a BRD — and the S1 size-classification table defines exactly which artifacts each class of work gets, so skips are standard rather than ad-hoc. Skipping beyond what your size class allows still requires *saying so in the ticket*, never drifting past it. The lightweight profile in [adoption-plan.md](adoption-plan.md) maps to the XS/S rows.
 
+**Harness names assume the default stack.** This doc says "Claude Code" and "Sonnet/Opus" throughout — that's the [default stack](adoption-plan.md) (Claude Code + Anthropic models). On the **open-frontier stack** (OpenCode + DeepSeek/OpenRouter), every stage maps one-for-one per [harness-matrix.md](harness-matrix.md) — gates, artifacts, skills, and constitution rules are stack-independent.
+
 ---
 
 ## S0 — Capture

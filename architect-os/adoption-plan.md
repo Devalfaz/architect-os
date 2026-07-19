@@ -33,9 +33,45 @@ Everything in Default, plus:
 - **Compliance layer**: AI-assistance disclosure required on every PR (already in the [PR template](github/PULL_REQUEST_TEMPLATE.md)), audit log of agent sessions, SAST + dependency scanning as required checks, DORA metrics tracked, not just the personal metrics in [rituals-and-metrics.md](rituals-and-metrics.md).
 - **Shared memory governance**: graph and docs edits go through PRs like code; a rotating "librarian" owns the weekly distill.
 
+## The two stacks
+
+The profiles above set *ceremony*; the stack sets *tools*. The two choices are orthogonal — Lightweight ceremony runs fine on either stack.
+
+### Default stack — Claude Code + Anthropic
+
+| Layer | Tool |
+|---|---|
+| Harness | Claude Code (terminal, IDE, Desktop, web) |
+| Planning models (S2/S4/S5) | Opus 4.8 |
+| Implementation (S6) | Sonnet 5 (⏰ intro pricing ends 2026-08-31) |
+| Learning (S9) | Haiku 4.5 |
+| Always-on review | CodeRabbit |
+| Cross-family second opinion (C36) | Codex review (Copilot code review as alternative) |
+| Async XS lane | Claude Code on the web / Routines, Copilot coding agent, Codex Web |
+| Cost | ~$232–249/mo subscriptions ([cost-control.md](cost-control.md)) |
+
+Choose when: you want the most mature agent loop (subagents, skills, hooks, Routines), already pay for Max, or rely on Claude-specific features. The workflow docs (lifecycle, cost-control, README checklist) assume this stack.
+
+### Open-frontier stack — OpenCode + DeepSeek/OpenRouter
+
+| Layer | Tool |
+|---|---|
+| Harness | OpenCode (Aider, Cline as alternatives) |
+| Planning models (S2/S4/S5) | DeepSeek V4 Pro |
+| Implementation (S6) | DeepSeek V4 Flash |
+| Learning (S9) | Gemini 2.5 Flash |
+| Always-on review | CodeRabbit |
+| Cross-family second opinion (C36) | GLM 5.2 via OpenRouter (Llama 4 Maverick as alternative) |
+| Async XS lane | OpenCode backgrounded, Codex Web |
+| Cost | ~$32–65/mo ([harness-matrix.md](harness-matrix.md)) |
+
+Choose when: cost discipline matters, you want zero vendor lock-in, or you accept a younger harness in exchange for 60–85% lower spend.
+
+**Rules that hold on both stacks:** the lifecycle, the constitution, the review pipeline (C36 works on both — Claude authors → Codex reviews; DeepSeek authors → GLM/Llama reviews; Codex authors → claude-code-action or CodeRabbit), the GitHub execution system, the memory architecture, and the rituals. Pick **one stack per repo** and record the choice in AGENTS.md (or ADR-0001); don't mix stacks mid-ticket. Migration between stacks is cheap by design — every artifact in this OS is plain markdown.
+
 ## Tooling matrix
 
-Full comparison with citations: [harness-matrix.md](harness-matrix.md). The one-glance version:
+Full comparison with citations: [harness-matrix.md](harness-matrix.md). The one-glance version (**default stack** — the open-frontier mapping is the matrix's Part II):
 
 | Layer | Default | Alternative | Skip when |
 |---|---|---|---|
