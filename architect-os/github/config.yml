@@ -28,11 +28,12 @@ branches:
         require_code_owner_reviews: false
       required_status_checks:
         strict: true
+        # Contexts must equal the Actions job *names* from ci.yml (not "workflow / job").
         contexts:
-          - "CI / typecheck"
-          - "CI / lint"
-          - "CI / test"
-          - "CI / build"
+          - "Typecheck"
+          - "Lint"
+          - "Test"
+          - "Build"
       enforce_admins: false
       restrictions: null
       required_linear_history: true

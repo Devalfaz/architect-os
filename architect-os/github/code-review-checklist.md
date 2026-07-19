@@ -55,6 +55,9 @@
 - [ ] C34: Dependencies pinned — no `latest` or `*` versions
 - [ ] C35: No PII, credentials, tokens, or full identifiers in logs
 
+### ✅ Review setup (C36 — human's responsibility, agent states the facts)
+- [ ] C36: Authoring model family declared in the PR template, so the human can route a cross-family second reviewer (Claude authored → Codex review; Codex authored → claude-code-action/CodeRabbit)
+
 ---
 
 ## Areas of uncertainty

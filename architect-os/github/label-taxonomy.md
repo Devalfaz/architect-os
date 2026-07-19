@@ -33,7 +33,7 @@
 
 | How many files? | How many lines (net)? | Size label | Agent? |
 |---|---|---|---|
-| 1 | ≤50 | `size:XS` | Fire-and-forget (Copilot Workspace / Codex Cloud) |
+| 1 | ≤50 | `size:XS` | Fire-and-forget (Copilot coding agent / Codex Web) |
 | 1–3 | 50–150 | `size:S` | Agent-primary (Claude Code, fresh session) |
 | 3–5 | 150–400 | `size:M` | Agent-primary, max size for single ticket |
 | Any | >400 | `size:split-me` | Split first. Cannot go to agent as-is. |

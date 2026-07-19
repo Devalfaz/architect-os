@@ -19,7 +19,7 @@
 | Sonnet 4.6 (legacy) | $3.00 | $15.00 | $0.30 | Still available, migrate to Sonnet 5 |
 | Opus 4.7/4.6 (legacy) | $5.00 | $25.00 | $0.50 | Still available, migrate to Opus 4.8 |
 
-¹ Sonnet 5 introductory pricing $2/$10 through August 31, 2026; $3/$15 standard thereafter.
+¹ Sonnet 5 introductory pricing $2/$10 through August 31, 2026; $3/$15 standard thereafter. **⏰ Verify-by 2026-08-31:** re-run the budget tables in [cost-control.md](cost-control.md) at standard pricing — the monthly estimate rises ~30% on S6 work if usage is API-billed (Max-plan users unaffected).
 
 ### OpenAI (current generation)
 
@@ -85,7 +85,7 @@
 | **Ticket decomposition (S5)** | Sonnet 5 | Human gate catches errors. Cost-effective for planning. |
 | **Implementation (S6)** | Sonnet 5 | Daily driver. 90% of tickets. Intro price $2/$10 through Aug 2026. |
 | **Self-review (S7)** | Sonnet 5 | Same model reviews own work. |
-| **Second opinion** | gpt-5.3-codex or GPT-5.6-terra | Different model family → different blind spots. |
+| **Second opinion** | gpt-5.3-codex or GPT-5.6-terra | **C36 (hard rule):** cross-family from the author, or it counts as no review. |
 | **AI review (S7)** | CodeRabbit (multi-model) | Subscription, not per-token. |
 | **Memory dumps (S9)** | Haiku 4.5 or GPT-5.4-nano | Cheapest models that can do mechanical distillation. |
 
@@ -105,11 +105,13 @@ GPT-5.4-nano  ██████░░░░░░░░  cheapest, mechanical o
 
 ## Prompt caching (both providers, July 2026)
 
-**Anthropic:** Cache writes 1.25× (5-min TTL) or 2.0× (1-hour TTL) base input. Cache reads = 0.1× base input (90% savings). Stacks with Batch API.
+**Anthropic:** Cache writes 1.25× (5-min TTL) or 2.0× (1-hour TTL) base input. Cache reads = 0.1× base input (90% savings). Stacks with Batch API. Two operational bonuses: cache reads **do not count against rate limits**, and the cache-diagnostics beta reports exactly where consecutive prompts diverged (use it before hand-debugging cache misses).
 
-**OpenAI:** Discount varies by model family. GPT-5.6 family: 90% off cached reads. GPT-5.4 family: 75% off. o-series: 50% off.
+**OpenAI:** Discount varies by model family. GPT-5.6 family: 90% off cached reads. GPT-5.4 family: 75% off. o-series: 50% off. **⚠️ The `prompt_cache_key` ceiling:** on GPT-5.6+ you must set `prompt_cache_key`, and traffic per key must stay under **~15 requests/min** — above that, routing degrades and cache hit rates silently collapse. Partition busy workloads across multiple keys. Cached tokens still count against OpenAI rate limits (unlike Anthropic).
 
-**Architect OS caching:** AGENTS.md, constitution, FSD sections = cache candidates. Effective savings: 40–60% on implementation sessions. Automatic — keep AGENTS.md stable.
+**Batch APIs (both providers):** 50% off everything, async (typically <1h Anthropic, ≤24h OpenAI), and it **stacks with caching**. Use the 1-hour cache TTL inside batches (5-min expires mid-batch). Natural fits: S9 memory dumps and weekly distills, bulk second-opinion review scans, eval runs, large mechanical migrations.
+
+**Architect OS caching:** AGENTS.md, constitution, FSD sections = cache candidates. Effective savings: 40–60% on implementation sessions. Automatic — keep AGENTS.md stable (every edit invalidates the prefix behind it).
 
 ---
 

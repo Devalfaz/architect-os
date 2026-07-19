@@ -44,7 +44,7 @@ C24 (fix loops ≤2 rounds) is both a quality control AND a cost control.
 
 ### Dual-provider strategy
 
-Run same ticket through Claude Code (Sonnet 5) AND Codex (gpt-5.3-codex). Compare approaches. Different model families catch different blind spots. Reserve for: security-sensitive code, performance-critical paths, agent-flagged uncertainty, weekly spot-check.
+Run same ticket through Claude Code (Sonnet 5) AND Codex (gpt-5.3-codex). Compare approaches. Different model families catch different blind spots — the same principle C36 makes mandatory for review. Reserve for: security-sensitive code, performance-critical paths, agent-flagged uncertainty, weekly spot-check.
 
 ---
 
@@ -75,11 +75,15 @@ Don't restart the same session. Kill → diagnose → re-plan:
 
 ## Prompt caching — the free money
 
-**Anthropic:** Cache writes 1.25× (5-min TTL) or 2.0× (1-hour TTL). Cache reads = 0.1× base input (90% savings). Stacks with Batch API.
+**Anthropic:** Cache writes 1.25× (5-min TTL) or 2.0× (1-hour TTL). Cache reads = 0.1× base input (90% savings). Stacks with Batch API. Cache reads don't count against rate limits; the cache-diagnostics beta pinpoints where a prefix diverged.
 
-**OpenAI:** 50–90% off cached reads depending on model family. GPT-5.6 family: 90%. GPT-5.4 family: 75%. o-series: 50%.
+**OpenAI:** 50–90% off cached reads depending on model family. GPT-5.6 family: 90%. GPT-5.4 family: 75%. o-series: 50%. On GPT-5.6+, set `prompt_cache_key` and keep each key under **~15 requests/min** — exceeding it silently collapses hit rates; partition across keys.
+
+**Batch APIs — the second 50%:** both providers give 50% off async batches, stacking with caching (use the 1-hour TTL inside batches). Route through batch: S9 dumps, weekly distills, bulk review scans, eval runs, mechanical migrations. Anything that doesn't need an answer this minute shouldn't pay interactive prices.
 
 **Architect OS caching:** AGENTS.md, constitution, FSD sections = auto-cached between sessions. Effective savings: 40–60% on implementation sessions. Keep AGENTS.md stable — cache invalidates on every edit.
+
+**Health metric:** track `cache_read_input_tokens` ÷ total input tokens in the weekly cost review. A falling cache-hit ratio usually means AGENTS.md churn or unstable session prefixes — fix the prefix, don't buy a cheaper model.
 
 ---
 
@@ -104,7 +108,7 @@ Don't restart the same session. Kill → diagnose → re-plan:
 
 | What changed | Impact |
 |---|---|
-| Sonnet 5 at $2/$10 intro (was $3/$15 for Sonnet 4.6) | 33% cheaper for primary S6 model through Aug 2026 |
+| Sonnet 5 at $2/$10 intro (was $3/$15 for Sonnet 4.6) | 33% cheaper for primary S6 model through Aug 2026. **⏰ Verify-by 2026-08-31:** intro ends; re-run the per-ticket budget table at $3/$15 |
 | Opus 4.8 same price as Opus 4.6 ($5/$25), more capable | Flagship improved at zero cost increase |
 | GPT-5.3-codex ($1.75/$14) for coding tasks | Competitive second-opinion pricing |
 | GPT-5.4-nano ($0.20/$1.25) for mechanical work | Budget option for dumps and classification |

@@ -20,7 +20,7 @@ STAGE 1: Human review (10-minute rubric)
 STAGE 2: AI review (automatic, parallel)
      │
      ├── CodeRabbit (always-on)
-     └── Second AI opinion (Codex review) — optional
+     └── Cross-family second opinion (C36) — standing on M/security PRs
      │
      ▼
 Agent addresses AI findings → Human resolves threads
@@ -53,15 +53,26 @@ Approved → Squash merge
 
 Reviews every PR automatically. Best at: mechanical bugs, security patterns, code quality issues, missing error handling, performance anti-patterns. Bad at: design drift, architectural consistency, correct abstraction questions, business logic correctness.
 
-**Interaction:** Valid findings → include in fix-request. False positives → reply `@coderabbitai false positive: [reason]`.
+**Interaction:** Valid findings → include in fix-request. False positives → reply `@coderabbitai false positive: [reason]`. Config: [.coderabbit.yaml](github/.coderabbit.yaml) — rules cited as `[Cn]` with severity, 🟡/🔵 batched, `docs/**`/`templates/**`/`memory/*.json` explicitly re-included (failure mode #17).
 
-### Second AI opinion (optional)
+**Finishing Touches / autofix:** reviewer-generated fixes (autofix, docstrings, generated tests) are a **new unreviewed change** from the same vendor that just reviewed (failure mode #18). They go through the rubric like any commit — never merged on the reviewer's say-so.
 
-Use on: security-sensitive paths, performance-critical hot paths, M-size with complex logic, agent-flagged uncertainty, weekly spot-check.
+### Second AI opinion — cross-family by construction (C36)
 
-Run: `codex review --pr <NUM> --repo <owner/repo>` or claude-code-action.
+**The rule (C36, 🔴):** when both author and reviewer are AI, they must not share a model family. Same-family review counts as no review — the reviewer inherits the author's blind spots.
 
-**Decision rule:** Run once a week on one M-size PR. Track unique catches. After a month: is it worth $0.50–$2 per review?
+**Routing table:**
+
+| PR authored by | Standing second opinion | Alternatives | Never |
+|---|---|---|---|
+| Claude Code (default) | **Codex review** — `codex review --pr <NUM> --repo <owner/repo>` | Copilot code review (if seat exists) | claude-code-action on a Claude model |
+| Codex | claude-code-action (Anthropic model) | CodeRabbit alone + 20-min rubric | Codex review |
+| Cursor agent | Codex review or claude-code-action | — | Cursor Bugbot |
+| Human (no agent) | any — C36 doesn't apply | — | — |
+
+**When it runs:** standing on every M-size PR and anything touching `area:auth` / `area:security` paths; on-demand elsewhere (agent-flagged uncertainty, performance-critical hot paths, weekly spot-check). Whenever it runs, the family rule is hard. If no cross-family reviewer is available, the rule is not waived — the human rubric escalates to the 20-minute pass.
+
+**Track it:** unique catches per reviewer per month. If the second opinion catches nothing CodeRabbit + rubric didn't for a full month, drop it to weekly spot-checks — but never drop the family rule.
 
 ---
 
@@ -111,7 +122,7 @@ Squash merge only. PR title = conventional commit. Delete branch after merge.
 ## Review metrics (track in rituals)
 
 Per-PR: time to first review, fix rounds, CodeRabbit valid/FP ratio, second AI unique catches, bounce rate.
-Monthly: avg review time, fix round distribution, CodeRabbit FP rate, second AI value.
+Monthly: avg review time, fix round distribution, CodeRabbit FP rate, second AI value, **address rate** (AI review comments addressed ÷ emitted — below ~35% for two consecutive weeks means prune rules and re-tune the reviewer, not push harder; see failure mode #16).
 
 ---
 

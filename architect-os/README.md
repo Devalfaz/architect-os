@@ -22,7 +22,7 @@ Every piece of work flows **idea → BRD → PRD/FSD → design → architecture
 |---|---|---|
 | 1 | [lifecycle.md](lifecycle.md) | The end-to-end workflow, stage by stage, with gates |
 | 2 | [daily-loop.md](daily-loop.md) | The one-page loop you actually run each day |
-| 3 | [constitution.md](constitution.md) | The rules every agent must follow (C1–C35) |
+| 3 | [constitution.md](constitution.md) | The rules every agent must follow (C1–C36, severity-tagged) |
 | 4 | [harness-matrix.md](harness-matrix.md) | Which tool for which layer, and why — cited |
 | 5 | [skills-catalog.md](skills-catalog.md) | The repeatable agent workflows and when to fire each |
 | 6 | [github-setup.md](github-setup.md) | Labels, issue forms, rulesets, Projects — the execution system |
@@ -55,7 +55,7 @@ architect-os/
 ├── README.md                      ← you are here
 ├── lifecycle.md                   ← the workflow spine
 ├── daily-loop.md                  ← 1-page operating loop
-├── constitution.md                ← agent rules C1–C35
+├── constitution.md                ← agent rules C1–C36, severity-tagged
 ├── harness-matrix.md              ← tool comparison & assignments
 ├── skills-catalog.md              ← agent workflow library
 ├── github-setup.md                ← execution-system narrative
@@ -67,7 +67,7 @@ architect-os/
 ├── models-cost-quality.md         ← model landscape & routing
 ├── cost-control.md                ← budgets, arbitrage, kill switches
 ├── rituals-and-metrics.md         ← cadences & measurement
-├── failure-modes.md               ← the 12 ways this goes wrong
+├── failure-modes.md               ← the 18 ways this goes wrong
 ├── failure-recovery-playbook.md   ← symptom → action
 ├── adoption-plan.md               ← profiles, 30/60/90, walkthroughs
 ├── templates/                     ← BRD, PRD, FSD, ADR, AGENTS.md, dumps…

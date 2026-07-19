@@ -1,0 +1,70 @@
+# .coderabbit.yaml — copy to repo root.
+# CodeRabbit is the always-on primary AI reviewer (Stage 2 of review-workflow.md).
+# It is NOT the second opinion: C36 requires the second opinion to be cross-family
+# from the authoring agent (Claude authors → Codex review). See review-workflow.md.
+#
+# Monthly ritual: run `@coderabbitai emit path instructions` on a PR to sweep the
+# last week of review feedback into suggested edits to this file. Merge suggestions
+# by hand — this file is constitution-adjacent and changes get reviewed like code.
+
+language: en-US
+
+reviews:
+  profile: assertive
+  # Assertive, not chill: nit control comes from severity BATCHING (below), not from
+  # the reviewer silently dropping findings we'd want to see.
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+
+  path_filters:
+    # Explicit re-includes — CodeRabbit's defaults skip generated-looking files.
+    # Our graph memory, templates, and docs carry real decisions and MUST be
+    # reviewed (failure mode #17: generated-code silent skip).
+    - "!**/node_modules/**"
+    - "docs/**"
+    - "templates/**"
+    - "memory/*.json"
+
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        This repo follows a numbered constitution (constitution.md, rules C1–C36),
+        each rule tagged with a severity: 🔴 Critical, 🟠 Major, 🟡 Minor, 🔵 Trivial.
+        - Cite every violation as `[Cn]` with the rule's tagged severity.
+        - 🔴 and 🟠 findings: individual comments, request changes.
+        - 🟡 and 🔵 findings: batch ALL of them into ONE summary comment per review —
+          never open individual threads for minor/trivial findings (anti-nit-flood).
+        - Do not restate rules that CI already enforces (formatting, import order).
+        Priority order: security (C31–C35) > scope (C6–C10) > spec fidelity (C1–C5)
+        > testing (C16–C20) > everything else.
+    - path: "src/**"
+      instructions: |
+        Conventions live in AGENTS.md — apply them rather than generic style advice.
+        Flag: files changed that a linked ticket's plan does not justify (collateral
+        damage), validation missing at boundaries [C12], authz not checked
+        per-operation [C33], hardcoded timeouts/limits/IDs that should be config [C15].
+    - path: "**/migrations/**"
+      instructions: |
+        Migrations are one-way risk. Flag anything irreversible without a stated
+        rollback path, and any hand-edit to previously generated migrations [C30].
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    # Autofix / generated docstrings / generated tests from the reviewer are a NEW
+    # UNREVIEWED CHANGE from the same vendor that just reviewed (failure mode #18).
+    # If enabled, they pass through the full rubric like any other commit.
+
+knowledge_base:
+  learnings:
+    scope: auto
+  # Learnings ON: resolved review conversations become persistent preferences.
+  # Feed confirmed learnings back into constitution.md as ADR amendments monthly.
+
+chat:
+  auto_reply: true

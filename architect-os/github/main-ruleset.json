@@ -35,10 +35,10 @@
       "parameters": {
         "strict_required_status_checks_policy": true,
         "required_status_checks": [
-          { "context": "CI / typecheck" },
-          { "context": "CI / lint" },
-          { "context": "CI / test" },
-          { "context": "CI / build" }
+          { "context": "Typecheck" },
+          { "context": "Lint" },
+          { "context": "Test" },
+          { "context": "Build" }
         ]
       }
     },
