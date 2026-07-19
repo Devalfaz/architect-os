@@ -34,6 +34,20 @@ Every piece of work flows **idea → BRD → PRD/FSD → design → architecture
 | 12 | [failure-modes.md](failure-modes.md) / [failure-recovery-playbook.md](failure-recovery-playbook.md) | What goes wrong and what to do about it |
 | 13 | [adoption-plan.md](adoption-plan.md) | Default/light/heavy profiles, 30/60/90, worked walkthroughs |
 
+## July 2026 research update
+
+Six parallel internet-research passes against primary sources, plus a master synthesis identifying what changed since the mid-2025 baseline, what the existing research got right, and what is now stale or missing. The synthesis is the entry point; the detailed reports are the evidence layer.
+
+| File | Scope | Priority findings |
+|---|---|---|
+| [insights-and-issues-2026-07.md](insights-and-issues-2026-07.md) | **Master synthesis — start here** | 20 issues prioritized Critical/High/Medium/Low; 5 things to do this quarter |
+| [research-2026-07-tools.md](research-2026-07-tools.md) | AI coding agents & tools | Claude Code async primitives shipped; new entrant wave (Devin, Replit Agent, Lovable, Bolt, v0, Windsurf, Trae, Zed AI, Cline, Continue, OpenCode); three-layer code review stack |
+| [research-2026-07-specs.md](research-2026-07-specs.md) | Spec-driven development | GitHub Spec Kit 122k stars; AWS Kiro; BMad v6 scale-adaptive; Anthropic March 2026 harness-design post gives empirical evidence |
+| [research-2026-07-memory.md](research-2026-07-memory.md) | Memory & context engineering | Context engineering as a discipline (Anthropic Sep 2025); Mem0/Letta/Zep; AGENTS.md content mix pruning; automatic invalidation |
+| [research-2026-07-review.md](research-2026-07-review.md) | AI code review | Correlated-vendor problem (Greptile auditor post); runtime validation (TREX); 27.6% of merged PRs AI-authored; reviewer-independence rule |
+| [research-2026-07-multi-agent.md](research-2026-07-multi-agent.md) | Multi-agent orchestration | Anthropic multi-agent research system (+90.2% over single-agent, 15× chat tokens); Claude Code agent teams/worktrees/`claude -p` batch; 12 multi-agent failure modes |
+| [research-2026-07-update.md](research-2026-07-update.md) | Cost optimization & failure modes | Batch APIs, LiteLLM/OpenRouter, Anthropic automatic caching mode, OpenAI `prompt_cache_key` 15 RPM ceiling; 15 new failure modes beyond the existing 12 |
+
 ## Repository layout (this document set)
 
 ```

@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "generated": "2026-07-17T10:00:00Z",
+  "repo": "csv-export-app",
+  "description": "Example knowledge graph for a small Next.js app with CSV export feature. 3 modules, 9 files, 5 concepts, 2 decisions.",
+  "nodes": [
+    { "id": "module:src/server/auth", "type": "module", "label": "Auth Module",
+      "properties": { "description": "User authentication and session management via Supabase Auth" } },
+    { "id": "module:src/server/export", "type": "module", "label": "Export Module",
+      "properties": { "description": "CSV export service for user data portability" } },
+    { "id": "module:src/app/api", "type": "module", "label": "API Routes",
+      "properties": { "description": "Next.js App Router API handlers" } },
+
+    { "id": "file:src/server/auth/service.ts", "type": "file", "label": "AuthService",
+      "properties": { "description": "Session validation, user lookup", "exports": ["AuthService", "getSession"], "dependencies": ["@supabase/supabase-js"], "test_coverage": "high", "last_modified": "2026-07-15", "last_verified": "2026-07-17" } },
+    { "id": "file:src/server/export/service.ts", "type": "file", "label": "ExportService",
+      "properties": { "description": "Streaming CSV generation with row cap enforcement", "exports": ["ExportService", "exportToCsv"], "dependencies": ["node:stream", "csv-stringify"], "test_coverage": "high", "last_modified": "2026-07-16", "last_verified": "2026-07-16" } },
+    { "id": "file:src/server/export/serialize.ts", "type": "file", "label": "serializeRow",
+      "properties": { "description": "Row serialization with BOM support and special-character escaping", "exports": ["serializeRow"], "dependencies": [], "test_coverage": "high", "last_modified": "2026-07-16", "last_verified": "2026-07-16" } },
+    { "id": "file:src/app/api/export/route.ts", "type": "file", "label": "Export API Route",
+      "properties": { "description": "GET /api/export.csv — Zod-validated, auth-gated", "exports": ["GET"], "dependencies": ["zod", "next/server"], "test_coverage": "medium", "last_modified": "2026-07-16", "last_verified": "2026-07-16" } },
+    { "id": "file:src/app/settings/page.tsx", "type": "file", "label": "Settings Page",
+      "properties": { "description": "User settings with export section", "exports": ["default"], "dependencies": ["@/components/ui/button"], "test_coverage": "low", "last_modified": "2026-07-16", "last_verified": "2026-07-16" } },
+    { "id": "file:src/server/export/service.test.ts", "type": "file", "label": "ExportService Tests",
+      "properties": { "description": "Unit tests for CSV export: 0 rows, typical, cap, Unicode, special chars", "test_coverage": "high", "last_modified": "2026-07-16", "last_verified": "2026-07-16" } },
+    { "id": "file:src/server/auth/service.test.ts", "type": "file", "label": "AuthService Tests",
+      "properties": { "description": "Unit tests for session validation and user lookup", "test_coverage": "high", "last_modified": "2026-07-15", "last_verified": "2026-07-17" } },
+
+    { "id": "concept:Session", "type": "concept", "label": "Session",
+      "properties": { "description": "Represents an authenticated user session. Managed by Supabase Auth. Has access_token, user_id, expires_at." } },
+    { "id": "concept:User", "type": "concept", "label": "User",
+      "properties": { "description": "Registered user with email, account. Has many records. Owns export requests." } },
+    { "id": "concept:Export", "type": "concept", "label": "CSV Export",
+      "properties": { "description": "Synchronous CSV download of user-owned records. Capped at 100k rows. Stateless GET request." } },
+    { "id": "concept:Record", "type": "concept", "label": "User Record",
+      "properties": { "description": "A single data record owned by a user. Serialized to CSV by ExportService." } },
+    { "id": "concept:RowCap", "type": "concept", "label": "100k Row Cap",
+      "properties": { "description": "v1 constraint: exports capped at 100k rows. Exceeding returns 413. Revisit async export if demanded." } },
+
+    { "id": "decision:ADR-0001", "type": "decision", "label": "ADR-0001: Use PostgreSQL + Drizzle",
+      "properties": { "status": "accepted", "description": "Chose PostgreSQL via Supabase with Drizzle ORM for type-safe queries. Rejected raw SQL (tooling loss) and Prisma (bundle size)." } },
+    { "id": "decision:ADR-0014", "type": "decision", "label": "ADR-0014: Export capped at 100k rows, sync-only v1",
+      "properties": { "status": "accepted", "description": "v1 CSV export is synchronous with 100k row cap. Revisit async export at demand. Simplifies initial implementation." } },
+
+    { "id": "test:export-service", "type": "test", "label": "ExportService Tests",
+      "properties": { "description": "6 test cases: 0 rows, 50 rows, 100k rows (cap), Unicode chars, CSV special chars, BOM handling" } },
+    { "id": "test:auth-service", "type": "test", "label": "AuthService Tests",
+      "properties": { "description": "Tests for session validation, expired tokens, missing auth" } }
+  ],
+  "edges": [
+    { "id": "e-001", "source": "module:src/app/api", "target": "module:src/server/auth", "type": "depends_on",
+      "properties": { "description": "API routes validate sessions via AuthService", "last_verified": "2026-07-17" } },
+    { "id": "e-002", "source": "module:src/app/api", "target": "module:src/server/export", "type": "depends_on",
+      "properties": { "description": "Export route calls ExportService", "last_verified": "2026-07-16" } },
+
+    { "id": "e-003", "source": "file:src/server/auth/service.ts", "target": "concept:Session", "type": "implements",
+      "properties": { "description": "AuthService manages Session lifecycle", "last_verified": "2026-07-17" } },
+    { "id": "e-004", "source": "file:src/server/export/service.ts", "target": "concept:Export", "type": "implements",
+      "properties": { "description": "ExportService implements CSV export logic", "last_verified": "2026-07-16" } },
+    { "id": "e-005", "source": "file:src/server/export/serialize.ts", "target": "concept:Record", "type": "implements",
+      "properties": { "description": "serializeRow converts Record to CSV row", "last_verified": "2026-07-16" } },
+
+    { "id": "e-006", "source": "file:src/server/export/service.ts", "target": "file:src/server/export/serialize.ts", "type": "calls",
+      "properties": { "description": "ExportService calls serializeRow for each record", "last_verified": "2026-07-16" } },
+    { "id": "e-007", "source": "file:src/app/api/export/route.ts", "target": "file:src/server/export/service.ts", "type": "calls",
+      "properties": { "description": "Route handler calls ExportService.exportToCsv()", "last_verified": "2026-07-16" } },
+    { "id": "e-008", "source": "file:src/app/api/export/route.ts", "target": "file:src/server/auth/service.ts", "type": "calls",
+      "properties": { "description": "Route validates session before calling export", "last_verified": "2026-07-16" } },
+
+    { "id": "e-009", "source": "test:export-service", "target": "file:src/server/export/service.ts", "type": "tests",
+      "properties": { "description": "6 test cases cover all export scenarios", "last_verified": "2026-07-16" } },
+    { "id": "e-010", "source": "test:auth-service", "target": "file:src/server/auth/service.ts", "type": "tests",
+      "properties": { "description": "Tests cover session validation and error paths", "last_verified": "2026-07-17" } },
+
+    { "id": "e-011", "source": "file:src/server/export/service.ts", "target": "decision:ADR-0014", "type": "constrained_by",
+      "properties": { "description": "ExportService enforces 100k row cap per ADR-0014", "last_verified": "2026-07-16" } },
+    { "id": "e-012", "source": "file:src/server/export/serialize.ts", "target": "concept:RowCap", "type": "related_to",
+      "properties": { "description": "serializeRow handles all records below the cap", "last_verified": "2026-07-16" } },
+
+    { "id": "e-013", "source": "module:src/server/export", "target": "module:src/server/auth", "type": "depends_on",
+      "properties": { "description": "Export module validates auth before processing", "last_verified": "2026-07-16" } },
+    { "id": "e-014", "source": "concept:Export", "target": "concept:RowCap", "type": "constrained_by",
+      "properties": { "description": "Exports limited to 100k rows in v1", "last_verified": "2026-07-16" } }
+  ]
+}

@@ -1,0 +1,21 @@
+# CODEOWNERS — Review assignment for protected paths
+
+# Architecture and decisions require human owner review
+/docs/adr/          @repo-owner
+/docs/architecture/ @repo-owner
+/AGENTS.md          @repo-owner
+/constitution.md     @repo-owner
+
+# CI and deployment config — changes gate carefully
+/.github/workflows/ @repo-owner
+/.github/**/*.yml   @repo-owner
+
+# Database migrations — review for data safety
+**/migrations/      @repo-owner
+
+# Security-sensitive paths
+**/auth/**          @repo-owner
+**/secrets/**       @repo-owner
+
+# Fallback: everything else is auto-assigned
+# (no CODEOWNERS for src/ — human review covers it via rubric)

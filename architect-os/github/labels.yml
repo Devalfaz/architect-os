@@ -1,0 +1,73 @@
+# GitHub Label Taxonomy
+
+*Every label, its purpose, color, and description. Sync via `github-label-sync` or `gh label create`. This is the canonical source — update here first, then sync.*
+
+---
+
+## Lifecycle labels
+
+| Label | Color | Description |
+|---|---|---|
+| `needs-triage` | `#B60205` | Raw, unprocessed — default for new issues |
+| `needs-info` | `#D93F0B` | Insufficient detail — waiting on reporter |
+| `ready-for-agent` | `#0E8A16` | Fully specified with file-level plan, AC, test plan — executable by AI |
+| `ready-for-human` | `#006B75` | Too complex/ambiguous for agent — needs human implementation |
+| `in-progress` | `#FBCA04` | Agent or human is actively working this |
+| `in-review` | `#1D76DB` | PR is open, review pipeline active |
+| `wontfix` | `#CCCCCC` | Rejected — reason in closing comment |
+
+## Size labels
+
+| Label | Color | Description |
+|---|---|---|
+| `size:XS` | `#C2E0C6` | ≤50 lines — fire-and-forget capable |
+| `size:S` | `#0E8A16` | 50–150 lines — agent-primary, one file |
+| `size:M` | `#FBCA04` | 150–400 lines — max for single ticket |
+| `size:split-me` | `#B60205` | >400 lines — must split before agent can touch |
+
+## Area labels
+
+| Label | Color | Description |
+|---|---|---|
+| `area:api` | `#0052CC` | API endpoints, route handlers (`src/app/api/`) |
+| `area:auth` | `#5319E7` | Authentication, authorization (`src/server/auth/`) |
+| `area:ui` | `#D4C5F9` | Frontend components, pages (`src/components/`, `src/app/`) |
+| `area:db` | `#0052CC` | Database schema, queries, migrations (`src/server/db/`) |
+| `area:infra` | `#B60205` | CI/CD, hosting, deployment, tooling (`.github/`) |
+| `area:docs` | `#C5DEF5` | Documentation changes (`docs/`) |
+| `area:test` | `#C2E0C6` | Testing infrastructure (`*.test.*`, `*.spec.*`, e2e) |
+| `area:perf` | `#FBCA04` | Performance-sensitive code, optimization |
+| `area:security` | `#B60205` | Security-sensitive paths, auth, validation, secrets |
+
+## Priority labels
+
+| Label | Color | Description |
+|---|---|---|
+| `P0:now` | `#B60205` | Blocking everything — drop what you're doing |
+| `P1:next` | `#D93F0B` | Next in queue after current work — this sprint |
+| `P2:soon` | `#FBCA04` | This month — after P1s |
+| `P3:later` | `#0E8A16` | Backlog — good first issue |
+| `P4:icebox` | `#CCCCCC` | Someday — not prioritized, may never be done |
+
+## Signal labels
+
+| Label | Color | Description |
+|---|---|---|
+| `ai:ready` | `#0E8A16` | Gated at S5, ready for agent implementation |
+| `ai:implemented` | `#1D76DB` | Agent has opened a PR |
+| `ai:self-reviewed` | `#006B75` | Agent has posted self-review comment on PR |
+| `bug` | `#B60205` | Defect, not feature — triggers diagnosing-bugs workflow |
+| `regression` | `#D93F0B` | Previously worked, now broken — high severity |
+| `needs-decision` | `#FBCA04` | Blocked on unresolved decision |
+| `good-first-agent` | `#C2E0C6` | Excellent for new agent setup or calibration |
+| `tech-debt` | `#5319E7` | Refactor, not feature — from improve-codebase-architecture |
+
+## Workflow labels (auto-applied)
+
+| Label | Color | Description |
+|---|---|---|
+| `spec-delta` | `#D4C5F9` | PR or issue that amends the spec |
+| `breaking-change` | `#B60205` | PR introduces a breaking change |
+| `dependencies` | `#C5DEF5` | PR updates dependencies (Dependabot/agent) |
+| `duplicate` | `#CCCCCC` | Issue duplicates an existing one |
+| `help-wanted` | `#0E8A16` | Extra attention needed |

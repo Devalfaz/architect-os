@@ -1,0 +1,42 @@
+name: Feature Request
+description: Propose a new feature or enhancement
+labels: [needs-triage]
+body:
+  - type: textarea
+    attributes:
+      label: Problem
+      description: What problem does this solve? Who has it?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed solution
+      description: What should we build? Be specific about behavior, not implementation.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternatives considered
+      description: What else could we do? Why is this approach better?
+  - type: textarea
+    attributes:
+      label: Success criteria
+      description: How will we know this worked? Measurable if possible.
+  - type: textarea
+    attributes:
+      label: Non-goals
+      description: What are we explicitly NOT building here?
+  - type: dropdown
+    attributes:
+      label: Priority
+      options:
+        - P1:next (this sprint)
+        - P2:soon (this month)
+        - P3:later (backlog)
+        - P4:icebox (someday)
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Evidence / data
+      description: User feedback, metrics, competitor analysis — anything that supports this request.

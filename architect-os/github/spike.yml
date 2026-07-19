@@ -1,0 +1,40 @@
+name: Spike / Research
+description: Time-boxed investigation to answer a specific question
+labels: [needs-triage, area:docs]
+body:
+  - type: textarea
+    attributes:
+      label: Question
+      description: What specific question needs answering? One sentence.
+      placeholder: "Does library X support streaming CSV output with Unicode BOM?"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Context
+      description: Why does this matter? What decision depends on the answer?
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Time box
+      description: How long should this investigation take?
+      options:
+        - 30 minutes
+        - 1 hour
+        - 2 hours
+        - Half day
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Deliverable
+      description: What should the output be?
+      placeholder: "A research note in docs/research/ with findings, sources, and a recommendation."
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Expiry
+      description: When do these findings become stale?
+      placeholder: "2026-10-01 (3 months)"
