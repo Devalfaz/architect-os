@@ -20,6 +20,7 @@ Reject **without a full read** if any of these fail — bouncing at the gate cos
 | **Size** | ≤400 lines net (C9) unless pre-agreed | Bounce — `size:split-me` |
 | **CI green** | Typecheck, lint, test, build all pass | Bounce — the diff is not evidence the code runs (hallucinated imports pass diff review; only execution catches them) |
 | **Self-review posted** | C22 comment exists | Bounce — request it first |
+| **Converge PASS** (M-size) | The [converge gate](skills/converge/SKILL.md) verdict is PASS — read the verdict line only, not the detail table | FAIL already auto-bounced; no verdict = run it first |
 | **Reviewer independence (C36)** | The AI second-opinion reviewer is a different model family than the authoring agent | Fix the reviewer config before reviewing; if no cross-family reviewer is available, escalate this pass to 20 minutes |
 | **Collateral-damage scan** | Every file in the diff's file list is justified by the ticket's plan | Unexplained files = bounce (failure mode #14 — agents touch what they traverse) |
 

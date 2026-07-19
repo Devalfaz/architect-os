@@ -10,6 +10,12 @@
 PR opened (CI green, self-review posted)
      │
      ▼
+STAGE 0: Converge gate (M-size and up — fresh-context evaluator)
+     │   diff vs FROZEN acceptance criteria + plan → done/partial/missing/extra
+     │
+     ├── FAIL ──→ auto-bounce to agent (report = fix request, counts as a round)
+     │
+     ▼ PASS (human sees verdict only, not the detail — trust-drift rule)
 STAGE 1: Human review (10-minute rubric)
      │
      ├── Bounce ──→ Re-plan (S5) or re-spec (S2)
@@ -28,6 +34,17 @@ Agent addresses AI findings → Human resolves threads
      ▼
 Approved → Squash merge
 ```
+
+---
+
+## Stage 0: Converge gate
+
+The [`converge` skill](skills/converge/SKILL.md) runs in a **fresh session** that never saw the implementation reasoning: inputs are the diff, the frozen acceptance criteria, and the frozen plan — nothing else. It runs the relevant tests and emits a conformance table (done / partial / missing / extra) as a PR comment.
+
+- **FAIL** (any `missing`, or >25% `partial`) → auto-bounce before human time is spent; the report is the fix request and counts toward the two-round bound (C24).
+- **PASS** → proceed to Stage 1. You read the *verdict line only* until your rubric pass is done — the detail table is AI review content and waits like the rest (failure mode #15).
+- Standing on M-size PRs; on-demand for suspected stubbing or refactor-train tickets. XS PRs whose single criterion CI already asserts can skip it.
+- Why it exists: agents stub features and talk themselves into approving their own work; a separated, skeptically-tuned evaluator grading against a *frozen* contract is the mechanism that catches "well-written PR, wrong behavior" — the gap no commercial reviewer covers.
 
 ---
 

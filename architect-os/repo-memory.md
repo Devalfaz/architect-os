@@ -21,7 +21,9 @@ Agents know programming from training data, but not:
 **File:** `AGENTS.md` (root) + symlink `CLAUDE.md → AGENTS.md`
 **Purpose:** First thing every agent reads. ≤150 lines.
 
-**Contents:** Project one-liner, Tech stack with versions, Domain language (5–10 terms), File conventions (10 most important paths), Constitution summary (5 most violated rules), Architecture style and key decisions, Gotchas (from dumps), Active constraints
+**Contents:** Project one-liner, Commands the agent can't guess, Domain language (5–10 terms), Binding architecture decisions (3–5, each linking its ADR), Constitution summary (5 most violated rules), Gotchas (from dumps), Do-not-touch list, Active constraints.
+
+**Deliberately excluded** (Anthropic's include/exclude guidance — the [template](templates/AGENTS.md) carries the full table): tech-stack lists (readable from `package.json`), file-tree conventions (readable from the tree), API docs (link instead), anything that changes frequently. The pruning test for every line: *"would removing this cause the agent to make a mistake?"* Bloated entrypoints make agents ignore the rules that matter — if a rule keeps being violated, the file is too long, not too gentle.
 
 **Freshness:** Verified weekly. `last_verified` checked at distill.
 
@@ -76,8 +78,11 @@ Every file in `docs/research/` has `research_date` and `expiry_date`. After expi
 ### Edge types
 `depends_on`, `implements`, `tests`, `owns`, `calls`, `constrained_by`, `related_to`, `supersedes`, `caused_by`
 
+### Temporal validity & provenance (schema v1.1)
+Nodes and edges optionally carry `valid_from` / `valid_to` / `invalidated_by` / `sources`. A fact with `valid_to` set is **history, not truth** — it stays in the graph for provenance ("what did we believe on date X, and what changed our mind") but agents must not act on it. Invalidation happens at *write time*, the moment an agent discovers the contradiction — not at the weekly distill ([protocol](memory-freshness-protocol.md)). `sources` points every fact back to its origin: a dump file, an ADR, a spec.
+
 ### Ego-network loading
-Agent loads: file nodes in ticket plan + all edges from those nodes + connected concepts/ADRs → ~10–50 nodes. Programmatic navigation, not context dump.
+Agent loads: file nodes in ticket plan + all edges from those nodes + connected concepts/ADRs → ~10–50 nodes, **excluding anything with `valid_to` set**. Programmatic navigation, not context dump.
 
 ---
 

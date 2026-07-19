@@ -28,7 +28,7 @@ Three loops matter:
 
 **The gate principle:** each gate is cheap to pass if the previous stage was done honestly, and expensive to skip. Gates are where *you* work. Everything between gates is where agents work. This is what "architect, not babysitter" means operationally: your time concentrates at decision points, not in transcripts.
 
-**Stage-skipping is allowed but explicit.** A one-line bugfix doesn't need a BRD. The rule is: you may skip a stage by *saying so in the ticket* ("no spec needed: trivial"), never by drifting past it. The lightweight profile in [adoption-plan.md](adoption-plan.md) defines standard skips.
+**Stage-skipping is sized, not improvised.** A one-line bugfix doesn't need a BRD — and the S1 size-classification table defines exactly which artifacts each class of work gets, so skips are standard rather than ad-hoc. Skipping beyond what your size class allows still requires *saying so in the ticket*, never drifting past it. The lightweight profile in [adoption-plan.md](adoption-plan.md) maps to the XS/S rows.
 
 ---
 
@@ -57,9 +57,22 @@ The kill-criteria field is the important one: writing down *what would make you 
 | **Artifact** | `docs/product/<slug>/brd.md` |
 | **Harness** | Claude Code, interactive session |
 | **Skills** | `research` (market/competitor input if needed) |
-| **Exit gate** | you can state problem, user, outcome, and non-goals in five sentences without reading the doc. Measurable success metric exists. Go/no-go recorded. |
+| **Exit gate** | you can state problem, user, outcome, and non-goals in five sentences without reading the doc. Measurable success metric exists. Go/no-go recorded. **Work is size-classified** (table below), which sets the expected artifact depth for every later stage. |
 
 For personal projects the BRD can be a half page. It still exists, because the non-goals section is what keeps S5 tickets from sprawling later.
+
+### Size classification — the spec scales to the work
+
+Classify at S1 exit (or at triage for bugs). The size determines *expected* artifact depth — this replaces ad-hoc stage-skipping with a standard answer, and it prevents the failure mode where a one-line bugfix gets a full PRD because the lifecycle says so:
+
+| Size | Signature | S1 (BRD) | S2 (spec) | S5 (plan) |
+|---|---|---|---|---|
+| **XS** | ≤1 file, no unknowns, no schema/API change | skip | acceptance criteria in the issue body | file list in the issue body |
+| **S** | 1–3 files, one known area | one paragraph in the issue | FSD-lite: flows + ACs + edge cases in the issue | full file-level plan in the issue |
+| **M** | 3–5 files, or any schema/API change | half-page BRD | full FSD | full plan, persisted (see S5) |
+| **L** | >5 files, architectural impact, or new domain | full BRD | full PRD + FSD | decompose into an S/M ticket train first |
+
+Sizing is a hypothesis: if implementation reveals the size was wrong (an "XS" touches a third file), the ticket bounces up a class and gains the missing artifacts — that's a spec delta, not a failure.
 
 ## S2 — Specify (PRD → FSD)
 
@@ -110,10 +123,12 @@ The FSD is the document agents will actually read during implementation. Write i
 |---|---|
 | **Entry** | approved FSD + architecture |
 | **Activities** | run `to-tickets`: decompose into GitHub Issues using [task.yml](github/ISSUE_TEMPLATE/task.yml). Every ticket gets: linked spec section, **file/function-level implementation plan**, out-of-scope list, Given/When/Then acceptance criteria, test plan, size XS/S/M. Order with sub-issues/dependencies. You review every plan — this review is 10x cheaper than reviewing the diff that a bad plan produces. |
-| **Artifacts** | GitHub Issues labeled `ai:ready`, sequenced in the Delivery project |
+| **Artifacts** | GitHub Issues labeled `ai:ready`, sequenced in the Delivery project; for M-size work, the plan **persisted to `docs/specs/<slug>/plan.md`** |
 | **Harness** | Claude Code against the repo (it must read actual code to name actual files); Traycer is the managed alternative for this exact step — see [harness-matrix.md](harness-matrix.md) |
 | **Skills** | `to-tickets`, `wayfinder` (locate the right code first) |
-| **Exit gate** | every ticket ≤1 day (size M max; `size:split-me` means split it). File lists name real files. No ticket depends on an unmade decision — those get `needs-decision` and stop here. You'd stake a code review on each plan being right. |
+| **Exit gate** | every ticket ≤1 day (size M max; `size:split-me` means split it). File lists name real files. No ticket depends on an unmade decision — those get `needs-decision` and stop here. **The plan is persisted before S6 begins** — M-size: `docs/specs/<slug>/plan.md`; XS/S: the issue body is the persistence. You'd stake a code review on each plan being right. |
+
+**Why persistence is a gate, not a habit:** the plan lives outside any session. Sessions truncate, compact, and die — a plan that exists only in the conversation that produced it is lost the moment context rolls over, and the fix loop's "bounce back to S5" only works if there's a frozen S5 artifact to bounce back *to*. The persisted plan is also what the `converge` gate grades against at S7: frozen before implementation, it can't be quietly rewritten to match whatever got built.
 
 ## S6 — Implement
 
@@ -137,11 +152,11 @@ Narrow context is not a cost optimization — it's a *quality* mechanism. An age
 | | |
 |---|---|
 | **Entry** | PR open, CI green, self-review posted |
-| **Activities** | 1) **You** run the [10-minute rubric](pr-review-rubric.md) *before reading any AI comments* — reading AI review first anchors you on mechanical issues and blinds you to design drift. 2) then CodeRabbit auto-review + a second AI opinion (Codex review or claude-code-action). 3) fix loop: the agent answers every thread with a commit SHA or reasoned pushback; **you** resolve threads; two rounds max. |
-| **Artifacts** | review threads, fix commits |
-| **Harness** | you + CodeRabbit + Codex/Claude action |
-| **Skills** | `code-review` (for the agent's self-review pass) |
-| **Exit gate** | your approval + AI findings addressed + CI green. Any constitution violation cited by rule id. |
+| **Activities** | 0) **`converge` gate** (M-size and up): a fresh-context evaluator grades the diff against the *frozen* acceptance criteria and plan — done / partial / missing / extra, tests run as evidence. A failed converge auto-bounces before your time is spent; a passed converge is a green check, not a verdict you defer to. 1) **You** run the [10-minute rubric](pr-review-rubric.md) *before reading any AI review content, including the converge detail* — your end-state check stays independent (trust drift, failure mode #15). 2) then CodeRabbit auto-review + the cross-family second opinion per **C36** (Claude authored → Codex review; routing table in [review-workflow.md](review-workflow.md)). 3) fix loop: the agent answers every thread with a commit SHA or reasoned pushback; **you** resolve threads; two rounds max. |
+| **Artifacts** | converge report (PR comment), review threads, fix commits |
+| **Harness** | you + `converge` evaluator + CodeRabbit + cross-family second opinion (C36) |
+| **Skills** | `converge` (spec-conformance gate), `code-review` (for the agent's self-review pass) |
+| **Exit gate** | converge gaps resolved or ticketed + your approval + AI findings addressed + CI green. Any constitution violation cited by rule id with severity. |
 
 ## S8 — Merge & Release
 

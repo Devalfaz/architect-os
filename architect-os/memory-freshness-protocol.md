@@ -10,6 +10,28 @@ Every document, graph node, and research note carries `last_verified`. Unverifie
 
 ---
 
+## Write-time invalidation (automatic — the important half)
+
+The weekly distill is the *confirmation* step, not the *discovery* step. Waiting for Friday to flag a known-wrong fact means every agent session until Friday reads a lie. So:
+
+**The rule: any agent that discovers a memory contradicts the current code invalidates it in the same session.** Discovery moments: a graph node names a file that doesn't exist, an AGENTS.md claim fails against `package.json`, an ADR's compliance grep comes back dirty, a "verified API" throws at typecheck.
+
+What "invalidate immediately" means, by artifact:
+
+| Artifact | Immediate action (same session) | Weekly distill then does |
+|---|---|---|
+| Graph node/edge | Set `valid_to: <today>` + `invalidated_by: <what proved it wrong>` — the fact becomes history, never deleted (schema v1.1) | Confirms the invalidation, adds the corrected replacement node |
+| AGENTS.md claim | Inline `⚠️ STALE (found wrong 2026-07-20: <one line>)` next to the claim | Rewrites the claim, clears the flag |
+| ADR | Comment on the ADR issue/file: compliance check failing | Human decides: enforce or supersede |
+| verified-apis.md | Strike the entry with the failing evidence | Re-verify against installed version |
+
+Two constraints keep this safe:
+
+- **Invalidation ≠ correction.** The agent marks the fact wrong with evidence; it does not write the replacement truth mid-ticket (that's scope creep, C6/C7, and mid-session "corrections" are how memory poisoning happens). The dump's graph-delta block carries the proposed replacement; the distill reviews it.
+- **Invalidated facts stay as history.** `valid_to` + `invalidated_by` preserve provenance — you can always ask "what did we believe on date X, and what changed our mind." Deletion says nothing; tombstones teach.
+
+---
+
 ## Verification schedule
 
 | Artifact | Frequency | Trigger |
@@ -44,7 +66,7 @@ Sources still accessible? Code samples still work? If valid: update dates. If st
 Each API claim checked against actual installed version docs. Test code snippets. Flag changed APIs.
 
 ### Knowledge graph
-Nodes: still exist? Edges: still accurate? Remove orphans. Add new from dumps. Update `last_verified` on all checked.
+Nodes: still exist? Edges: still accurate? Confirm any write-time invalidations from the week (`valid_to` set mid-session) and add their corrected replacement nodes. Orphans and wrong facts get `valid_to` + `invalidated_by`, not deletion. Add new from dumps. Update `last_verified` on all checked.
 
 ---
 

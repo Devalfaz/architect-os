@@ -80,11 +80,14 @@ Deep-module vocabulary (depth, seam, adapter, leverage). Design-it-twice pattern
 
 ## OS-Native Skills (custom, in `~/.claude/skills/architect-os/`)
 
+### `/converge` ([full spec](skills/converge/SKILL.md))
+The S7 spec-conformance gate. Fresh-context evaluator grades the diff against the **frozen** acceptance criteria + plan — done/partial/missing/extra, tests run as evidence, report posted as a PR comment. FAIL auto-bounces before human review; PASS means the human rubric proceeds (verdict visible, detail read after — trust-drift rule). **Use:** standing on every M-size PR; on-demand for suspected stubbing or refactor-train tickets. **Not:** a code reviewer — it answers only "does the built thing match the specified thing."
+
 ### `/memory-dump`
-Generates structured daily memory dump. Cheapest viable model. **Use:** end of every coding day (S9).
+Generates structured daily memory dump. Cheapest viable model. **Use:** end of every coding day (S9). Includes any write-time invalidations discovered mid-session ([protocol](memory-freshness-protocol.md)).
 
 ### `/graph-update`
-Reads week's dumps, produces graph delta PR. **Use:** weekly distill.
+Reads week's dumps, produces graph delta PR — confirming write-time invalidations (`valid_to`/`invalidated_by`) and adding corrected replacement nodes. **Use:** weekly distill.
 
 ### `/retro`
 Structured retrospective: what worked, what didn't, what to change. **Use:** monthly.
@@ -99,9 +102,9 @@ S1 Frame → /grill-with-docs + /research → BRD
 S2 Specify → /research + /prototype + /to-spec + /grill-with-docs → PRD + FSD
 S3 Design → /prototype → design brief
 S4 Architect → /domain-modeling + /improve-codebase-architecture → ADRs
-S5 Plan → /to-tickets + /wayfinder → GitHub Issues
+S5 Plan → /to-tickets + /wayfinder → GitHub Issues + persisted plan.md
 S6 Implement → /implement → /tdd → /code-review (×N tickets, fresh context each)
-S7 Review → human rubric → CodeRabbit → Codex review
+S7 Review → /converge gate → human rubric → CodeRabbit → Codex review (C36)
 S8 Release → CI/CD
 S9 Learn → /memory-dump → /graph-update → /retro
 ```

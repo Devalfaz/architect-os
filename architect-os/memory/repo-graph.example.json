@@ -1,8 +1,8 @@
 {
-  "version": "1.0",
-  "generated": "2026-07-17T10:00:00Z",
+  "version": "1.1",
+  "generated": "2026-07-20T10:00:00Z",
   "repo": "csv-export-app",
-  "description": "Example knowledge graph for a small Next.js app with CSV export feature. 3 modules, 9 files, 5 concepts, 2 decisions.",
+  "description": "Example knowledge graph for a small Next.js app with CSV export feature. 3 modules, 9 files, 6 concepts (1 invalidated), 2 decisions. Demonstrates v1.1 temporal validity: invalidated facts stay in the graph as history with valid_to + invalidated_by.",
   "nodes": [
     { "id": "module:src/server/auth", "type": "module", "label": "Auth Module",
       "properties": { "description": "User authentication and session management via Supabase Auth" } },
@@ -35,12 +35,14 @@
     { "id": "concept:Record", "type": "concept", "label": "User Record",
       "properties": { "description": "A single data record owned by a user. Serialized to CSV by ExportService." } },
     { "id": "concept:RowCap", "type": "concept", "label": "100k Row Cap",
-      "properties": { "description": "v1 constraint: exports capped at 100k rows. Exceeding returns 413. Revisit async export if demanded." } },
+      "properties": { "description": "v1 constraint: exports capped at 100k rows. Exceeding returns 413. Revisit async export if demanded.", "valid_from": "2026-07-14", "sources": ["decision:ADR-0014", "docs/specs/csv-export/fsd.md"] } },
+    { "id": "concept:RowCap-50k", "type": "concept", "label": "50k Row Cap (INVALIDATED)",
+      "properties": { "description": "Original draft constraint: exports capped at 50k rows. Raised to 100k during S2 after load-testing the streaming path. Kept as history — do not act on this.", "valid_from": "2026-07-10", "valid_to": "2026-07-14", "invalidated_by": "decision:ADR-0014", "sources": ["memory/dumps/2026-07-14.md"] } },
 
     { "id": "decision:ADR-0001", "type": "decision", "label": "ADR-0001: Use PostgreSQL + Drizzle",
       "properties": { "status": "accepted", "description": "Chose PostgreSQL via Supabase with Drizzle ORM for type-safe queries. Rejected raw SQL (tooling loss) and Prisma (bundle size)." } },
     { "id": "decision:ADR-0014", "type": "decision", "label": "ADR-0014: Export capped at 100k rows, sync-only v1",
-      "properties": { "status": "accepted", "description": "v1 CSV export is synchronous with 100k row cap. Revisit async export at demand. Simplifies initial implementation." } },
+      "properties": { "status": "accepted", "description": "v1 CSV export is synchronous with 100k row cap. Revisit async export at demand. Simplifies initial implementation.", "valid_from": "2026-07-14", "sources": ["docs/adr/0014-export-row-cap.md"] } },
 
     { "id": "test:export-service", "type": "test", "label": "ExportService Tests",
       "properties": { "description": "6 test cases: 0 rows, 50 rows, 100k rows (cap), Unicode chars, CSV special chars, BOM handling" } },

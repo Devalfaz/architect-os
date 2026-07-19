@@ -124,6 +124,15 @@ value1,value2,value3
 | Integration | `GET /api/export.csv`: auth, no auth, empty data, cap, db failure |
 | E2E | Happy path: login → settings → export → verify CSV contents |
 
+## Implementation plan (frozen at S5)
+
+*Filled by `to-tickets` at S5, then FROZEN — this section plus the acceptance criteria are what the `converge` gate grades the built PR against. Changes after freezing are spec deltas (C23) recorded in the revision history, never silent edits. For M-size features, mirror to `docs/specs/<slug>/plan.md` so the plan survives any session.*
+
+| Ticket | Files (file → function/change) | Depends on | Size |
+|---|---|---|---|
+| #231 | `src/server/export/service.ts` → `ExportService.exportToCsv()` (new); `src/server/export/service.test.ts` (new) | — | M |
+| #232 | `src/app/settings/page.tsx` → export section | #231 | S |
+
 ## Revision history
 
 | Date | Change | Author |

@@ -71,8 +71,9 @@ architect-os/
 ├── failure-recovery-playbook.md   ← symptom → action
 ├── adoption-plan.md               ← profiles, 30/60/90, walkthroughs
 ├── templates/                     ← BRD, PRD, FSD, ADR, AGENTS.md, dumps…
-├── github/                        ← issue forms, labels, ruleset, CI (copy into .github/)
-└── memory/                        ← repo-graph schema + example
+├── skills/                        ← OS-native skill specs (converge, …)
+├── github/                        ← issue forms, labels, ruleset, CI, .coderabbit.yaml (copy into repo)
+└── memory/                        ← repo-graph schema (v1.1, temporal) + example
 ```
 
 ## What a product repo looks like once installed

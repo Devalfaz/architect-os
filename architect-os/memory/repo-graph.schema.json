@@ -8,8 +8,8 @@
   "properties": {
     "version": {
       "type": "string",
-      "description": "Schema version.",
-      "default": "1.0"
+      "description": "Schema version. 1.1 added temporal validity (valid_from/valid_to/invalidated_by) and provenance (sources).",
+      "default": "1.1"
     },
     "generated": {
       "type": "string",
@@ -47,7 +47,26 @@
               "last_modified": { "type": "string", "format": "date" },
               "last_verified": { "type": "string", "format": "date" },
               "status": { "type": "string" },
-              "priority": { "type": "string" }
+              "priority": { "type": "string" },
+              "valid_from": {
+                "type": "string",
+                "format": "date",
+                "description": "Date this fact became true (temporal validity — Zep-style)."
+              },
+              "valid_to": {
+                "type": "string",
+                "format": "date",
+                "description": "Date this fact stopped being true. Present = the node is INVALIDATED history, not current truth. Invalidated nodes stay in the graph as provenance; agents must not act on them."
+              },
+              "invalidated_by": {
+                "type": "string",
+                "description": "What invalidated this fact: a node id, an ADR id, or a dump reference (e.g. 'dump:2026-07-20#export-cap'). Required when valid_to is set."
+              },
+              "sources": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Provenance: where this fact came from — dump files, ADR ids, doc paths (e.g. 'memory/dumps/2026-07-19.md', 'ADR-0014', 'docs/specs/csv-export/fsd.md')."
+              }
             }
           }
         }
@@ -81,7 +100,15 @@
             "type": "object",
             "properties": {
               "description": { "type": "string" },
-              "last_verified": { "type": "string", "format": "date" }
+              "last_verified": { "type": "string", "format": "date" },
+              "valid_from": { "type": "string", "format": "date" },
+              "valid_to": {
+                "type": "string",
+                "format": "date",
+                "description": "Present = this relationship no longer holds; kept as history. Requires invalidated_by."
+              },
+              "invalidated_by": { "type": "string" },
+              "sources": { "type": "array", "items": { "type": "string" } }
             }
           }
         }
