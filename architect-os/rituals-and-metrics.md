@@ -36,7 +36,7 @@ Delivery board scan. Stale In Progress? M tickets that became L? Weekly merge co
 Red builds on main? Flaky tests → quarantine (C20).
 
 ### Skill changelog
-Skill edits → record in `docs/agents/skill-changelog.md`: date, skill, what changed, why. Commit to `~/.claude/skills/` git repo.
+Skill edits → record in `docs/agents/skill-changelog.md`: date, skill, what changed, why, **and the task-eval verdict** (better / same / worse — see [skills-catalog.md](skills-catalog.md)). Commit to `~/.claude/skills/` git repo. An edit that shipped without a verdict is an unverified hypothesis; a `same` verdict means revert it.
 
 ---
 
@@ -55,6 +55,7 @@ Skill edits → record in `docs/agents/skill-changelog.md`: date, skill, what ch
 | CodeRabbit address rate | Is review signal landing? | ≥50%, trending up |
 | Second AI unique catches | Value of second opinion | >0.5/review |
 | Spec deltas filed | Spec quality | Trending down |
+| Skill edits: better/same/worse | Are skill changes earning their tokens? | ≥half `better`; no unevaluated edits |
 | Stale memory nodes | Graph maintenance | <10% |
 | Total monthly cost | Budget | vs target |
 | Cost per ticket | Efficiency | Trending down |
@@ -96,6 +97,9 @@ Seeded inventory (first retest: **2026-10-19**, aligned with the research snapsh
 | Size classification (S1) | Jul 2026 | XS/S tickets shipping without over-spec? | 2026-10 |
 | Plan persistence (S5) | Jul 2026 | Any bounce-back-to-S5 that used the frozen plan? | 2026-10 |
 | Temporal memory fields + write-time invalidation | Jul 2026 | Stale-node count; any mid-week invalidation? | 2026-10 |
+| Context strategy (Layer 0) | Aug 2026 | Sessions hitting context limits; any self-summarize-and-continue? | 2026-11 |
+| EARS requirements in the FSD | Aug 2026 | Edge cases found at S2 that S6 used to discover — spec-delta trend | 2026-11 |
+| Skill task-evals | Aug 2026 | Ratio of `same`/`worse` verdicts. If nearly all edits are `better`, the eval is too lenient to be informative — tighten the scenarios or drop it | 2026-11 |
 | Weekly memory distill | (original) | Still finding things the graph got wrong? | standing |
 | Second-opinion AI review at all | (original) | Unique catches vs. the time it takes | standing |
 
@@ -116,6 +120,7 @@ Research snapshots carry `expires` dates. When one lapses: re-fetch the load-bea
 | Skip monthly retro — "nothing went wrong" | Things went wrong you didn't notice |
 | Let metrics sheet go stale | Can't improve what you don't measure |
 | Let skill edits go unversioned | Can't roll back bad edit without git |
+| Ship a skill edit without a task-eval | An unmeasured edit is a guess that costs tokens in every future session |
 | Let graph become "auto-generated only" | Auto noise vs hand signal. Weekly distill is the human filter |
 
 ---

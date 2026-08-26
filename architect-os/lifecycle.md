@@ -83,11 +83,11 @@ Sizing is a hypothesis: if implementation reveals the size was wrong (an "XS" to
 | | |
 |---|---|
 | **Entry** | approved BRD |
-| **Activities** | 1) optional `research` spike → `docs/research/` with expiry date. 2) optional `prototype` to de-risk the scary part — prototypes are *throwaway by contract*. 3) draft PRD ([templates/prd.md](templates/prd.md)) — numbered FR-x requirements. 4) draft FSD ([templates/fsd.md](templates/fsd.md)) — flows, states, edge-case table, API contracts, Given/When/Then acceptance criteria keyed to FR ids. 5) **grill the spec**: run `grill-with-docs` so every claimed API and library behavior is verified against real documentation, not the model's memory. |
+| **Activities** | 1) optional `research` spike → `docs/research/` with expiry date. 2) optional `prototype` to de-risk the scary part — prototypes are *throwaway by contract*. 3) draft PRD ([templates/prd.md](templates/prd.md)) — numbered FR-x requirements. 4) draft FSD ([templates/fsd.md](templates/fsd.md)) — flows, states, **EARS requirements** (the five patterns, walked per flow), edge-case table, API contracts, Given/When/Then acceptance criteria keyed to FR ids. 5) **grill the spec**: run `grill-with-docs` so every claimed API and library behavior is verified against real documentation, not the model's memory. |
 | **Artifacts** | `docs/product/<slug>/prd.md`, `docs/specs/<slug>/fsd.md`, optionally `docs/research/*.md` |
 | **Harness** | Claude Code (frontier model — this is not the stage to save money, see [models-cost-quality.md](models-cost-quality.md)) |
 | **Skills** | `research`, `prototype`, `to-spec`, `grill-with-docs` |
-| **Exit gate** | every acceptance criterion is mechanically testable. The edge-case table is filled (empty = not thought about ≠ none exist). External API claims carry doc links. You would bet a day of work on this spec being right. |
+| **Exit gate** | every acceptance criterion is mechanically testable. **Every flow has at least one If/Then (unwanted-behaviour) requirement** — walking the five EARS patterns is what *generates* edge cases rather than recalling them. The edge-case table is filled (empty = not thought about ≠ none exist). External API claims carry doc links. You would bet a day of work on this spec being right. |
 
 The FSD is the document agents will actually read during implementation. Write it for a competent contractor with no context: if a requirement needs the conversation to be understood, it isn't written yet.
 

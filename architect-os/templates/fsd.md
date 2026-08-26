@@ -65,9 +65,46 @@ value1,value2,value3
 
 [What database changes are needed? New tables, columns, indexes, migrations.]
 
+## Requirements (EARS)
+
+*Numbered FR-ids in EARS notation. Write these **before** the edge-case table —
+walking all five patterns is what generates the edge cases, instead of hoping
+you remember them.*
+
+| Pattern | Keyword | Template | What it surfaces |
+|---|---|---|---|
+| Ubiquitous | *(none)* | The `<system>` shall `<response>` | always-true invariants |
+| State-driven | **While** | While `<precondition>`, the `<system>` shall `<response>` | mode and state behaviour |
+| Event-driven | **When** | When `<trigger>`, the `<system>` shall `<response>` | the happy path |
+| Optional feature | **Where** | Where `<feature is included>`, the `<system>` shall `<response>` | flags, tiers, platforms |
+| **Unwanted behaviour** | **If / Then** | If `<trigger>`, then the `<system>` shall `<response>` | **the edge cases** |
+| Complex | *(combined)* | While `<precondition>`, when `<trigger>`, the `<system>` shall `<response>` | conditional behaviour |
+
+**FR-1** — The export service shall produce RFC-4180-conformant, UTF-8 CSV. *(ubiquitous)*
+
+**FR-2** — When the user selects "Export CSV", the system shall generate a CSV of all records the user owns. *(event-driven)*
+
+**FR-3** — While an export is generating, the system shall display the export button disabled with a spinner. *(state-driven)*
+
+**FR-4** — If the user owns more than 100,000 records, then the system shall return 413 with "Export exceeds 100,000 row limit". *(unwanted)*
+
+**FR-5** — If the database connection fails during generation, then the system shall return 500 and log the error with user id and row count. *(unwanted)*
+
+**FR-6** — If the request carries no valid session, then the system shall return 401. *(unwanted)*
+
+**FR-7** — Where object-storage offload is enabled, the system shall stream to a signed URL instead of an inline response. *(optional feature)*
+
+> **The discipline:** walk all five patterns for every flow. **A flow with no
+> If/Then requirements has not been thought about yet** — that is the same
+> failure the edge-case table's "empty = not thought about" rule catches, but
+> caught earlier and systematically rather than by memory.
+
+**How the three artifacts chain:** EARS requirement → edge-case row → Given/When/Then criterion. EARS states *what must be true*; G/W/T states *how you would test it*. Every **If/Then** requirement should appear as an edge-case row **and** at least one acceptance criterion — if it doesn't, one of the three is incomplete.
+
 ## Edge-case table
 
-*Every cell must be filled. Empty = not thought about ≠ none exist.*
+*Every cell must be filled. Empty = not thought about ≠ none exist. Every
+If/Then requirement above should have a row here.*
 
 | Scenario | Expected behavior | Handled by |
 |---|---|---|
@@ -142,4 +179,6 @@ value1,value2,value3
 
 ---
 
-*Save as `docs/specs/<slug>/fsd.md`. Grill with `/grill-with-docs` before approval. Every external API claim must be verified against actual documentation. The gate: every acceptance criterion is mechanically testable; the edge-case table is filled; you would bet a day of work on this spec being right.*
+*Save as `docs/specs/<slug>/fsd.md`. Grill with `/grill-with-docs` before approval. Every external API claim must be verified against actual documentation. The gate: every acceptance criterion is mechanically testable; **every flow has at least one If/Then requirement**; the edge-case table is filled; you would bet a day of work on this spec being right.*
+
+*On EARS: the [Easy Approach to Requirements Syntax](https://alistairmavin.com/ears/) came out of Rolls-Royce analysing airworthiness regulations for jet-engine control (IEEE RE'09, Mavin et al.). It is borrowed here for one reason — the five patterns are a **generator**, not just a format. Kiro ships it as its default AC notation on the claim that it catches edge cases developers miss by hand. Adopted 2026-08-26; retest per the [subtraction ritual](../rituals-and-metrics.md).*

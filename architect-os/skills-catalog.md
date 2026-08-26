@@ -126,4 +126,75 @@ All skills live in `~/.claude/skills/` under git. Versioning is mandatory.
 - OS-native skills: your own. Version alongside Pocock's.
 - Retro-driven edits: when retro identifies friction, edit the skill, commit, update changelog.
 
+---
+
+## Skill evaluation — closing the edit loop
+
+*Versioning lets you roll back a bad edit. It does not tell you an edit **was**
+bad. Without evals, every retro-driven skill change is an unverified hypothesis —
+exactly what [memory-freshness-protocol.md](memory-freshness-protocol.md) forbids
+for memory, applied to the thing that shapes every agent run.*
+
+**The trigger is an edit, not a schedule.** Nothing here runs weekly. You pay the
+cost only when you change a skill, which is the only moment the answer can change.
+
+### Two evals, borrowed from Tessl's split
+
+**1. Review eval — does it read well to a model?** *(once per skill, ~5 min)*
+Fresh session, no repo context: *"Here is a skill file. What would you do
+differently from what it says? What is ambiguous?"* Anything the model
+misreads is a defect in the skill, not the model. Fix and re-run.
+
+**2. Task eval — does it actually help?** *(on every edit, ~15 min)*
+The one that matters. Run the same real task twice in **fresh sessions**:
+once with the skill, once without (or old version vs new). Compare against
+a saved "what good looks like" note.
+
+### Scenarios
+
+Each actively-maintained skill gets **2–3 scenarios** in
+`~/.claude/skills/<skill>/evals/<name>.md`. A scenario is small and real:
+
+```markdown
+# Scenario: to-tickets on a 3-file feature
+**Prompt:** [the actual prompt you'd give, verbatim]
+**Repo state:** [branch/commit, or a fixture]
+**Good looks like:**
+- every ticket names real files that exist
+- no ticket depends on an unmade decision
+- sizes assigned, dependency order explicit
+**Last verdict:** better (2026-08-26, v3 → v4)
+```
+
+Pull scenarios from your own history — a ticket the skill handled badly is the
+best scenario you will ever write. Never invent one.
+
+### The verdict, and why "same" matters
+
+Record one of three in `docs/agents/skill-changelog.md` alongside the edit:
+
+| Verdict | Meaning | Action |
+|---|---|---|
+| **better** | the edit earned its place | keep, note what improved |
+| **same** | the edit was decoration | **revert it** — it added tokens for nothing |
+| **worse** | the edit hurt | `git revert`, record why so you don't retry it |
+
+**"Same" is the finding most worth having.** Skill files are loaded into agent
+context, so an edit that changes nothing has a real cost: it lengthens the
+prefix, invalidates the cache, and dilutes signal ([Layer 0](repo-memory.md)).
+Most skill edits are decoration until proven otherwise.
+
+Evidence that this is worth doing at all: Tessl's research measured roughly a
+**20% absolute accuracy gain** from having a relevant skill available. Skills
+move the needle enough to deserve measurement.
+
+### Third-party skills are executable instructions
+
+You install skills from other people into `~/.claude/skills/`, where they run
+with your permissions and shape every session. Tessl now ships Snyk security
+scores on registry skills; you have no such scoring, so the habit substitutes:
+**read a third-party skill before installing it**, and re-read the diff when you
+update. Treat an unread skill the way you would treat an unread dependency —
+because that is what it is (C34's spirit, applied outside the lockfile).
+
 **Source:** mattpocock/skills GitHub repository, skill files in skills/engineering/ and skills/productivity/.

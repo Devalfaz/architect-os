@@ -175,6 +175,39 @@ question to ask each quarter is "which of our scaffolds is now redundant?"
 
 ---
 
+## 6. Borrowed from the competition (2026-08-26 sweep)
+
+**Confidence:** ✅ alistairmavin.com/ears + kiro.dev/docs (fetched 2026-08-26);
+✅ tessl.io/blog task-evals + skills-lifecycle posts; ❔ the 20% figure is
+Tessl's own research, not independently replicated.
+
+A survey of what the field productised that this OS does not. Full verdict table
+in the session notes; two items were adopted, the rest deliberately rejected.
+
+### Adopted
+
+| Item | From | Why it earned adoption |
+|---|---|---|
+| **EARS notation** | Kiro (orig. Rolls-Royce, IEEE RE'09) | The S2 gate demanded a filled edge-case table but had **no method for generating** edge cases. EARS's five patterns are a generator; the *unwanted behaviour* (If/Then) pattern is the systematic version of what was previously intuition. → [templates/fsd.md](../templates/fsd.md) |
+| **Task evals for skills** | Tessl | Skills were versioned but **never measured** — every retro-driven edit was an unverified hypothesis, which the freshness protocol forbids for memory. Tessl measured ~20% absolute accuracy gain from a relevant skill ❔, enough to justify measuring changes to them. → [skills-catalog.md](../skills-catalog.md) |
+
+### Rejected, with reasons
+
+| Item | From | Why not |
+|---|---|---|
+| Automated temporal knowledge graph | Graphiti / Cognee | Near-identical to Layer 3's `valid_from`/`valid_to` model but auto-extracted. Layer 3 is human-verified **on purpose**, and graphify already holds the auto-navigation role. Adopting it would either duplicate graphify or silently convert decision memory into unverified extraction. |
+| Full `/speckit.*` command surface | Spec Kit | `converge` already covers the conformance pass; `/speckit.clarify` duplicates `grill-with-docs`. Second navigation scheme, same drift failure as a folder taxonomy. |
+| Agent Manager orchestration UI | Antigravity 2.0 | Solves team-scale coordination. Solo at WIP≤2, there is nothing to orchestrate. |
+| Persona suite (12+ roles) | BMAD | The one good idea — scale-adaptive sizing — was absorbed at S1 in the July pass. The rest is team ceremony. |
+| Runtime validation sandbox | Greptile TREX | A real gap (*"neither Spec Kit nor Kiro verifies generated code against the live, running app"*), but subscription-priced. `converge`'s tests-as-evidence is the cheap version. Revisit if runtime bugs start escaping. |
+| Registry security scoring | Tessl / Snyk | No tool adopted, but **the habit was**: read third-party skills before installing, since they execute with your permissions. |
+
+The rejections matter as much as the adoptions — every one of them would have
+added a mechanism the [subtraction ritual](../rituals-and-metrics.md) would later
+have to delete.
+
+---
+
 ## What changes in the OS
 
 Small. Four edits, no architectural change:
@@ -185,6 +218,11 @@ Small. Four edits, no architectural change:
 | Add context-discipline lines to the agent entrypoint | [templates/AGENTS.md](../templates/AGENTS.md) | ✅ done |
 | Cross-reference cache stability as a context rule | [cost-control.md](../cost-control.md) | ✅ done |
 | Register this file in the research table | [README.md](../README.md) | ✅ done |
+| EARS requirement patterns + the chain to edge cases and ACs | [templates/fsd.md](../templates/fsd.md) | ✅ done |
+| S2 gate: every flow needs an If/Then requirement | [lifecycle.md](../lifecycle.md) | ✅ done |
+| Skill evaluation protocol (review + task evals, verdicts) | [skills-catalog.md](../skills-catalog.md) | ✅ done |
+| Eval verdict in the weekly changelog + monthly metric | [rituals-and-metrics.md](../rituals-and-metrics.md) | ✅ done |
+| Three new mechanisms entered in the subtraction inventory, retest 2026-11 | [rituals-and-metrics.md](../rituals-and-metrics.md) | ✅ done |
 
 **What deliberately does not change:** the ten stages, the constitution, the
 review pipeline, the four memory layers, WIP≤2, PR≤400, fresh session per ticket.
@@ -201,4 +239,6 @@ arxiv.org/abs/2602.07962 (LOCA-bench) · arxiv.org/html/2605.12366v1 (Classifier
 arxiv.org/pdf/2512.13564 (Memory in the Age of AI Agents) ·
 arxiv.org/pdf/2606.04967 (From Prompt to Process) ·
 louisbouchard.ai/context-engineering-2026 · morphllm.com/context-rot ·
+alistairmavin.com/ears + kiro.dev/docs (EARS) · tessl.io/blog (task evals,
+skills lifecycle, registry security scores) · cognee.ai + graphlit.com (memory) ·
 sourcegraph.com/blog/context-engineering. Re-verify after 2026-11-26.*
