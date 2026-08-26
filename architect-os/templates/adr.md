@@ -2,6 +2,18 @@
 
 *One per irreversible choice. Each ADR must include an agent instruction line and a mechanical compliance check. ADRs document decisions that are expensive to reverse — use of a library, choice of architecture style, data model decision.*
 
+**When to write one:** *the moment you reject a credible alternative.* If nothing
+real was rejected, it isn't a decision — it's a structural fact, and it belongs
+in [architecture.md](architecture.md), not here. That test is why a healthy repo
+has few ADRs and one long architecture doc, not the reverse.
+
+**An ADR is frozen, not living.** Once accepted, you never edit it to match
+reality — you write a new one that supersedes it. The old file stays as
+provenance: *what did we believe on date X, and what changed our mind.* Same
+model as the knowledge graph's `valid_to` / `invalidated_by`
+([repo-memory.md](../repo-memory.md)) — `superseded_by` **is** invalidation, one
+layer up. Editing an accepted ADR destroys the only record of the reasoning.
+
 ---
 
 ```markdown

@@ -95,27 +95,27 @@ The FSD is the document agents will actually read during implementation. Write i
 
 **Purpose:** decide what it looks and feels like before code exists, so UI tickets are executable rather than exploratory.
 
-| | |
-|---|---|
-| **Entry** | approved FSD (for features with UI; headless work skips to S4 — say so) |
+|                |                                                                                                                                                                                                                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Entry**      | approved FSD (for features with UI; headless work skips to S4 — say so)                                                                                                                                                                                                                                                  |
 | **Activities** | fill [templates/design-brief.md](templates/design-brief.md): screens/states inventory tied to FSD flows, tokens, component mapping to shadcn/ui, a11y requirements. Either Figma-first (design there, pull via Figma MCP) or prototype-first (agent builds throwaway HTML mocks, you react, brief captures the verdict). |
-| **Artifact** | `docs/product/<slug>/design-brief.md` + Figma links or `prototypes/` |
-| **Harness** | Claude Code + Figma MCP, or v0-style generation for direction-finding |
-| **Skills** | `prototype` |
-| **Exit gate** | every screen and state in the FSD has a design decision. Empty/loading/error states included — these are what agents invent badly when unspecified. |
+| **Artifact**   | `docs/product/<slug>/design-brief.md` + Figma links or `prototypes/`                                                                                                                                                                                                                                                     |
+| **Harness**    | Claude Code + Figma MCP, or v0-style generation for direction-finding                                                                                                                                                                                                                                                    |
+| **Skills**     | `prototype`                                                                                                                                                                                                                                                                                                              |
+| **Exit gate**  | every screen and state in the FSD has a design decision. Empty/loading/error states included — these are what agents invent badly when unspecified.                                                                                                                                                                      |
 
 ## S4 — Architect
 
 **Purpose:** make the decisions that are expensive to reverse, and write them down so agents can't unmake them.
 
-| | |
-|---|---|
-| **Entry** | spec'd feature that touches architecture, or a new repo |
+|                |                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Entry**      | spec'd feature that touches architecture, or a new repo                                                                                                                                                                                                                                                                                                                                                |
 | **Activities** | 1) `domain-modeling`: nail the ubiquitous language — entity names agents must use, recorded in AGENTS.md. 2) update `docs/architecture/architecture.md` ([template](templates/architecture.md)). 3) one [ADR](templates/adr.md) per irreversible choice, each with an *agent instruction* line and a mechanical compliance check. 4) stack per [tech-stack.md](tech-stack.md) — deviations get an ADR. |
-| **Artifacts** | `docs/architecture/architecture.md`, `docs/adr/NNNN-*.md` |
-| **Harness** | Claude Code, frontier model, plan mode for exploring options |
-| **Skills** | `domain-modeling`, `improve-codebase-architecture` (for existing repos) |
-| **Exit gate** | ADRs accepted. Data model reviewed by you, line by line — schema mistakes are the most expensive agent mistakes. New repo: repo bootstrapped per [github-setup.md](github-setup.md), AGENTS.md written. |
+| **Artifacts**  | `docs/architecture/architecture.md`, `docs/adr/NNNN-*.md`                                                                                                                                                                                                                                                                                                                                              |
+| **Harness**    | Claude Code, frontier model, plan mode for exploring options                                                                                                                                                                                                                                                                                                                                           |
+| **Skills**     | `domain-modeling`, `improve-codebase-architecture` (for existing repos)                                                                                                                                                                                                                                                                                                                                |
+| **Exit gate**  | ADRs accepted. Data model reviewed by you, line by line — schema mistakes are the most expensive agent mistakes. New repo: repo bootstrapped per [github-setup.md](github-setup.md), AGENTS.md written.                                                                                                                                                                                                |
 
 ## S5 — Plan (Ticket decomposition)
 

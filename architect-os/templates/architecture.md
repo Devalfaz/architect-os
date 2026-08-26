@@ -2,6 +2,26 @@
 
 *The living document of your system's architecture. Updated when ADRs change the architecture, not on a schedule. Agents read this to understand the big picture.*
 
+**This document vs. [ADRs](adr.md) — the split that keeps both useful:**
+
+| | This document | An ADR |
+|---|---|---|
+| Answers | **what** the system is | **why** it is that way |
+| Tense | present — "the system is X" | past — "on `<date>` we chose X" |
+| Mutability | rewritten continuously | **immutable once accepted**; superseded, never edited |
+| Count | exactly one | many, numbered, append-only |
+| Read | every time an agent orients | on demand, when a decision is questioned |
+
+Practically: this file is the **compressed, always-loaded view**; ADRs are
+**just-in-time retrieval**. An agent implementing a ticket needs "where does DB
+access live" (one read here), not 2,000 words on why Prisma was rejected. Keep
+the rationale out of here and the shape out of the ADRs, and each stays cheap to
+load ([Layer 0](../repo-memory.md)).
+
+**The rule for which one to write:** *write an ADR the moment you reject a
+credible alternative.* If nothing real was rejected, it isn't a decision — it's
+a structural fact, and facts live **here** and nowhere else.
+
 ---
 
 ```markdown
@@ -35,9 +55,16 @@ graph TD
 
 ## Key design decisions
 
-1. **[Decision 1]:** [What and why. Linked ADR if applicable.]
-2. **[Decision 2]:**
-3. ...
+<!-- One line each: the decision AS IT STANDS TODAY, plus its ADR.
+     The "why" lives in the ADR, not here. If you catch yourself explaining
+     rationale or listing rejected alternatives in this section, it belongs in
+     the ADR and this line should shrink back to a pointer. Two answers to
+     "why" means neither is trustworthy. -->
+
+1. **[Decision]** — [what holds today, one line] ([ADR-NNNN](../adr/NNNN-slug.md))
+2. **[Decision]** — [what holds today, one line] ([ADR-NNNN](../adr/NNNN-slug.md))
+3. **[Structural fact, no ADR]** — [no credible alternative was rejected, so
+   there is no decision record; this line is the only home for it]
 
 ## Data flow
 
