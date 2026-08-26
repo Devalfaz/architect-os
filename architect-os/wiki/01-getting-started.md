@@ -26,7 +26,7 @@ Follow the machine checklist in [README.md](../README.md), which per stack means
 ## Step 2 — Repo setup (per repo, ~1 hour the first time, <30 min after)
 
 1. **Pick a profile** — [profiles/](../profiles/README.md). Flutter → [flutter.md](../profiles/flutter.md); Next.js → [web-nextjs.md](../profiles/web-nextjs.md); neither → copy the closest and adapt.
-2. Run the repo checklist in [README.md](../README.md): create repo (squash-only), copy `github/` → `.github/` **applying the profile's CI section**, sync labels, import the [branch ruleset](../github/main-ruleset.json) (update required-check names to the profile's job names), create the Delivery project ([guide](../github/projects-setup.md)).
+2. Run the repo checklist in [README.md](../README.md): create repo (squash-only), copy `github/` → `.github/` **applying the profile's CI section**, sync labels, import the [branch ruleset](../github/rulesets/main-ruleset.json) (update required-check names to the profile's job names), create the Delivery project ([guide](../github/projects-setup.md)).
 3. Drop `.coderabbit.yaml` at repo root ([base](../github/.coderabbit.yaml) + the profile's path-instructions block).
 4. Write `AGENTS.md` from the [template](../templates/AGENTS.md) + the profile's seed section. `ln -s AGENTS.md CLAUDE.md`. Have the agent draft it from the code, then **you correct it** — the corrections are the value.
 5. Create `docs/` + `memory/` trees; commit an empty graph conforming to the [schema](../memory/repo-graph.schema.json).

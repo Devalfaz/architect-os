@@ -90,7 +90,7 @@ architect-os/
 ├── profiles/                      ← per-project-type overlays (flutter, web-nextjs, …)
 ├── templates/                     ← BRD, PRD, FSD, ADR, AGENTS.md, dumps…
 ├── skills/                        ← OS-native skill specs (converge, …)
-├── github/                        ← issue forms, labels, ruleset, CI, .coderabbit.yaml (copy into repo)
+├── github/                        ← mirrors .github/ — copy straight in (see github-setup.md)
 └── memory/                        ← repo-graph schema (v1.1, temporal) + example
 ```
 

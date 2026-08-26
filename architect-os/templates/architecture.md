@@ -45,7 +45,7 @@ graph TD
 
 ## Technology decisions
 
-See [tech-stack.md](tech-stack.md) for the full rationale. Key points:
+See [ADR-0001](../adr/0001-tech-stack.md) for the full rationale. Key points:
 
 - [Technology]: [Why]
 - ...
@@ -58,8 +58,8 @@ See [tech-stack.md](tech-stack.md) for the full rationale. Key points:
 
 | ADR | Decision | Status |
 |---|---|---|
-| [ADR-0001](adr/0001-tech-stack.md) | Tech stack | accepted |
-| [ADR-0002](adr/0002-architecture-style.md) | Architecture style | accepted |
+| [ADR-0001](../adr/0001-tech-stack.md) | Tech stack | accepted |
+| [ADR-0002](../adr/0002-architecture-style.md) | Architecture style | accepted |
 | ... | | |
 
 ## Known technical debt
@@ -77,4 +77,8 @@ See [tech-stack.md](tech-stack.md) for the full rationale. Key points:
 
 ---
 
-*Save as `docs/architecture/architecture.md`. Updated when ADRs change the architecture. Verified monthly per [memory-freshness-protocol.md](memory-freshness-protocol.md).*
+*Save as `docs/architecture/architecture.md`. Updated when ADRs change the architecture. Verified monthly per [memory-freshness-protocol.md](../memory-freshness-protocol.md).*
+
+*Note: links **inside** the template body above are relative to the template's
+destination (`docs/architecture/`), not to this repo — so `../adr/…` is correct
+there and will not resolve here.*

@@ -33,7 +33,7 @@ Either named stack as-is — this is the project type all the OS defaults were c
 
 ## CI & checks
 
-The base [github/ci.yml](../github/ci.yml) as-is (Typecheck, Lint, Test, Build) plus **E2E** (Playwright against a preview build) — required on M-size PRs, scheduled otherwise.
+The base [github/workflows/ci.yml](../github/workflows/ci.yml) as-is (Typecheck, Lint, Test, Build) plus **E2E** (Playwright against a preview build) — required on M-size PRs, scheduled otherwise.
 
 ## Test strategy
 

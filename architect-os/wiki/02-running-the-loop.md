@@ -26,7 +26,7 @@ The feel to calibrate against: you are *never waiting* on an agent (something is
 
 ## The bug (canonical: [walkthrough 2](../adoption-plan.md))
 
-Bug issue ([form](../github/bug.yml)) → severity + `regression-test-required` → `diagnosing-bugs` skill: the agent must **reproduce in a failing test before touching code** (the failing test *is* the diagnosis) → if the fix has scope options, the agent proposes and *you* choose → surgical fix + the regression test → rubric (2 min at this size) → merge. The regression test is permanent armor; the dump records the gotcha.
+Bug issue ([form](../github/ISSUE_TEMPLATE/bug.yml)) → severity + `regression-test-required` → `diagnosing-bugs` skill: the agent must **reproduce in a failing test before touching code** (the failing test *is* the diagnosis) → if the fix has scope options, the agent proposes and *you* choose → surgical fix + the regression test → rubric (2 min at this size) → merge. The regression test is permanent armor; the dump records the gotcha.
 
 ## When it goes sideways (canonical: [failure-recovery-playbook.md](../failure-recovery-playbook.md))
 

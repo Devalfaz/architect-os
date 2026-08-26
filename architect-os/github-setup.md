@@ -108,13 +108,35 @@ jobs:
 
 ---
 
+## What ships in `github/`
+
+The folder **mirrors its destination**, so installing it is a copy, not a
+reassembly. `.md` files are guides you read; everything else is payload.
+
+```
+architect-os/github/              →  your-app/
+├── ISSUE_TEMPLATE/*.yml          →  .github/ISSUE_TEMPLATE/
+├── workflows/ci.yml              →  .github/workflows/
+├── workflows/label-sync.yml      →  .github/workflows/
+├── rulesets/main-ruleset.json    →  .github/rulesets/   (import via UI/API)
+├── PULL_REQUEST_TEMPLATE.md      →  .github/
+├── CODEOWNERS                    →  .github/
+├── labels.yml                    →  .github/
+├── settings.yml                  →  .github/            (Probot Settings app)
+└── .coderabbit.yaml              →  repo ROOT  ⚠ not .github/
+```
+
+⚠ **Two things that bite:** `.coderabbit.yaml` must sit at the **repo root** —
+CodeRabbit does not read it from `.github/`. And `settings.yml` is repo metadata
+for the Settings app; it is *not* `ISSUE_TEMPLATE/config.yml`, which is the
+issue-chooser config and does not ship here.
+
 ## Setup checklist
-- [ ] Copy issue templates to `.github/ISSUE_TEMPLATE/`
-- [ ] Copy PR template to `.github/`
-- [ ] Create labels via `gh label create` or UI
-- [ ] Install branch protection ruleset on main
+- [ ] `cp -r architect-os/github/. .github/` then `mv .github/.coderabbit.yaml .`
+- [ ] Create labels: `npx github-label-sync --labels .github/labels.yml <owner>/<repo>`
+- [ ] Install branch protection ruleset on main (`rulesets/main-ruleset.json`)
 - [ ] Create Delivery Projects v2 board with custom fields
 - [ ] Set up Project automations
-- [ ] Create CI workflow
+- [ ] Verify CI workflow runs (`.github/workflows/ci.yml`)
 - [ ] Test PR to verify: CI, CodeRabbit, squash merge
 - [ ] Verify needs-triage auto-applied on new issues
