@@ -101,6 +101,14 @@ Don't restart the same session. Kill → diagnose → re-plan:
 
 **Health metric:** track `cache_read_input_tokens` ÷ total input tokens in the weekly cost review. A falling cache-hit ratio usually means AGENTS.md churn or unstable session prefixes — fix the prefix, don't buy a cheaper model.
 
+> **This section is not only about money.** Prefix stability is what makes
+> keeping a session's history affordable, which is what makes *not* compacting
+> viable, which is what preserves the agent's recall. Compaction rewrites the
+> cached prefix — so you pay full price to recompute exactly what caching saved,
+> and lose recall doing it. Treat the rules above as **context strategy** with a
+> budget side-effect: [repo-memory.md § Layer 0](repo-memory.md),
+> evidence in [research-2026-08-context-engineering.md](research-2026-08-context-engineering.md).
+
 ---
 
 ## Subscription comparison (July 2026)

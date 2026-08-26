@@ -1,0 +1,5 @@
+# Derived artifacts — rebuild, never commit (see architect-os/repo-memory.md)
+graphify-out/
+
+# macOS
+.DS_Store

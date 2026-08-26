@@ -28,7 +28,7 @@ Every piece of work flows **idea → BRD → PRD/FSD → design → architecture
 | 4 | [harness-matrix.md](harness-matrix.md) | Which tool for which layer, and why — cited |
 | 5 | [skills-catalog.md](skills-catalog.md) | The repeatable agent workflows and when to fire each |
 | 6 | [github-setup.md](github-setup.md) | Labels, issue forms, rulesets, Projects — the execution system |
-| 7 | [repo-memory.md](repo-memory.md) | The four-layer memory architecture |
+| 7 | [repo-memory.md](repo-memory.md) | Context strategy (Layer 0) + the four-layer memory architecture |
 | 8 | [tech-stack.md](tech-stack.md) | Default stack + when to deviate |
 | 9 | [pr-review-rubric.md](pr-review-rubric.md) / [review-workflow.md](review-workflow.md) | The two-stage review system |
 | 10 | [models-cost-quality.md](models-cost-quality.md) / [cost-control.md](cost-control.md) | Model routing and budgets |
@@ -51,6 +51,15 @@ Six parallel internet-research passes against primary sources, plus a master syn
 | [research-2026-07-multi-agent.md](research-2026-07-multi-agent.md) | Multi-agent orchestration | Anthropic multi-agent research system (+90.2% over single-agent, 15× chat tokens); Claude Code agent teams/worktrees/`claude -p` batch; 12 multi-agent failure modes |
 | [research-2026-07-update.md](research-2026-07-update.md) | Cost optimization & failure modes | Batch APIs, LiteLLM/OpenRouter, Anthropic automatic caching mode, OpenAI `prompt_cache_key` 15 RPM ceiling; 15 new failure modes beyond the existing 12 |
 
+## August 2026 update — context engineering
+
+A targeted follow-up pass on one discipline. Confirms Principle 2 with measured
+evidence, and challenges one inherited practice.
+
+| File | Scope | Priority findings |
+|---|---|---|
+| [research-2026-08-context-engineering.md](research-2026-08-context-engineering.md) | Context engineering | Context rot measured across frontier models (2×–30× miss rate past ~800K tokens) — C6/C7 are quality rules with numbers; **compaction contested** ("shrink, don't rewrite"); prefix stability reclassified as context strategy, not cost; harness-engineering literature converges on this OS's primitives. Rules resulting: [repo-memory.md § Layer 0](repo-memory.md). Re-verify after 2026-11-26. |
+
 ## Repository layout (this document set)
 
 ```
@@ -62,7 +71,7 @@ architect-os/
 ├── harness-matrix.md              ← tool comparison & assignments
 ├── skills-catalog.md              ← agent workflow library
 ├── github-setup.md                ← execution-system narrative
-├── repo-memory.md                 ← memory architecture
+├── repo-memory.md                 ← context strategy + memory architecture
 ├── memory-freshness-protocol.md   ← anti-staleness rules
 ├── tech-stack.md                  ← default stack + variants
 ├── pr-review-rubric.md            ← human review, first pass
