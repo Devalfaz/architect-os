@@ -6,20 +6,24 @@
 
 ## Issue labels
 
-### Lifecycle
-`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `in-progress`, `in-review`, `wontfix`
+**Canonical definitions: [github/labels.yml](github/labels.yml)** — names, colours,
+and descriptions, machine-readable and synced by the `label-sync` workflow.
+**When to use each: [github/label-taxonomy.md](github/label-taxonomy.md).**
+Neither list is reproduced here; a third copy drifts, and the stale one wins
+whichever gets read first.
 
-### Size
-`size:XS` (≤50 lines), `size:S` (50–150), `size:M` (150–400), `size:split-me` (>400 — split first)
+The six families, so you know what exists:
 
-### Area
-`area:api`, `area:auth`, `area:ui`, `area:db`, `area:infra`, `area:docs`, `area:test`, `area:perf`, `area:security`
+| Family | Purpose | Examples |
+|---|---|---|
+| **Lifecycle** | where the issue is in the pipeline | `needs-triage` → `ready-for-agent` → `in-progress` → `in-review` |
+| **Size** | expected artifact depth (S1 classification) | `size:XS` ≤50 lines · `size:S` 50–150 · `size:M` 150–400 · `size:split-me` >400 |
+| **Area** | which part of the system | `area:api`, `area:auth`, `area:db`, `area:security`, … |
+| **Priority** | scheduling | `P0:now` → `P4:icebox` |
+| **Signal** | agent-pipeline state and issue kind | `ai:ready`, `ai:self-reviewed`, `bug`, `regression`, `spec-delta`, `needs-decision` |
+| **Housekeeping** | triage hygiene | `duplicate`, `dependencies`, `breaking-change`, `help-wanted` |
 
-### Priority
-`P0:now`, `P1:next`, `P2:soon`, `P3:later`, `P4:icebox`
-
-### Signal
-`ai:ready`, `ai:implemented`, `ai:self-reviewed`, `bug`, `regression`, `needs-decision`, `good-first-agent`, `tech-debt`
+Add or rename a label in `labels.yml` only — the sync workflow propagates it.
 
 ### Workflow
 ```
