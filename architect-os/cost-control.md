@@ -107,7 +107,7 @@ Don't restart the same session. Kill → diagnose → re-plan:
 > cached prefix — so you pay full price to recompute exactly what caching saved,
 > and lose recall doing it. Treat the rules above as **context strategy** with a
 > budget side-effect: [repo-memory.md § Layer 0](repo-memory.md),
-> evidence in [research-2026-08-context-engineering.md](research-2026-08-context-engineering.md).
+> evidence in [research-2026-08-context-engineering.md](research/research-2026-08-context-engineering.md).
 
 ---
 

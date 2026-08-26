@@ -9,7 +9,7 @@ expires: 2026-10-19
 
 # Insights & Issues — Architect OS Research Update (July 2026)
 
-*Master synthesis of five parallel internet research passes conducted 2026-07-19. Companion to the five detailed reports in this directory: `research-2026-07-update.md` (cost & failure modes), `research-2026-07-memory.md` (memory & context), `research-2026-07-tools.md` (AI coding tools), `research-2026-07-specs.md` (spec-driven dev), `research-2026-07-review.md` (AI code review), `research-2026-07-multi-agent.md` (multi-agent orchestration).*
+*Master synthesis of five parallel internet research passes conducted 2026-07-19. Companion to the detailed reports in `research/`: `research/research-2026-07-update.md` (cost & failure modes), `research/research-2026-07-memory.md` (memory & context), `research/research-2026-07-tools.md` (AI coding tools), `research/research-2026-07-specs.md` (spec-driven dev), `research/research-2026-07-review.md` (AI code review), `research/research-2026-07-multi-agent.md` (multi-agent orchestration).*
 
 **Scope:** What changed since the mid-2025 architect-os baseline, what the existing research got right, what is now wrong or stale, and what is missing.
 
@@ -23,19 +23,19 @@ Architect OS's core thesis — **spec-first, narrow-context, human-gated, fresh-
 
 But the supporting cast is now stale:
 
-1. **The tool market reorganized around agent-native control centers**, not CLI-vs-IDE-vs-cloud. Claude Code (Desktop + Web + iOS + agent teams + routines + channels), GitHub Copilot app, Cursor Cloud Agents, Devin Cloud all converged on a "My Work" multi-session surface. The mid-2025 matrix's "Claude Code has no async fire-and-forget" limitation is obsolete. (`research-2026-07-tools.md`)
+1. **The tool market reorganized around agent-native control centers**, not CLI-vs-IDE-vs-cloud. Claude Code (Desktop + Web + iOS + agent teams + routines + channels), GitHub Copilot app, Cursor Cloud Agents, Devin Cloud all converged on a "My Work" multi-session surface. The mid-2025 matrix's "Claude Code has no async fire-and-forget" limitation is obsolete. (`research/research-2026-07-tools.md`)
 
-2. **The model landscape shifted faster than any other layer.** Anthropic added Fable 5, Opus 4.8, Sonnet 5; OpenAI added GPT-5.6 family (sol/terra/luna), cut o3 from $10/$40 to $2/$8; Sonnet 5 intro pricing ($2/$10) ends Aug 31 2026. The mid-2025 matrix's pricing is wrong; the July 2026 update is correct but does not mention LiteLLM/OpenRouter routing, Batch APIs, or the new `prompt_cache_key` per-key RPM ceiling. (`research-2026-07-update.md`)
+2. **The model landscape shifted faster than any other layer.** Anthropic added Fable 5, Opus 4.8, Sonnet 5; OpenAI added GPT-5.6 family (sol/terra/luna), cut o3 from $10/$40 to $2/$8; Sonnet 5 intro pricing ($2/$10) ends Aug 31 2026. The mid-2025 matrix's pricing is wrong; the July 2026 update is correct but does not mention LiteLLM/OpenRouter routing, Batch APIs, or the new `prompt_cache_key` per-key RPM ceiling. (`research/research-2026-07-update.md`)
 
-3. **Spec-driven dev became orthodoxy, not experiment.** GitHub Spec Kit hit 122k stars (v0.13.0 Jul 17 2026); AWS Kiro shipped as a productized spec-first IDE; BMad v6 (50.8k stars, v6.10.0 Jul 3 2026) added scale-adaptive sizing; Anthropic's March 2026 harness-design post gave the first hard empirical evidence that a planner/generator/evaluator harness beats solo-agent by ~20× quality at ~20× cost. The architect-os S2→S5→S6→S7 loop is isomorphic to all of these but missing three things: a `/converge`-style conformance command, scale-adaptive spec sizing, and an explicit evaluator agent at S7. (`research-2026-07-specs.md`)
+3. **Spec-driven dev became orthodoxy, not experiment.** GitHub Spec Kit hit 122k stars (v0.13.0 Jul 17 2026); AWS Kiro shipped as a productized spec-first IDE; BMad v6 (50.8k stars, v6.10.0 Jul 3 2026) added scale-adaptive sizing; Anthropic's March 2026 harness-design post gave the first hard empirical evidence that a planner/generator/evaluator harness beats solo-agent by ~20× quality at ~20× cost. The architect-os S2→S5→S6→S7 loop is isomorphic to all of these but missing three things: a `/converge`-style conformance command, scale-adaptive spec sizing, and an explicit evaluator agent at S7. (`research/research-2026-07-specs.md`)
 
-4. **AI code review split into three layers, and architect-os has only one.** Layer 1: read-only static-diff reviewers (CodeRabbit, Copilot Code Review, Cursor BugBot, Greptile, Qodo) — commoditized. Layer 2: independent-auditor framing (Greptile refuses to author code; argues same-vendor author+review is the Arthur-Andersen problem) — architect-os has the correlated-vendor problem because it uses Claude Code to author and claude-code-action to review. Layer 3: runtime/execution review (Greptile TREX, Jun 2026, runs the code in a sandbox) — architect-os has no equivalent. (`research-2026-07-review.md`)
+4. **AI code review split into three layers, and architect-os has only one.** Layer 1: read-only static-diff reviewers (CodeRabbit, Copilot Code Review, Cursor BugBot, Greptile, Qodo) — commoditized. Layer 2: independent-auditor framing (Greptile refuses to author code; argues same-vendor author+review is the Arthur-Andersen problem) — architect-os has the correlated-vendor problem because it uses Claude Code to author and claude-code-action to review. Layer 3: runtime/execution review (Greptile TREX, Jun 2026, runs the code in a sandbox) — architect-os has no equivalent. (`research/research-2026-07-review.md`)
 
-5. **Context engineering became a named discipline.** Anthropic's September 2025 post gave the canonical framing: context is a finite resource with diminishing marginal returns; the goal is "the smallest possible set of high-signal tokens that maximize the likelihood of the desired outcome." Three concrete techniques dominate: **compaction, structured note-taking, sub-agent architectures**. The 150-line AGENTS.md cap in architect-os is correct in spirit but the *content mix* is slightly wrong — Anthropic now explicitly says "Bloated CLAUDE.md files cause Claude to ignore your actual instructions!" and provides an Include/Exclude table that the architect-os Layer 1 doesn't fully honor. (`research-2026-07-memory.md`)
+5. **Context engineering became a named discipline.** Anthropic's September 2025 post gave the canonical framing: context is a finite resource with diminishing marginal returns; the goal is "the smallest possible set of high-signal tokens that maximize the likelihood of the desired outcome." Three concrete techniques dominate: **compaction, structured note-taking, sub-agent architectures**. The 150-line AGENTS.md cap in architect-os is correct in spirit but the *content mix* is slightly wrong — Anthropic now explicitly says "Bloated CLAUDE.md files cause Claude to ignore your actual instructions!" and provides an Include/Exclude table that the architect-os Layer 1 doesn't fully honor. (`research/research-2026-07-memory.md`)
 
-6. **Multi-agent orchestration is a real production discipline now.** Anthropic's June 2025 multi-agent research post shows +90.2% improvement over single-agent on research evals and quantifies the cost: 15× chat tokens. The orchestrator-worker pattern with filesystem-based subagent output (avoiding the "game of telephone") is the reference. Architect-os's WIP=2 single-agent thesis is correct for the 80% case but undocumented for the 20% case (large migrations, parallel investigation, dependency-independent ticket batches). Claude Code now ships native worktrees, agent teams, and `claude -p` batch mode that architect-os doesn't mention. (`research-2026-07-multi-agent.md`)
+6. **Multi-agent orchestration is a real production discipline now.** Anthropic's June 2025 multi-agent research post shows +90.2% improvement over single-agent on research evals and quantifies the cost: 15× chat tokens. The orchestrator-worker pattern with filesystem-based subagent output (avoiding the "game of telephone") is the reference. Architect-os's WIP=2 single-agent thesis is correct for the 80% case but undocumented for the 20% case (large migrations, parallel investigation, dependency-independent ticket batches). Claude Code now ships native worktrees, agent teams, and `claude -p` batch mode that architect-os doesn't mention. (`research/research-2026-07-multi-agent.md`)
 
-7. **15 new failure modes surfaced beyond the existing 12.** Most urgent: prompt injection via tool output, hooks executing before trust dialog, persistent memory poisoning, sandbox escape via creative problem-solving, self-evaluation leniency, caching optimization regressions (the April 2026 Claude Code quality post-mortem template), correlated-model review blind spots, collateral-damage edits (random unrelated line edits humans would never make), false confidence from "AI approved it," agent abandonment of subagent results, synchronous coordinator bottleneck, game of telephone. (`research-2026-07-update.md` + `research-2026-07-review.md` + `research-2026-07-multi-agent.md`)
+7. **15 new failure modes surfaced beyond the existing 12.** Most urgent: prompt injection via tool output, hooks executing before trust dialog, persistent memory poisoning, sandbox escape via creative problem-solving, self-evaluation leniency, caching optimization regressions (the April 2026 Claude Code quality post-mortem template), correlated-model review blind spots, collateral-damage edits (random unrelated line edits humans would never make), false confidence from "AI approved it," agent abandonment of subagent results, synchronous coordinator bottleneck, game of telephone. (`research/research-2026-07-update.md` + `research/research-2026-07-review.md` + `research/research-2026-07-multi-agent.md`)
 
 ---
 
@@ -251,16 +251,16 @@ Resist the temptation to:
 
 ---
 
-## Companion reports in this directory
+## Companion reports in `research/`
 
 | File | Scope | Lines | Sources fetched |
 |---|---|---|---|
-| `research-2026-07-update.md` | Cost optimization & failure modes | 475 | 11 |
-| `research-2026-07-memory.md` | Memory & context engineering | 438 | 7 |
-| `research-2026-07-tools.md` | AI coding agents & tools | 357 | 12 |
-| `research-2026-07-specs.md` | Spec-driven development | 208 | 9 |
-| `research-2026-07-review.md` | AI code review | 248 | 10 |
-| `research-2026-07-multi-agent.md` | Multi-agent orchestration | 293 | 3 + synthesis |
+| `research/research-2026-07-update.md` | Cost optimization & failure modes | 475 | 11 |
+| `research/research-2026-07-memory.md` | Memory & context engineering | 438 | 7 |
+| `research/research-2026-07-tools.md` | AI coding agents & tools | 357 | 12 |
+| `research/research-2026-07-specs.md` | Spec-driven development | 208 | 9 |
+| `research/research-2026-07-review.md` | AI code review | 248 | 10 |
+| `research/research-2026-07-multi-agent.md` | Multi-agent orchestration | 293 | 3 + synthesis |
 
 Total: ~2,000 lines of new research across 52 webfetches on primary sources.
 
@@ -300,4 +300,4 @@ Total: ~2,000 lines of new research across 52 webfetches on primary sources.
 
 ---
 
-*End of synthesis. The five detailed reports in this directory contain the full source-attributed findings behind every claim above. This document is the executive layer; those are the evidence layer.*
+*End of synthesis. The five detailed reports in `research/` contain the full source-attributed findings behind every claim above. This document is the executive layer; those are the evidence layer.*

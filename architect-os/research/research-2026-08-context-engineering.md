@@ -5,11 +5,11 @@
 quality question before it is a cost question. Fetched 2026-08-26.
 **Re-verify after 2026-11-26.***
 
-**Confidence tiers** (same scheme as [harness-matrix.md](harness-matrix.md)):
+**Confidence tiers** (same scheme as [harness-matrix.md](../harness-matrix.md)):
 ✅ verified-primary · 📣 vendor-claim · ❔ inferred/secondary
 
 Scope note: this file is *evidence*, not law. The rules it supports live in
-[repo-memory.md](repo-memory.md); the numbers live here.
+[repo-memory.md](../repo-memory.md); the numbers live here.
 
 ---
 
@@ -33,10 +33,10 @@ Techniques named in the primary source, mapped to where this OS already does the
 
 | Technique | Anthropic's framing | Where the OS does it |
 |---|---|---|
-| **Right altitude** | prompts specific enough to guide, flexible enough to leave heuristics | [templates/AGENTS.md](templates/AGENTS.md) pruning test |
+| **Right altitude** | prompts specific enough to guide, flexible enough to leave heuristics | [templates/AGENTS.md](../templates/AGENTS.md) pruning test |
 | **Just-in-time retrieval** | hold lightweight identifiers (paths, queries); load at runtime | ego-network graph loading, Layer 3 |
 | **Structured note-taking** | persistent external memory outside the window | Layer 4 dumps; `docs/` tree |
-| **Sub-agent architectures** | focused agents, clean contexts, return 1–2k-token summaries | [multi-agent.md](multi-agent.md) Pattern 3 |
+| **Sub-agent architectures** | focused agents, clean contexts, return 1–2k-token summaries | [multi-agent.md](../multi-agent.md) Pattern 3 |
 | **Compaction** | summarize history near the limit | **now contested — see §3** |
 
 Tool design guidance also lands on this OS's side: minimal overlap between tools,
@@ -74,7 +74,7 @@ Useful vocabulary — these are distinct and have distinct fixes:
 
 | Mechanism | What happens | The OS's existing defense |
 |---|---|---|
-| **Context poisoning** | a hallucination enters history and is reproduced at every subsequent step | fresh session per ticket (S6); write-time invalidation ([protocol](memory-freshness-protocol.md)) |
+| **Context poisoning** | a hallucination enters history and is reproduced at every subsequent step | fresh session per ticket (S6); write-time invalidation ([protocol](../memory-freshness-protocol.md)) |
 | **Context distraction** | the agent leans on accumulated history instead of synthesizing a new plan | frozen plan at S5; `converge` grades against it, not the transcript |
 | **Context confusion** | irrelevant material in the window degrades response quality | C6/C7 scope rules; ego-network loading, not repo dumps |
 
@@ -125,7 +125,7 @@ never letting a session reach the window limit.
 ## 4. Caching stability is a context rule, not a cost rule
 
 **Confidence:** ✅ provider pricing already recorded in
-[cost-control.md](cost-control.md) and [harness-matrix.md](harness-matrix.md).
+[cost-control.md](../cost-control.md) and [harness-matrix.md](../harness-matrix.md).
 
 The OS already records the numbers — Anthropic cache reads at 0.1× base input;
 DeepSeek cache-hit input **50× cheaper** ($0.0028 vs $0.14/1M) — and files them
@@ -170,7 +170,7 @@ Their two named failure modes are ones this OS already gates against:
 
 One guidance item the OS does *not* yet encode: **remove harness scaffolding as
 model capability improves.** The quarterly subtraction ritual in
-[rituals-and-metrics.md](rituals-and-metrics.md) is the right home for it — the
+[rituals-and-metrics.md](../rituals-and-metrics.md) is the right home for it — the
 question to ask each quarter is "which of our scaffolds is now redundant?"
 
 ---
@@ -181,10 +181,10 @@ Small. Four edits, no architectural change:
 
 | Change | File | Status |
 |---|---|---|
-| Add the context-strategy section the four layers serve | [repo-memory.md](repo-memory.md) | ✅ done |
-| Add context-discipline lines to the agent entrypoint | [templates/AGENTS.md](templates/AGENTS.md) | ✅ done |
-| Cross-reference cache stability as a context rule | [cost-control.md](cost-control.md) | ✅ done |
-| Register this file in the research table | [README.md](README.md) | ✅ done |
+| Add the context-strategy section the four layers serve | [repo-memory.md](../repo-memory.md) | ✅ done |
+| Add context-discipline lines to the agent entrypoint | [templates/AGENTS.md](../templates/AGENTS.md) | ✅ done |
+| Cross-reference cache stability as a context rule | [cost-control.md](../cost-control.md) | ✅ done |
+| Register this file in the research table | [README.md](../README.md) | ✅ done |
 
 **What deliberately does not change:** the ten stages, the constitution, the
 review pipeline, the four memory layers, WIP≤2, PR≤400, fresh session per ticket.

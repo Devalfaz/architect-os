@@ -4,7 +4,7 @@
 
 **The pruning test, applied to every line:** *"Would removing this cause the agent to make a mistake?"* If not, cut it. Bloated entrypoint files cause agents to ignore the instructions that matter (Anthropic's guidance is blunt: bloated CLAUDE.md files make Claude ignore your actual instructions).
 
-**Two reasons the ceiling is real, not stylistic** ([evidence](../research-2026-08-context-engineering.md)):
+**Two reasons the ceiling is real, not stylistic** ([evidence](../research/research-2026-08-context-engineering.md)):
 1. **Context rot.** Every token here is loaded into *every* session. Degradation as input grows is measured across frontier models — a long entrypoint doesn't just get skimmed, it degrades everything downstream of it.
 2. **Prefix stability.** This file is the cached prompt prefix. Every edit invalidates that cache, and cache reads are 10–50× cheaper than misses. **Batch edits into the weekly distill; don't trickle them.** Churn here is expensive twice — in tokens, and in the recall that keeping history buys you.
 

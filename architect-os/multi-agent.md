@@ -2,7 +2,7 @@
 
 *The default in this OS is one fresh session per ticket, WIP ≤ 2. That is correct for ~80% of work. This doc covers the other ~20%: large migrations, dependency-independent ticket batches, research-heavy spikes, and well-specified async work. Multi-agent burns ~15× the tokens of chat — it is opt-in for high-value tasks, never a default.*
 
-Evidence base: `research-2026-07-multi-agent.md` (Anthropic's multi-agent research system post, Claude Code best practices, framework landscape). Key numbers: multi-agent beat single-agent by **+90.2%** on Anthropic's internal research evals; **token usage alone explains ~80% of performance variance** (tool calls + model choice another 15%); agents burn ~4× chat tokens, multi-agent ~15×.
+Evidence base: `research/research-2026-07-multi-agent.md` (Anthropic's multi-agent research system post, Claude Code best practices, framework landscape). Key numbers: multi-agent beat single-agent by **+90.2%** on Anthropic's internal research evals; **token usage alone explains ~80% of performance variance** (tool calls + model choice another 15%); agents burn ~4× chat tokens, multi-agent ~15×.
 
 ---
 
@@ -117,4 +117,4 @@ The 80/20 asymmetry is the whole point: single-agent narrow-context discipline i
 
 ---
 
-*See also: [lifecycle.md](lifecycle.md) S6 (batch/async lanes), [cost-control.md](cost-control.md) (per-orchestrator ceilings), [constitution.md](constitution.md) C37 (event-triggered limits), [research-2026-07-multi-agent.md](research-2026-07-multi-agent.md) (full evidence).*
+*See also: [lifecycle.md](lifecycle.md) S6 (batch/async lanes), [cost-control.md](cost-control.md) (per-orchestrator ceilings), [constitution.md](constitution.md) C37 (event-triggered limits), [research-2026-07-multi-agent.md](research/research-2026-07-multi-agent.md) (full evidence).*

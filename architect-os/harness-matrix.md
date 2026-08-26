@@ -14,8 +14,8 @@ tool is best" — it's "which model for which job at which stage, at what cost."
 - ❔ **inferred** — cross-referenced from secondary mentions; treat as a
   hypothesis, re-verify before relying on it
 
-Full evidence trail: `research-2026-07-tools.md` (12 fetches, 6 succeeded),
-`research-2026-07-review.md`, `research-2026-07-update.md` in this directory.
+Full evidence trail: `research/research-2026-07-tools.md` (12 fetches, 6 succeeded),
+`research/research-2026-07-review.md`, `research/research-2026-07-update.md`, in `research/`.
 This doc eats its own dog food: re-verify everything after **2026-10-19** (the
 research snapshot expiry).
 
@@ -26,7 +26,7 @@ research snapshot expiry).
 The mid-2025 trichotomy (IDE extensions / CLI agents / cloud agents) is
 obsolete. The market reorganized into **seven categories**; the two axes that
 matter are _who runs the agent_ (harness) and _which model powers it_ (routing
-decision). ✅ `research-2026-07-tools.md`
+decision). ✅ `research/research-2026-07-tools.md`
 
 | Category                         | Example tools                                                                        | Defining trait                                                                          |
 | -------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
@@ -222,7 +222,7 @@ surfaces architecture).
 
 ### Cline — IDE-native harness
 
-**Confidence:** ✅ via `research-2026-07-tools.md`.
+**Confidence:** ✅ via `research/research-2026-07-tools.md`.
 
 VS Code extension turning the editor into an agent surface. First-class
 OpenRouter support, MCP support, `@`-mentions, plan/act mode split.
@@ -333,7 +333,7 @@ it — one source of truth.
 ### claude-code-action — uncorrelated review via Bedrock/Vertex/DeepSeek
 
 **Confidence:** ✅ github.com/anthropics/claude-code-action via
-`research-2026-07-review.md`.
+`research/research-2026-07-review.md`.
 
 Anthropic's GitHub Action for running Claude Code on PRs/issues. The key trick:
 it supports **Bedrock and Vertex backends hosting non-Claude models** (Llama 4,
@@ -754,4 +754,4 @@ coderabbit.ai/blog (fetched 2026-07-19). devin.ai (fetched 2026-07-19).
 replit.com/ai + lovable.dev (fetched 2026-07-19). github.com/Aider-AI/aider
 (fetched 2026-07-19). github.com/github/spec-kit v0.13.0.
 github.com/bmad-code-org/BMAD-METHOD v6.10.0. Full evidence trail:
-research-2026-07-\*.md in this directory. Re-verify after 2026-10-19._
+research/research-2026-07-*.md. Re-verify after 2026-10-19._

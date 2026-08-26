@@ -44,12 +44,12 @@ Six parallel internet-research passes against primary sources, plus a master syn
 | File | Scope | Priority findings |
 |---|---|---|
 | [insights-and-issues-2026-07.md](insights-and-issues-2026-07.md) | **Master synthesis — start here** | 20 issues prioritized Critical/High/Medium/Low; 5 things to do this quarter |
-| [research-2026-07-tools.md](research-2026-07-tools.md) | AI coding agents & tools | Claude Code async primitives shipped; new entrant wave (Devin, Replit Agent, Lovable, Bolt, v0, Windsurf, Trae, Zed AI, Cline, Continue, OpenCode); three-layer code review stack |
-| [research-2026-07-specs.md](research-2026-07-specs.md) | Spec-driven development | GitHub Spec Kit 122k stars; AWS Kiro; BMad v6 scale-adaptive; Anthropic March 2026 harness-design post gives empirical evidence |
-| [research-2026-07-memory.md](research-2026-07-memory.md) | Memory & context engineering | Context engineering as a discipline (Anthropic Sep 2025); Mem0/Letta/Zep; AGENTS.md content mix pruning; automatic invalidation |
-| [research-2026-07-review.md](research-2026-07-review.md) | AI code review | Correlated-vendor problem (Greptile auditor post); runtime validation (TREX); 27.6% of merged PRs AI-authored; reviewer-independence rule |
-| [research-2026-07-multi-agent.md](research-2026-07-multi-agent.md) | Multi-agent orchestration | Anthropic multi-agent research system (+90.2% over single-agent, 15× chat tokens); Claude Code agent teams/worktrees/`claude -p` batch; 12 multi-agent failure modes |
-| [research-2026-07-update.md](research-2026-07-update.md) | Cost optimization & failure modes | Batch APIs, LiteLLM/OpenRouter, Anthropic automatic caching mode, OpenAI `prompt_cache_key` 15 RPM ceiling; 15 new failure modes beyond the existing 12 |
+| [research-2026-07-tools.md](research/research-2026-07-tools.md) | AI coding agents & tools | Claude Code async primitives shipped; new entrant wave (Devin, Replit Agent, Lovable, Bolt, v0, Windsurf, Trae, Zed AI, Cline, Continue, OpenCode); three-layer code review stack |
+| [research-2026-07-specs.md](research/research-2026-07-specs.md) | Spec-driven development | GitHub Spec Kit 122k stars; AWS Kiro; BMad v6 scale-adaptive; Anthropic March 2026 harness-design post gives empirical evidence |
+| [research-2026-07-memory.md](research/research-2026-07-memory.md) | Memory & context engineering | Context engineering as a discipline (Anthropic Sep 2025); Mem0/Letta/Zep; AGENTS.md content mix pruning; automatic invalidation |
+| [research-2026-07-review.md](research/research-2026-07-review.md) | AI code review | Correlated-vendor problem (Greptile auditor post); runtime validation (TREX); 27.6% of merged PRs AI-authored; reviewer-independence rule |
+| [research-2026-07-multi-agent.md](research/research-2026-07-multi-agent.md) | Multi-agent orchestration | Anthropic multi-agent research system (+90.2% over single-agent, 15× chat tokens); Claude Code agent teams/worktrees/`claude -p` batch; 12 multi-agent failure modes |
+| [research-2026-07-update.md](research/research-2026-07-update.md) | Cost optimization & failure modes | Batch APIs, LiteLLM/OpenRouter, Anthropic automatic caching mode, OpenAI `prompt_cache_key` 15 RPM ceiling; 15 new failure modes beyond the existing 12 |
 
 ## August 2026 update — context engineering
 
@@ -58,7 +58,7 @@ evidence, and challenges one inherited practice.
 
 | File | Scope | Priority findings |
 |---|---|---|
-| [research-2026-08-context-engineering.md](research-2026-08-context-engineering.md) | Context engineering | Context rot measured across frontier models (2×–30× miss rate past ~800K tokens) — C6/C7 are quality rules with numbers; **compaction contested** ("shrink, don't rewrite"); prefix stability reclassified as context strategy, not cost; harness-engineering literature converges on this OS's primitives. Rules resulting: [repo-memory.md § Layer 0](repo-memory.md). Re-verify after 2026-11-26. |
+| [research-2026-08-context-engineering.md](research/research-2026-08-context-engineering.md) | Context engineering | Context rot measured across frontier models (2×–30× miss rate past ~800K tokens) — C6/C7 are quality rules with numbers; **compaction contested** ("shrink, don't rewrite"); prefix stability reclassified as context strategy, not cost; harness-engineering literature converges on this OS's primitives. Rules resulting: [repo-memory.md § Layer 0](repo-memory.md). Re-verify after 2026-11-26. |
 
 ## Repository layout (this document set)
 
@@ -83,6 +83,9 @@ architect-os/
 ├── failure-modes.md               ← the 18 ways this goes wrong
 ├── failure-recovery-playbook.md   ← symptom → action
 ├── adoption-plan.md               ← profiles, 30/60/90, walkthroughs
+├── insights-and-issues-2026-07.md ← research synthesis (the executive layer)
+│
+├── research/                      ← evidence layer: dated, expiring, consulted not read
 ├── wiki/                          ← user manual (start here)
 ├── profiles/                      ← per-project-type overlays (flutter, web-nextjs, …)
 ├── templates/                     ← BRD, PRD, FSD, ADR, AGENTS.md, dumps…
@@ -90,6 +93,13 @@ architect-os/
 ├── github/                        ← issue forms, labels, ruleset, CI, .coderabbit.yaml (copy into repo)
 └── memory/                        ← repo-graph schema (v1.1, temporal) + example
 ```
+
+**The layout rule:** flat files at the root are **canonical prose you read** —
+navigation for them is the reading-order table above, not a folder taxonomy.
+Subfolders hold everything that is *not* that: `research/` is dated evidence you
+consult, `wiki/` is a different audience, and `templates/`, `github/`,
+`profiles/`, `skills/`, `memory/` are artifacts you **copy into other repos**.
+Add a new law doc at the root; add a new dated report to `research/`.
 
 ## What a product repo looks like once installed
 

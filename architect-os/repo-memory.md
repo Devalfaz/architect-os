@@ -20,7 +20,7 @@ Agents know programming from training data, but not:
 
 *Memory is where knowledge is **kept**. Context strategy is what gets **loaded**
 — and it is a quality decision before it is a cost one. Evidence and numbers:
-[research-2026-08-context-engineering.md](research-2026-08-context-engineering.md).*
+[research-2026-08-context-engineering.md](research/research-2026-08-context-engineering.md).*
 
 **The governing rule:** find the smallest set of high-signal tokens that maximize
 the likelihood of the desired outcome. Every layer below exists so that context
