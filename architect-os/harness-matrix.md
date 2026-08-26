@@ -28,15 +28,15 @@ obsolete. The market reorganized into **seven categories**; the two axes that
 matter are _who runs the agent_ (harness) and _which model powers it_ (routing
 decision). ✅ `research-2026-07-tools.md`
 
-| Category                            | Example tools                                                              | Defining trait                                                                        |
-| ----------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Agent-native control centers**    | Claude Code Desktop/Web, GitHub Copilot app, Cursor + Cloud Agents, Devin  | Multi-session orchestration UI ("My Work"), canvases, worktrees, cross-surface teleport |
-| **CLI agents (BYO-key)**            | OpenCode, Aider, Cline, Continue                                           | Terminal-native, file-grounded, model-agnostic, fresh session per task                |
-| **Vendor-locked CLI agents**        | Claude Code, Codex CLI                                                     | Terminal agents tied to vendor models (widening: Claude Code accepts DeepSeek)        |
-| **IDE agents**                      | Cursor, Windsurf, Cline, Continue, Zed AI, Trae, Copilot in-editor         | Embedded in editor, synchronous, inline diffs                                         |
-| **Cloud async agents**              | Claude Code Routines/Web, Copilot cloud agent, Codex Web, Devin, Cursor Cloud Agents | Event/schedule-triggered, runs while you're offline                            |
-| **Code review platforms**           | CodeRabbit, Copilot code review, Cursor Bugbot, Devin Review, Greptile     | Distinct product category with tiered reasoning, attribution, follow-through          |
-| **Vibe-coding app builders**        | Replit Agent, Lovable, Bolt, v0                                            | Non-technical audience, idea → deployed app, no real codebase                         |
+| Category                         | Example tools                                                                        | Defining trait                                                                          |
+| -------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| **Agent-native control centers** | Claude Code Desktop/Web, GitHub Copilot app, Cursor + Cloud Agents, Devin            | Multi-session orchestration UI ("My Work"), canvases, worktrees, cross-surface teleport |
+| **CLI agents (BYO-key)**         | OpenCode, Aider, Cline, Continue                                                     | Terminal-native, file-grounded, model-agnostic, fresh session per task                  |
+| **Vendor-locked CLI agents**     | Claude Code, Codex CLI                                                               | Terminal agents tied to vendor models (widening: Claude Code accepts DeepSeek)          |
+| **IDE agents**                   | Cursor, Windsurf, Cline, Continue, Zed AI, Trae, Copilot in-editor                   | Embedded in editor, synchronous, inline diffs                                           |
+| **Cloud async agents**           | Claude Code Routines/Web, Copilot cloud agent, Codex Web, Devin, Cursor Cloud Agents | Event/schedule-triggered, runs while you're offline                                     |
+| **Code review platforms**        | CodeRabbit, Copilot code review, Cursor Bugbot, Devin Review, Greptile               | Distinct product category with tiered reasoning, attribution, follow-through            |
+| **Vibe-coding app builders**     | Replit Agent, Lovable, Bolt, v0                                                      | Non-technical audience, idea → deployed app, no real codebase                           |
 
 Plus **spec/workflow frameworks** (GitHub Spec Kit, BMAD, Architect OS itself)
 — methodology + prompts, not model-backed products.
