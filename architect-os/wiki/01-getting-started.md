@@ -8,8 +8,8 @@
 
 The OS runs on either of two named stacks ([adoption-plan.md](../adoption-plan.md) § The two stacks):
 
-- **Default stack** — Claude Code + Anthropic models. Most mature agent loop (skills, subagents, hooks, Routines). ~$232–249/mo.
-- **Open-frontier stack** — OpenCode + DeepSeek/OpenRouter. Same OS, ~$32–65/mo, younger harness.
+- **Default stack** — Claude Code + Anthropic models. Most mature agent loop (skills, subagents, hooks, Routines). ~$220–264/mo.
+- **Open-frontier stack** — OpenCode + DeepSeek/OpenRouter. Same OS, ~$20–80/mo, younger harness.
 
 Pick per repo, record it in ADR-0001, don't mix mid-ticket. Unsure? Start with the default stack — every walkthrough in the docs assumes it; switch a repo later if the bill argues (migration is cheap: everything is markdown).
 

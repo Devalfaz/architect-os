@@ -116,15 +116,23 @@ Don't restart the same session. Kill → diagnose → re-plan:
 | Tool | Plan | Monthly |
 |---|---|---|
 | Claude Code | Max (20×) | $200 |
-| CodeRabbit | Pro | ~$12–15 |
+| CodeRabbit | **Free tier**, or Pro if you outgrow it | **$0**, or $24 (annual) / $30 (monthly) |
 | Copilot | Pro (optional) | $10 |
 | Codex CLI | API usage (gpt-5.3-codex) | ~$10–20 |
 | GitHub | Free/Pro | $0–4 |
-| **Total** | | **~$232–249** |
+| **Total** | | **~$220–264** |
 
-**Open-frontier stack:** OpenCode $0 + DeepSeek API $15–40 + OpenRouter reviews $5–10 + CodeRabbit $12–15 = **~$32–65/mo** (routing detail: [harness-matrix.md](harness-matrix.md)).
+**⚠ Start CodeRabbit on Free, not Pro.** ✅ Verified 2026-08-27: Pro is **free
+forever on public repos**, and the free tier on private repos allows 200
+files/hour and **4 PR reviews/hour** — comfortably above a WIP≤2 solo pipeline.
+The canonical [.coderabbit.yaml](github/.coderabbit.yaml) works on Free. Upgrade
+only when you actually hit the rate limit; billing counts **only developers who
+open PRs**, so solo is one seat. (Prior editions of this doc listed ~$12–15 ❔ —
+that was wrong by roughly 2×.)
 
-**Lightweight profile:** Claude Pro $17–20 + CodeRabbit $0–15 = ~$20–35/mo.
+**Open-frontier stack:** OpenCode $0 + DeepSeek API $15–40 + OpenRouter reviews $5–10 + CodeRabbit $0–30 = **~$20–80/mo** (routing detail: [harness-matrix.md](harness-matrix.md)).
+
+**Lightweight profile:** Claude Pro $17–20 + CodeRabbit $0–30 = ~$17–50/mo.
 
 **Cost justification:** If the OS saves you 10+ hours/month of coding time, $250 is $25/hour — cheaper than any human labor. The real metric: what's your time worth?
 

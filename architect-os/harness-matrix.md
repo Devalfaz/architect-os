@@ -304,8 +304,20 @@ to a _different family_:
 
 ### CodeRabbit — always-on AI reviewer
 
-**Confidence:** ✅ coderabbit.ai/blog fetched 2026-07-19. Pricing ❔ (~$12–15
-Pro, ~$20–24 Team, cross-referenced).
+**Confidence:** ✅ coderabbit.ai/blog fetched 2026-07-19. **Pricing ✅ re-verified
+2026-08-27** — the previous ❔ estimate (~$12–15 Pro) was wrong by ~2×.
+
+**Tiers:** Free · Pro **$24**/user/mo annual (**$30** monthly) · Pro Plus $48 ·
+Enterprise (custom, from ~$15k/mo at 500+ users). Billing counts **only
+developers who open PRs** — reviewers and managers are not seats.
+
+**Start on Free.** Pro is **free forever on public repos** (full feature set:
+auto-fix, 40+ linters, custom instructions). On private repos the free tier
+gives PR summaries, AI review comments, unlimited repos and members, and
+IDE/CLI reviews — rate-limited to **200 files/hour and 4 PR reviews/hour**,
+which is far above a WIP≤2 solo pipeline. The canonical
+[.coderabbit.yaml](github/.coderabbit.yaml) works on Free; upgrade only on
+hitting the limit.
 
 Now a **review-and-follow-through platform**, not just a PR bot: PR / IDE /
 CLI / Discord surfaces, **Change Stack** (guided layer-by-layer PR walkthrough —
@@ -655,7 +667,7 @@ Costs are **per session** (single-call cost × the 10–50× agentic multiplier,
 | Implementation (S6)        | **DeepSeek V4 Flash**                  | ~$0.10–0.50/ticket | ~20× cheaper per token than Sonnet 5; fast, tool calls, FIM                       |
 | Hard ticket fallback (S6)  | GLM 4.5 Air, Qwen 3 Coder              | ~$0.20–0.80/ticket | Different family when Flash struggles                                             |
 | Self-review (C22, S6)      | DeepSeek V4 Flash (author's own model) | ~$0.01            | Self-review is the author's pass by definition                                     |
-| AI review always-on (S7)   | CodeRabbit (subscription)              | ~$12–15/mo ❔     | Multi-model, always-on, path instructions + learnings                              |
+| AI review always-on (S7)   | CodeRabbit (Free tier; Pro if outgrown) | **$0** ✅ (Pro $24–30/mo) | Multi-model, always-on, path instructions + learnings. Free covers solo volume |
 | AI review 2nd opinion (S7) | **C36 cross-family**: Codex review (default stack) / GLM 5.2 via OpenRouter (open-frontier) | ChatGPT sub / ~$0.02/review | Different family from author — uncorrelated |
 | AI review 3rd opinion (S7) | Copilot code review (Business)         | $19/user/mo       | Third family                                                                       |
 | Spec conformance (S7)      | `converge` skill on DeepSeek V4 Pro    | ~$0.10–0.30/run   | Frozen ACs + plan vs diff, tests as evidence                                       |
@@ -704,15 +716,18 @@ cache-hit ratio weekly (cost-control.md).
 | --------------------------------------------------------------- | --------------- |
 | DeepSeek API (15–20 tickets, planning + implementation)         | $15–40          |
 | OpenRouter (GLM 5.2 + Llama 4 reviews)                          | $5–10           |
-| CodeRabbit Pro                                                  | $12–15 ❔       |
+| CodeRabbit (Free tier covers solo; Pro $24–30 if outgrown)      | $0–30 ✅        |
 | GitHub Copilot Business (optional, third reviewer)              | $19             |
 | ChatGPT Plus (for Codex review, if not already subscribed)      | $20             |
 | Greptile (optional)                                             | ~$20 ❔         |
-| **Total (default profile)**                                     | **~$32–65/mo**  |
-| **Total (with all optional layers)**                            | **~$90–125/mo** |
+| **Total (default profile)**                                     | **~$20–80/mo**  |
+| **Total (with all optional layers)**                            | **~$79–139/mo** |
 
-Mid-2025 baseline was ~$232–249/mo. **The open-frontier stack is 60–85%
-cheaper at near-equivalent quality for most tasks.**
+Compared against the default stack at **~$220–264/mo**
+([cost-control.md](cost-control.md)), **the open-frontier stack is 70–90%
+cheaper at near-equivalent quality for most tasks** — and the floor is now
+lower than previously published, because CodeRabbit's free tier covers solo
+volume. (Mid-2025 baseline for reference: ~$232–249/mo.)
 
 ### What changed from the mid-2025 matrix
 
@@ -730,7 +745,7 @@ cheaper at near-equivalent quality for most tasks.**
 | Traycer listed                                  | Dropped — no 2026 evidence of continued investment ❔                                         |
 | Same-vendor author+review accepted              | Constitution C36 — reviewer independence                                                      |
 | No confidence tiers                             | Every load-bearing fact tagged ✅/📣/❔ with fetch dates                                      |
-| ~$232–249/mo total                              | ~$32–65/mo default; ~$90–125/mo with all optional layers                                      |
+| ~$232–249/mo total                              | ~$20–80/mo default; ~$79–139/mo with all optional layers (CodeRabbit free tier lowered the floor) |
 
 ### What to _not_ change
 

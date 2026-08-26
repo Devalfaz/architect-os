@@ -535,7 +535,7 @@ flowchart TD
     Q -->|"implement (S6)<br/>plan (S5)<br/>self-review (S7)"| SONNET["Claude Sonnet 4.6<br/>$3/$15 per 1M<br/>daily driver — 90% of tickets"]
     Q -->|"2nd opinion"| GPT["GPT-5.2 via Codex<br/>$1.75/$14 per 1M<br/>different model = different blind spots"]
     Q -->|"dumps (S9)<br/>labels<br/>mechanical"| HAIKU["Claude Haiku 4.5<br/>$1/$5 per 1M<br/>or GPT-5 mini<br/>90% savings vs Sonnet"]
-    Q -->|"always-on review"| CR["CodeRabbit<br/>~$12/mo<br/>multi-model pipeline"]
+    Q -->|"always-on review"| CR["CodeRabbit<br/>free tier covers solo<br/>multi-model pipeline"]
 
     style OPUS fill:#fce4ec
     style SONNET fill:#e3f2fd

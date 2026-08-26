@@ -48,7 +48,7 @@ The profiles above set *ceremony*; the stack sets *tools*. The two choices are o
 | Always-on review | CodeRabbit |
 | Cross-family second opinion (C36) | Codex review (Copilot code review as alternative) |
 | Async XS lane | Claude Code on the web / Routines, Copilot coding agent, Codex Web |
-| Cost | ~$232–249/mo subscriptions ([cost-control.md](cost-control.md)) |
+| Cost | ~$220–264/mo subscriptions ([cost-control.md](cost-control.md)) |
 
 Choose when: you want the most mature agent loop (subagents, skills, hooks, Routines), already pay for Max, or rely on Claude-specific features. The workflow docs (lifecycle, cost-control, README checklist) assume this stack.
 
@@ -63,7 +63,7 @@ Choose when: you want the most mature agent loop (subagents, skills, hooks, Rout
 | Always-on review | CodeRabbit |
 | Cross-family second opinion (C36) | GLM 5.2 via OpenRouter (Llama 4 Maverick as alternative) |
 | Async XS lane | OpenCode backgrounded, Codex Web |
-| Cost | ~$32–65/mo ([harness-matrix.md](harness-matrix.md)) |
+| Cost | ~$20–80/mo ([harness-matrix.md](harness-matrix.md)) |
 
 Choose when: cost discipline matters, you want zero vendor lock-in, or you accept a younger harness in exchange for 60–85% lower spend.
 

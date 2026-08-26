@@ -117,18 +117,15 @@ GPT-5.4-nano  ██████░░░░░░░░  cheapest, mechanical o
 
 ---
 
-## Subscription comparison (July 2026)
+## Subscription comparison
 
-| Tool | Plan | Monthly |
-|---|---|---|
-| Claude Code | Max (20×) | $200 |
-| CodeRabbit | Pro | ~$12–15 |
-| Copilot | Pro (optional) | $10 |
-| Codex CLI | API usage | ~$10–20 |
-| GitHub | Free/Pro | $0–4 |
-| **Total** | | **~$232–249** |
+**Canonical table: [cost-control.md](cost-control.md).** It is not duplicated
+here — two copies of a price table drift, and the stale one wins whichever gets
+read first. Summary only:
 
-**Lightweight profile:** Claude Pro $17–20 + CodeRabbit $0–15 = ~$20–35/mo.
+Default stack **~$220–264/mo** · open-frontier **~$20–80/mo** · lightweight
+**~$17–50/mo**. CodeRabbit's **free tier covers solo volume** (Pro $24–30/mo
+only if you outgrow 4 PR reviews/hour) ✅ 2026-08-27.
 
 **Enterprise notes:** Copilot Enterprise $39/user/mo (adds Workspace + Code Review). Anthropic Enterprise $20/seat + API rates. Team Premium at $100/seat includes Claude Code + Claude Cowork.
 
