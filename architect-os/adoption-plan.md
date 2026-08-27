@@ -43,7 +43,7 @@ The profiles above set *ceremony*; the stack sets *tools*. The two choices are o
 |---|---|
 | Harness | Claude Code (terminal, IDE, Desktop, web) |
 | Planning models (S2/S4/S5) | Opus 4.8 |
-| Implementation (S6) | Sonnet 5 (⏰ intro pricing ends 2026-08-31) |
+| Implementation (S6) | Sonnet 5 ($3/$15 standard; intro rate expired 2026-08-31) |
 | Learning (S9) | Haiku 4.5 |
 | Always-on review | CodeRabbit |
 | Cross-family second opinion (C36) | Codex review (Copilot code review as alternative) |

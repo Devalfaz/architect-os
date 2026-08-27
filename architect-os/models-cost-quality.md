@@ -16,12 +16,18 @@
 |---|---|---|---|---|
 | **Fable 5** | $10.00 | $50.00 | $1.00 | Long-running agents, highest intelligence |
 | **Opus 4.8** | $5.00 | $25.00 | $0.50 | Complex agentic coding, enterprise work |
-| **Sonnet 5** | $2.00¹ | $10.00¹ | $0.20 | Coding and agents — introductory pricing |
+| **Sonnet 5** | $3.00 | $15.00 | $0.30 | Coding and agents — the S6 daily driver |
 | **Haiku 4.5** | $1.00 | $5.00 | $0.10 | Fastest, most cost-efficient |
 | Sonnet 4.6 (legacy) | $3.00 | $15.00 | $0.30 | Still available, migrate to Sonnet 5 |
 | Opus 4.7/4.6 (legacy) | $5.00 | $25.00 | $0.50 | Still available, migrate to Opus 4.8 |
 
-¹ Sonnet 5 introductory pricing $2/$10 through August 31, 2026; $3/$15 standard thereafter. **⏰ Verify-by 2026-08-31:** re-run the budget tables in [cost-control.md](cost-control.md) at standard pricing — the monthly estimate rises ~30% on S6 work if usage is API-billed (Max-plan users unaffected).
+**Sonnet 5 is now at standard pricing.** The $2/$10 introductory rate ran through
+**2026-08-31**; from 2026-09-01 it is **$3/$15** — a 1.5× rise on the primary S6
+model. Budget tables in [cost-control.md](cost-control.md) were re-run at standard
+pricing on 2026-08-27 (all Sonnet-billed rows scaled 1.5×). **Max-plan users are
+unaffected** — the $200 flat subscription does not meter tokens; this changes
+API-billed usage only, which on the default stack means Codex/second-opinion
+calls and anyone running Claude Code on an API key rather than Max.
 
 ### OpenAI (current generation)
 

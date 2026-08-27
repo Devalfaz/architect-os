@@ -86,7 +86,7 @@ staying 10–40× cheaper. The routing problem is no longer "which vendor" — i
 | Model           | Input $/1M    | Output $/1M | When to use                                                                                     | Confidence |
 | --------------- | ------------- | ----------- | ----------------------------------------------------------------------------------------------- | ---------- |
 | Claude Opus 4.8 | $5.00         | $25.00      | Only when DeepSeek V4 Pro fails a planning task — highest reasoning ceiling, ~16× more expensive per call | ✅ |
-| Claude Sonnet 5 | $2.00 (intro) | $10.00      | Only when DeepSeek V4 Flash produces low-quality code on a hard ticket — ~20× more expensive per call. **⏰ Intro price ends 2026-08-31** ($3/$15 after) | ✅ |
+| Claude Sonnet 5 | $3.00         | $15.00      | Only when DeepSeek V4 Flash produces low-quality code on a hard ticket — now ~**30×** more expensive per call at standard pricing (intro rate expired 2026-08-31) | ✅ 2026-08-27 |
 | GPT-5.6-sol     | $5.00         | $30.00      | Escape hatch for OpenAI-ecosystem tasks                                                         | 📣 tier naming per CodeRabbit benchmark |
 
 #### The routing principle
@@ -266,8 +266,11 @@ Per single API call at the stated token volumes (in + out):
 
 | Task                                        | DeepSeek V4 Flash              | Claude Sonnet 5             | Multiple        |
 | ------------------------------------------- | ------------------------------ | --------------------------- | --------------- |
-| Implementation (S6, ~30k input, ~5k output) | $0.004 + $0.001 = **$0.006**   | $0.06 + $0.05 = **$0.11**   | **~20× cheaper** |
-| Self-review (S7, ~20k input, ~3k output)    | $0.003 + $0.001 = **$0.004**   | $0.04 + $0.03 = **$0.07**   | **~20× cheaper** |
+| Implementation (S6, ~30k input, ~5k output) | $0.004 + $0.001 = **$0.006**   | $0.09 + $0.075 = **$0.165** | **~30× cheaper** |
+| Self-review (S7, ~20k input, ~3k output)    | $0.003 + $0.001 = **$0.004**   | $0.06 + $0.045 = **$0.105** | **~26× cheaper** |
+
+*Sonnet 5 column recomputed at standard $3/$15 on 2026-08-27 — the gap widened
+from ~20× when the intro rate retired.*
 
 **The agentic multiplier:** a real ticket session is not one call — tool loops,
 retries, and re-reads run **10–50×** a single call's tokens (caching absorbs
@@ -664,7 +667,7 @@ Costs are **per session** (single-call cost × the 10–50× agentic multiplier,
 | Spec generation (S2)       | **DeepSeek V4 Pro**                    | ~$0.30–1.00       | Intelligent planning, ~16× cheaper per token than Opus 4.8                         |
 | Architecture (S4)          | **DeepSeek V4 Pro**                    | ~$0.50–1.50       | Deep trade-off analysis; 1M context fits whole repo                                |
 | Ticket decomposition (S5)  | **DeepSeek V4 Pro**                    | ~$0.20–0.60       | Reads real files, structured plans                                                 |
-| Implementation (S6)        | **DeepSeek V4 Flash**                  | ~$0.10–0.50/ticket | ~20× cheaper per token than Sonnet 5; fast, tool calls, FIM                       |
+| Implementation (S6)        | **DeepSeek V4 Flash**                  | ~$0.10–0.50/ticket | ~30× cheaper per token than Sonnet 5 at standard pricing; fast, tool calls, FIM   |
 | Hard ticket fallback (S6)  | GLM 4.5 Air, Qwen 3 Coder              | ~$0.20–0.80/ticket | Different family when Flash struggles                                             |
 | Self-review (C22, S6)      | DeepSeek V4 Flash (author's own model) | ~$0.01            | Self-review is the author's pass by definition                                     |
 | AI review always-on (S7)   | CodeRabbit (Free tier; Pro if outgrown) | **$0** ✅ (Pro $24–30/mo) | Multi-model, always-on, path instructions + learnings. Free covers solo volume |

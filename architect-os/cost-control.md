@@ -2,17 +2,22 @@
 
 *AI agents can burn money if unchecked. This is the control system. Pricing verified against official provider docs July 2026.*
 
-**Scope:** budgets below price the [default stack](adoption-plan.md) (Claude Code + Anthropic models). The open-frontier stack runs the same budget structure at ~28–35× lower per-op cost — routing and per-op figures live in [harness-matrix.md](harness-matrix.md).
+**Scope:** budgets below price the [default stack](adoption-plan.md) (Claude Code + Anthropic models). The open-frontier stack runs the same budget structure at ~26–30× lower per-op cost (recomputed 2026-08-27 at Sonnet 5 standard pricing) — routing and per-op figures live in [harness-matrix.md](harness-matrix.md).
 
 ---
 
 ## Per-ticket budget
 
+*API-billed figures. **Max-plan users can ignore the dollar amounts** — the flat
+$200 doesn't meter tokens — but the ceilings still work as a **fix-loop
+tripwire**, which is their real job. Sonnet rows re-run at standard $3/$15 on
+2026-08-27 (1.5× the retired intro rate).*
+
 | Ticket size | Model | Budget ceiling | Typical actual |
 |---|---|---|---|
-| XS (1 file, <50 lines) | Sonnet 5 | $1.00 | $0.10–$0.40 |
-| S (1–3 files, <150 lines) | Sonnet 5 | $3.00 | $0.30–$1.00 |
-| M (3–5 files, <400 lines) | Sonnet 5 | $5.00 | $0.50–$2.50 |
+| XS (1 file, <50 lines) | Sonnet 5 | $1.50 | $0.15–$0.60 |
+| S (1–3 files, <150 lines) | Sonnet 5 | $4.50 | $0.45–$1.50 |
+| M (3–5 files, <400 lines) | Sonnet 5 | $7.50 | $0.75–$3.75 |
 | S2 Spec | Opus 4.8 or GPT-5.6-sol | $3.00/session | $0.50–$2.00 |
 | S4 Architecture | Opus 4.8 or o3 | $3.00/session | $0.75–$3.00 |
 | S9 Dump | Haiku 4.5 or GPT-5.4-nano | $0.10 | $0.01–$0.05 |
@@ -142,7 +147,7 @@ that was wrong by roughly 2×.)
 
 | What changed | Impact |
 |---|---|
-| Sonnet 5 at $2/$10 intro (was $3/$15 for Sonnet 4.6) | 33% cheaper for primary S6 model through Aug 2026. **⏰ Verify-by 2026-08-31:** intro ends; re-run the per-ticket budget table at $3/$15 |
+| Sonnet 5 at $3/$15 standard (intro $2/$10 expired 2026-08-31) | ✅ **Actioned 2026-08-27** — per-ticket budgets re-run at standard pricing, Sonnet rows ×1.5. Same rate as legacy Sonnet 4.6, so the intro was a discount window, not a price cut. Max-plan users unaffected |
 | Opus 4.8 same price as Opus 4.6 ($5/$25), more capable | Flagship improved at zero cost increase |
 | GPT-5.3-codex ($1.75/$14) for coding tasks | Competitive second-opinion pricing |
 | GPT-5.4-nano ($0.20/$1.25) for mechanical work | Budget option for dumps and classification |

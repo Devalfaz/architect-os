@@ -52,6 +52,7 @@ Merge → session dump (5 min) · Friday → distill dumps into graph + docs (30
 
 | What | When |
 |---|---|
-| Sonnet 5 intro pricing ends | **2026-08-31** — re-run budget tables |
+| ~~Sonnet 5 intro pricing ends~~ | ✅ done 2026-08-27 — now $3/$15, budgets re-run |
+| CodeRabbit pricing re-verified | ✅ done 2026-08-27 — free tier covers solo |
 | Research snapshot expires | **2026-10-19** — re-verify harness-matrix + models docs |
 | Subtraction ritual | Quarterly — disable one mechanism for a week; delete it if nothing degrades |
