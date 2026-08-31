@@ -10,6 +10,19 @@ Adopted items graduate to the quarterly subtraction inventory with a retest date
 
 **last_verified:** 2026-08-27
 
+## ID scheme
+
+| Prefix | Meaning |
+|---|---|
+| **B*n*** | **Backlog item** — a change to make. Numbered in the order raised, never reused after completion. |
+| **R*n*** | **Risk** — a standing condition to watch. Not work; it either persists or is retired. |
+
+These are **local to this file** — unlike `C1–C37`, which are constitutional and
+cited repo-wide ([constitution.md](constitution.md)), and unlike `S0–S9`, which
+are lifecycle stages. If you see `B4` in a commit message or a ticket, it means
+this file. Completed items move to **Done** at the bottom with their commit SHA
+rather than being deleted — an ID that stops resolving is worse than a long file.
+
 ---
 
 ## Needs a decision from you (blocked)
@@ -199,3 +212,14 @@ tell you what to re-fetch first: ❔ before 📣 before ✅. The August file
   commoditised (Monica, Team-GPT, Aizolo), and the user's answer to
   "for me or for others?" was *for me*, which removes the product case entirely.
   Recorded so it isn't re-proposed.
+
+---
+
+## Done
+
+*Completed items stay here with their commit SHA so old references still
+resolve. IDs are never reused.*
+
+| ID | What | Landed |
+|---|---|---|
+| — | *(nothing completed yet)* | — |
