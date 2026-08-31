@@ -103,6 +103,80 @@ answer is a number, not an opinion.
 
 ---
 
+## Design work (needs a spec before it can be built)
+
+### B8 — `S-1 Excavate`: the brownfield on-ramp ⭐
+**Size:** L — decompose before building · **Raised:** 2026-08-27
+
+**The gap:** this OS is greenfield-biased. Every stage assumes you start from an
+idea and produce docs as a *byproduct* of building. It says almost nothing about
+the far more common case: **an existing codebase with no docs.** Today the only
+guidance is one line in [adoption-plan.md](adoption-plan.md) ("have Claude draft
+AGENTS.md from the code; you correct") and `improve-codebase-architecture` at S4.
+
+**Proposed:** a stage that runs *before* S0 for existing repos and produces the
+doc set greenfield gets for free.
+
+#### What is and isn't derivable — the load-bearing distinction
+
+| Derivable from code | Not derivable, ever |
+|---|---|
+| Structure, modules, dependencies, call graph | **Why** any of it is that way |
+| Entry points, API surface, routes, schemas | Alternatives considered and rejected |
+| Domain language (entity + type names) | Business context, users, success metrics |
+| What the code does — flows, states | **Non-goals** — what was deliberately not built |
+| Test coverage map | Which oddities are deliberate vs accidental |
+| Conventions (from lint config, patterns) | Priorities, kill criteria |
+
+This is exactly the [ADR / architecture.md](templates/architecture.md) split:
+**`architecture.md` is derivable because it answers *what*; ADRs are not, because
+they answer *why*.** Excavation can reconstruct roughly the descriptive 70% of
+the doc set and none of the decisions. Any workflow that claims otherwise is
+fabricating.
+
+#### Sketch — five phases
+
+1. **Map** *(mechanical, cheap model)* — graphify / repo-map the tree: structure,
+   dependencies, entry points. → `architecture.md` skeleton + `repo-graph.json` seed.
+2. **Describe** *(mid model, per module, fresh session each)* — what each module
+   does, its public surface, how data flows. → layer table, domain language candidates.
+3. **Interrogate** *(frontier model + **you**)* — the phase that makes this work.
+   The agent **cannot know why**, but it *can* detect **where a decision was
+   made**: an unusual library where a standard exists, a hand-rolled implementation,
+   an oddly-enforced boundary, a "don't do X" comment, a workaround with no
+   explanation. Each is an **ADR-shaped hole**. The agent surfaces them as
+   questions; only you can answer. → ADR candidates.
+4. **Verify** *(converge-style)* — every derived claim cites `file:line`. A claim
+   that cannot cite is deleted, not softened.
+5. **Stamp provenance** — everything derived carries `derived_from: <git-sha>` and
+   `confidence: derived`. It is a **hypothesis until confirmed**, exactly as
+   [memory-freshness-protocol.md](memory-freshness-protocol.md) already requires
+   of stale memory. Confirmation is a human act.
+
+#### The four failure modes to design against
+
+1. **Fabricated rationale** 🔴 — the worst. An agent invents a plausible "why"
+   for a decision nobody made, it lands in an ADR, and every future agent treats
+   it as settled law. This is memory poisoning at the source. Mitigation: phase 3
+   produces *questions*, never answers; an unanswered question stays `needs-decision`.
+2. **Documenting bugs as intent** 🟠 — the code does X, so the doc says "the
+   system shall X." **EARS makes this worse**, not better: `shall` language
+   canonises observed behaviour as specification. Mitigation: derived requirements
+   are written as *observations* ("the system currently does X"), and only become
+   `shall` after you confirm X is wanted.
+3. **Freezing tech debt as spec** 🟠 — documenting the current state as the
+   desired state. The workaround becomes the contract.
+4. **Context rot at scale** 🟠 — a large repo cannot be excavated in one session.
+   Per-module fresh sessions (phase 2) and filesystem output, not a single
+   mega-context. Standard [Layer 0](repo-memory.md) discipline.
+
+#### Before building
+Write an FSD. Pick one **real repo you know well** as the test — you can only
+grade the output where you already know the truth. `~/projects/vyasan.design`,
+`caveman`, or one of the `need-*` repos are candidates.
+
+---
+
 ## Standing risks (not improvements, but tracked here so they aren't forgotten)
 
 ### R1 — This repo has no remote ⚠️
