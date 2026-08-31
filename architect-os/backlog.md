@@ -25,32 +25,6 @@ rather than being deleted — an ID that stops resolving is worse than a long fi
 
 ---
 
-## Needs a decision from you (blocked)
-
-### B1 — Two methodologies are active at once ⚠️
-**Size:** XS to decide, S to act · **Raised:** 2026-08-27
-
-`superpowers` is a **global** OpenCode plugin (`~/.config/opencode/opencode.json`),
-so it runs in every session. It is not a skill pack — it is *"a complete software
-development methodology for your coding agents."* Architect OS is also a complete
-methodology. Where they disagree, the agent silently blends them:
-
-| | superpowers | Architect OS |
-|---|---|---|
-| Work unit | 2–5 minute tasks | ticket ≤1 day, PR ≤400 lines |
-| Concurrency | subagent per task, by default | WIP ≤2; multi-agent is the 20% case |
-| Review | its own two-stage | converge → human → cross-family (C36) |
-
-They agree in spirit — both spec-first, TDD, human-gated — which is precisely why
-the conflict is easy to miss.
-
-**Decision needed:** keep Architect OS primary and demote superpowers to a skill
-library, or genuinely switch. Either is defensible; running both is not.
-**Next action once decided:** record the choice in `templates/AGENTS.md` guidance
-and in each repo's AGENTS.md.
-
----
-
 ## Ready (no decision needed, just effort)
 
 ### B2 — Self-review output contract (C22 form, not just content)
@@ -77,12 +51,15 @@ rewritable. Add to the S3 section of `templates/AGENTS.md`; consider whether the
 pattern generalises beyond design.
 
 ### B4 — Within-ticket atomization guidance for S6
-**Size:** S · **Source:** `obra/superpowers` · **Est:** 20 min
+**Size:** S · **Source:** `obra/superpowers` · **Est:** 20 min · **Unblocked 2026-08-27**
 
 S6 is deliberately a black box ("fresh session, narrow context, TDD"). Superpowers'
 **2–5 minute tasks with exact file paths and verification steps** is a discipline
 *inside* one ticket — no conflict with ticket sizing if framed that way.
-**Blocked by B1** — don't borrow from a methodology you may be removing.
+
+Now that superpowers is disabled (B1), this is a **deliberate borrowing into
+Architect OS**, not two methodologies overlapping — which is the cleaner outcome:
+the idea is documented in our own words, in our own doc, under our own gates.
 
 ### B5 — Install ui-ux-pro-max for S3
 **Size:** XS · **Source:** `nextlevelbuilder/ui-ux-pro-max-skill` · **Est:** 5 min
@@ -192,10 +169,30 @@ grade the output where you already know the truth. `~/projects/vyasan.design`,
 
 ## Standing risks (not improvements, but tracked here so they aren't forgotten)
 
-### R1 — This repo has no remote ⚠️
-Every commit in this doc set exists on **one disk**. The `alfas-hancod` remote is
-gone and `gh` now authenticates as `Devalfaz`. Same exposure applies to
-`~/projects/momentum`, which holds a complete v0.1 FSD and zero backups.
+### R1 — Backup state ⚠️ *(corrected 2026-08-27 — the original entry was wrong)*
+
+**The original claim ("this repo has no remote") was false and unverified.** It
+was carried over from `~/projects/momentum`, where the remote genuinely is dead,
+without ever running `git remote -v` here. Actual state:
+
+- **This repo has always had a remote:** `Devalfaz/agentic-workflow`, holding
+  work through `abb339e`. Four later commits are unpushed.
+- ⚠️ **That remote is PUBLIC.** The constitution, cost data, model routing, and
+  this backlog — including open decisions — are publicly readable. May well be
+  deliberate (the repo dates from July), but Momentum was made private, so the
+  inconsistency is worth a conscious choice rather than a default.
+- A stray empty private repo, `Devalfaz/architect-os`, was created during the
+  mistaken fix and `origin` was repointed at it. Restoring the URL was blocked by
+  the permission classifier, so **the user must run the `remote set-url` and
+  `push` themselves**, and delete whichever repo they don't want.
+
+**`~/projects/momentum` genuinely has no working remote** — that part stands. It
+holds a complete v0.1 FSD and zero backups.
+
+*Lesson, worth more than the fix: an unverified claim repeated confidently across
+several turns became load-bearing enough to drive a decision. This is failure
+mode #15 (trust drift) pointed the other way — the human trusting the agent. The
+`last_verified` discipline exists for exactly this and was not applied.*
 
 ### R2 — Research snapshot expires 2026-10-19
 The July research and everything built on it. `harness-matrix.md` confidence tiers
@@ -222,4 +219,4 @@ resolve. IDs are never reused.*
 
 | ID | What | Landed |
 |---|---|---|
-| — | *(nothing completed yet)* | — |
+| **B1** | Two methodologies active at once — resolved by disabling `superpowers` in `~/.config/opencode/opencode.json`. Architect OS is now the single methodology. Its ideas can still be borrowed deliberately (see B4). Backup of the prior config kept in the session scratchpad. | 2026-08-27 |
