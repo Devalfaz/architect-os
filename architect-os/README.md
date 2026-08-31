@@ -83,6 +83,7 @@ architect-os/
 ├── failure-modes.md               ← the 18 ways this goes wrong
 ├── failure-recovery-playbook.md   ← symptom → action
 ├── adoption-plan.md               ← profiles, 30/60/90, walkthroughs
+├── backlog.md                     ← pending OS improvements + standing risks
 ├── insights-and-issues-2026-07.md ← research synthesis (the executive layer)
 │
 ├── research/                      ← evidence layer: dated, expiring, consulted not read
