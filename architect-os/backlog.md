@@ -177,10 +177,11 @@ without ever running `git remote -v` here. Actual state:
 
 - **This repo has always had a remote:** `Devalfaz/agentic-workflow`, holding
   work through `abb339e`. Four later commits are unpushed.
-- ⚠️ **That remote is PUBLIC.** The constitution, cost data, model routing, and
-  this backlog — including open decisions — are publicly readable. May well be
-  deliberate (the repo dates from July), but Momentum was made private, so the
-  inconsistency is worth a conscious choice rather than a default.
+- ✅ **Visibility resolved 2026-08-27** — `agentic-workflow` was public since
+  2026-07-18; now **private** (0 stars, 0 forks, nothing lost). Note the six-week
+  public window is not retroactively undone: clones and archive mirrors persist.
+  Low risk — a credential scan across all tracked files found nothing, and the
+  exposed content was workflow documentation, not secrets. Nothing to rotate.
 - A stray empty private repo, `Devalfaz/architect-os`, was created during the
   mistaken fix and `origin` was repointed at it. Restoring the URL was blocked by
   the permission classifier, so **the user must run the `remote set-url` and
