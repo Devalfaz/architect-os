@@ -3,3 +3,5 @@ graphify-out/
 
 # macOS
 .DS_Store
+.obsidian/
+.commandcode/
